@@ -33,6 +33,16 @@
     opacity:.75}
   .crp-smoke{position:absolute;inset:0;z-index:0;mix-blend-mode:screen;opacity:.42}
   .crp-smoke span{position:absolute;bottom:-14%;display:block;border-radius:50%;background:radial-gradient(circle,rgba(118,155,180,.18) 0%,rgba(84,113,134,.1) 38%,rgba(30,42,51,.04) 62%,rgba(0,0,0,0) 74%);filter:blur(24px);animation:crpSmoke linear infinite}
+  .crp-campfire{position:absolute;left:clamp(14px,4vw,42px);bottom:18px;width:140px;height:140px;z-index:0;opacity:.92}
+  .crp-campfire-glow{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:132px;height:62px;border-radius:50%;background:radial-gradient(circle,rgba(255,151,56,.34) 0%,rgba(255,98,0,.18) 42%,rgba(255,98,0,0) 74%);filter:blur(10px);animation:crpFireGlow 2.6s ease-in-out infinite}
+  .crp-log{position:absolute;bottom:18px;width:54px;height:10px;border-radius:999px;background:linear-gradient(90deg,#493321,#6f4a2b 50%,#3a2819 100%);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset}
+  .crp-log-a{left:32px;transform:rotate(24deg)}
+  .crp-log-b{left:55px;transform:rotate(-24deg)}
+  .crp-flame{position:absolute;left:50%;bottom:28px;transform-origin:50% 100%;border-radius:50% 50% 44% 44%;filter:blur(.4px);animation:crpFlame 1.9s ease-in-out infinite}
+  .crp-flame-main{width:34px;height:58px;margin-left:-17px;background:radial-gradient(circle at 50% 78%,rgba(255,245,210,.98) 0 18%,rgba(255,188,82,.98) 30%,rgba(255,110,28,.92) 62%,rgba(255,93,0,.18) 100%)}
+  .crp-flame-mid{width:24px;height:42px;margin-left:-12px;bottom:36px;background:radial-gradient(circle at 50% 75%,rgba(255,250,232,.98) 0 20%,rgba(255,214,124,.95) 42%,rgba(255,146,28,.85) 74%,rgba(255,146,28,0) 100%);animation-duration:1.45s}
+  .crp-flame-small{width:16px;height:28px;margin-left:-8px;bottom:43px;background:radial-gradient(circle at 50% 72%,rgba(255,255,244,.95) 0 24%,rgba(255,234,162,.9) 48%,rgba(255,168,45,.55) 82%,rgba(255,168,45,0) 100%);animation-duration:1.12s}
+  .crp-ember{position:absolute;bottom:42px;left:50%;width:4px;height:4px;border-radius:50%;background:rgba(255,190,84,.9);box-shadow:0 0 10px rgba(255,137,51,.65);animation:crpEmber linear infinite}
   @keyframes crpGlow{
     0%{transform:translate3d(-1.5%,0,0) scale(1)}
     100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
@@ -42,6 +52,21 @@
     18%{opacity:.18}
     55%{opacity:.34}
     100%{transform:translate3d(34px,-115vh,0) scale(1.45);opacity:0}
+  }
+  @keyframes crpFlame{
+    0%{transform:translateX(0) scaleY(.94) rotate(-2deg)}
+    50%{transform:translateX(2px) scaleY(1.08) rotate(2deg)}
+    100%{transform:translateX(-1px) scaleY(.97) rotate(-1deg)}
+  }
+  @keyframes crpFireGlow{
+    0%{opacity:.72;transform:translateX(-50%) scale(1)}
+    50%{opacity:.96;transform:translateX(-50%) scale(1.08)}
+    100%{opacity:.76;transform:translateX(-50%) scale(.98)}
+  }
+  @keyframes crpEmber{
+    0%{transform:translate3d(0,0,0) scale(.6);opacity:0}
+    18%{opacity:.95}
+    100%{transform:translate3d(var(--x,0px),calc(-40px - var(--rise,26px)),0) scale(1.2);opacity:0}
   }
   .crp-content{position:relative;z-index:1;width:min(100%,1240px);margin:0 auto;padding:0 clamp(14px,2vw,24px)}
   .crp-header{text-align:center;padding:clamp(38px,7vw,68px) clamp(10px,1.4vw,18px) clamp(24px,3vw,34px)}
@@ -57,16 +82,13 @@
   .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
   .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
   .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
-  .crp-music{max-width:600px;margin:18px auto 0;border:1px solid rgba(0,136,255,.18);background:rgba(0,0,0,.82);padding:16px 18px}
+  .crp-music{max-width:700px;margin:18px auto 0;border:1px solid rgba(0,136,255,.18);background:rgba(0,0,0,.82);padding:16px 18px}
   .crp-music-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
   .crp-music-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase}
   .crp-music-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-top:6px}
-  .crp-music-copy{font-size:12px;color:#72808b;line-height:1.6;margin-top:8px;max-width:380px}
-  .crp-music-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .crp-music-btn{width:auto;margin-top:0;padding:12px 18px;letter-spacing:2px}
-  .crp-volume{display:flex;align-items:center;gap:10px}
-  .crp-volume span{font-size:10px;letter-spacing:1.6px;color:#5d6973;text-transform:uppercase}
-  .crp-volume input{accent-color:#0088ff;width:110px}
+  .crp-music-copy{font-size:12px;color:#72808b;line-height:1.6;margin-top:8px;max-width:460px}
+  .crp-player-wrap{margin-top:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:10px}
+  .crp-player-frame{display:block;width:100%;aspect-ratio:16 / 9;border:0}
   .crp-form-wrap{max-width:600px;margin:36px auto 0;padding:0}
   .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
   .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
@@ -155,10 +177,7 @@
     .crp-badge{font-size:9px;letter-spacing:1.2px}
     .crp-music{margin-top:16px;padding:14px}
     .crp-music-title{font-size:21px}
-    .crp-music-actions{width:100%}
-    .crp-music-btn{width:100%}
-    .crp-volume{width:100%;justify-content:space-between}
-    .crp-volume input{width:100%;max-width:150px}
+    .crp-campfire{left:8px;bottom:12px;width:110px;height:110px;opacity:.8}
     .crp-form-wrap{margin-top:28px}
     .crp-form-title{font-size:14px;letter-spacing:3px}
     .crp-form-sub{font-size:10px}
@@ -200,6 +219,18 @@
       <canvas class="crp-rain-canvas" id="rainCanvas"></canvas>
       <div class="crp-floor-glow"></div>
     </div>
+    <div class="crp-campfire">
+      <div class="crp-campfire-glow"></div>
+      <div class="crp-log crp-log-a"></div>
+      <div class="crp-log crp-log-b"></div>
+      <div class="crp-flame crp-flame-main"></div>
+      <div class="crp-flame crp-flame-mid"></div>
+      <div class="crp-flame crp-flame-small"></div>
+      <span class="crp-ember" style="--x:-16px;--rise:18px;animation-duration:2.8s;animation-delay:-1.2s"></span>
+      <span class="crp-ember" style="--x:6px;--rise:24px;animation-duration:2.3s;animation-delay:-.4s"></span>
+      <span class="crp-ember" style="--x:18px;--rise:30px;animation-duration:3.2s;animation-delay:-2.1s"></span>
+      <span class="crp-ember" style="--x:-4px;--rise:22px;animation-duration:2.6s;animation-delay:-.8s"></span>
+    </div>
   </div>
   <div class="crp-content">
     <div class="crp-header">
@@ -237,16 +268,18 @@
       <div class="crp-music-top">
         <div>
           <div class="crp-music-label">Atmosphere</div>
-          <div class="crp-music-title">Cozy Night Audio</div>
-          <div class="crp-music-copy">A built-in ambient loop players can start while they fill out the waitlist. No outside track, no copyright issues.</div>
+          <div class="crp-music-title">Campfire Radio</div>
+          <div class="crp-music-copy">Your YouTube track is built right into the page so people can kick it on while they fill out the waitlist.</div>
         </div>
-        <div class="crp-music-actions">
-          <button class="crp-btn crp-music-btn" id="musicToggleBtn" type="button">Play Music</button>
-          <label class="crp-volume" for="musicVolume">
-            <span>Volume</span>
-            <input id="musicVolume" max="100" min="0" type="range" value="38">
-          </label>
-        </div>
+      </div>
+      <div class="crp-player-wrap">
+        <iframe
+          class="crp-player-frame"
+          src="https://www.youtube.com/embed/-c9BV_lHbj8?rel=0"
+          title="ClutchRP music player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
       </div>
     </div>
 
@@ -395,8 +428,6 @@ const dom = {
   authName: document.getElementById('authName'),
   authNote: document.getElementById('authNote'),
   connectBtn: document.getElementById('connectBtn'),
-  musicToggleBtn: document.getElementById('musicToggleBtn'),
-  musicVolume: document.getElementById('musicVolume'),
   submitBtn: document.getElementById('submitBtn'),
   errMsg: document.getElementById('errMsg'),
   roleSelect: document.getElementById('roleSelect'),
@@ -441,12 +472,6 @@ let rainRipples = [];
 let rainAnimationFrame = 0;
 let rainLastTime = 0;
 let rainResizeBound = false;
-let audioContext = null;
-let audioMaster = null;
-let audioNoiseGain = null;
-let audioPulseGain = null;
-let audioLfo = null;
-let audioPlaying = false;
 
 function prefersReducedMotion(){
   return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -654,110 +679,6 @@ function drawRainFloor(){
   rainCtx.moveTo(0, rainFloor + .5);
   rainCtx.lineTo(rainWidth, rainFloor + .5);
   rainCtx.stroke();
-}
-
-function setMusicButtonLabel(){
-  if(!dom.musicToggleBtn){return;}
-  dom.musicToggleBtn.textContent = audioPlaying ? 'Pause Music' : 'Play Music';
-}
-
-async function initAmbientAudio(){
-  if(audioContext){
-    return;
-  }
-
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  if(!AudioCtx){
-    return;
-  }
-
-  audioContext = new AudioCtx();
-  audioMaster = audioContext.createGain();
-  audioMaster.gain.value = 0;
-  audioMaster.connect(audioContext.destination);
-
-  const warmPad = (frequency, gainValue, type) => {
-    const osc = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    const filter = audioContext.createBiquadFilter();
-    osc.type = type;
-    osc.frequency.value = frequency;
-    filter.type = 'lowpass';
-    filter.frequency.value = 900;
-    gain.gain.value = gainValue;
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(audioMaster);
-    osc.start();
-    return { osc, gain };
-  };
-
-  warmPad(196, 0.035, 'sine');
-  warmPad(293.66, 0.025, 'triangle');
-  warmPad(392, 0.018, 'triangle');
-
-  const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 2, audioContext.sampleRate);
-  const data = noiseBuffer.getChannelData(0);
-  for(let i = 0; i < data.length; i++){
-    data[i] = (Math.random() * 2 - 1) * 0.24;
-  }
-
-  const noiseSource = audioContext.createBufferSource();
-  noiseSource.buffer = noiseBuffer;
-  noiseSource.loop = true;
-  const noiseFilter = audioContext.createBiquadFilter();
-  noiseFilter.type = 'lowpass';
-  noiseFilter.frequency.value = 500;
-  audioNoiseGain = audioContext.createGain();
-  audioNoiseGain.gain.value = 0.018;
-  noiseSource.connect(noiseFilter);
-  noiseFilter.connect(audioNoiseGain);
-  audioNoiseGain.connect(audioMaster);
-  noiseSource.start();
-
-  const pulse = audioContext.createOscillator();
-  pulse.type = 'sine';
-  pulse.frequency.value = 0.08;
-  audioPulseGain = audioContext.createGain();
-  audioPulseGain.gain.value = 0.025;
-  pulse.connect(audioPulseGain);
-  audioPulseGain.connect(audioMaster.gain);
-  pulse.start();
-
-  audioLfo = audioContext.createOscillator();
-  const lfoGain = audioContext.createGain();
-  audioLfo.type = 'sine';
-  audioLfo.frequency.value = 0.03;
-  lfoGain.gain.value = 120;
-  audioLfo.connect(lfoGain);
-  lfoGain.connect(noiseFilter.frequency);
-  audioLfo.start();
-}
-
-async function toggleAmbientAudio(){
-  await initAmbientAudio();
-  if(!audioContext || !audioMaster){
-    return;
-  }
-
-  if(audioContext.state === 'suspended'){
-    await audioContext.resume();
-  }
-
-  const volumeValue = Number(dom.musicVolume?.value || 38) / 100;
-  audioPlaying = !audioPlaying;
-  audioMaster.gain.cancelScheduledValues(audioContext.currentTime);
-  audioMaster.gain.linearRampToValueAtTime(audioPlaying ? volumeValue * 0.42 : 0, audioContext.currentTime + 0.5);
-  setMusicButtonLabel();
-}
-
-function updateAmbientVolume(){
-  if(!audioContext || !audioMaster || !audioPlaying){
-    return;
-  }
-  const volumeValue = Number(dom.musicVolume?.value || 38) / 100;
-  audioMaster.gain.cancelScheduledValues(audioContext.currentTime);
-  audioMaster.gain.linearRampToValueAtTime(volumeValue * 0.42, audioContext.currentTime + 0.2);
 }
 
 function setSetupMode(active){
@@ -1051,16 +972,7 @@ dom.connectBtn.addEventListener('click', async () => {
   });
 });
 
-if(dom.musicToggleBtn){
-  dom.musicToggleBtn.addEventListener('click', toggleAmbientAudio);
-}
-
-if(dom.musicVolume){
-  dom.musicVolume.addEventListener('input', updateAmbientVolume);
-}
-
 buildAtmosphere();
-setMusicButtonLabel();
 
 if(configReady){
   supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
