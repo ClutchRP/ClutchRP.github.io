@@ -980,6 +980,28 @@ function updateCounter(){
   dom.counterNum.textContent = entries.length;
 }
 
+function mergeEntryIntoWaitlist(entry){
+  if(!entry){return;}
+
+  const existingIndex = entries.findIndex((item) => item.auth_user_id === entry.auth_user_id);
+  const merged = {
+    ...(existingIndex >= 0 ? entries[existingIndex] : {}),
+    ...entry
+  };
+
+  if(existingIndex >= 0){
+    entries.splice(existingIndex, 1, merged);
+  }else{
+    entries.push(merged);
+  }
+
+  entries.sort((a, b) => {
+    const aTime = a?.submitted_at ? new Date(a.submitted_at).getTime() : Number.MAX_SAFE_INTEGER;
+    const bTime = b?.submitted_at ? new Date(b.submitted_at).getTime() : Number.MAX_SAFE_INTEGER;
+    return aTime - bTime;
+  });
+}
+
 function renderWaitlist(){
   dom.waitlistList.innerHTML = '';
 
@@ -1097,24 +1119,33 @@ function syncAuthUi(){
 
 async function loadWaitlist(){
   if(!supabase){return;}
+  try{
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
+    const { data, error } = await supabase
+      .from('waitlist_entries')
+      .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+      .eq('status', 'submitted')
+      .order('submitted_at', { ascending: true })
+      .abortSignal(controller.signal);
+    clearTimeout(timeoutId);
 
-  const { data, error } = await supabase
-    .from('waitlist_entries')
-    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
-    .eq('status', 'submitted')
-    .order('submitted_at', { ascending: true });
+    if(error){
+      console.error('Waitlist load failed', error);
+      setAuthStatus('Database ready check failed. Create the <strong>waitlist_entries</strong> table and policies first.');
+      return;
+    }
 
-  if(error){
-    setAuthStatus('Database ready check failed. Create the <strong>waitlist_entries</strong> table and policies first.');
-    return;
-  }
-
-  entries = data || [];
-  myEntry = authUser ? entries.find((entry) => entry.auth_user_id === authUser.id) || null : null;
-  updateCounter();
-  renderWaitlist();
-  if(myEntry){
-    showResult(myEntry);
+    entries = data || [];
+    myEntry = authUser ? entries.find((entry) => entry.auth_user_id === authUser.id) || myEntry : null;
+    updateCounter();
+    renderWaitlist();
+    if(myEntry){
+      showResult(myEntry);
+    }
+  }catch(error){
+    console.error('Waitlist refresh crashed', error);
+    setAuthStatus('The waiting list refresh timed out. Your Discord connection is still active, so try submitting once more.');
   }
 }
 
@@ -1142,45 +1173,59 @@ window.submitForm = async function submitForm(){
   submitPending = true;
   dom.submitBtn.disabled = true;
   dom.submitBtn.textContent = 'Submitting...';
+  try{
+    const profile = extractDiscordProfile(authUser);
+    const payload = {
+      auth_user_id: authUser.id,
+      discord_id: profile.discordId,
+      discord_username: profile.username,
+      discord_avatar_url: profile.avatarUrl,
+      role: dom.roleSelect.value,
+      rp_meaning: dom.rpMeaning.value.trim(),
+      rp_experience: dom.rpExperience.value,
+      prev_server: dom.prevServer.value.trim(),
+      referral_code: myEntry?.referral_code || genCode(),
+      status: 'submitted'
+    };
 
-  const profile = extractDiscordProfile(authUser);
-  const payload = {
-    auth_user_id: authUser.id,
-    discord_id: profile.discordId,
-    discord_username: profile.username,
-    discord_avatar_url: profile.avatarUrl,
-    role: dom.roleSelect.value,
-    rp_meaning: dom.rpMeaning.value.trim(),
-    rp_experience: dom.rpExperience.value,
-    prev_server: dom.prevServer.value.trim(),
-    referral_code: myEntry?.referral_code || genCode(),
-    status: 'submitted'
-  };
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const { data, error } = await supabase
+      .from('waitlist_entries')
+      .upsert(payload, { onConflict: 'auth_user_id' })
+      .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+      .abortSignal(controller.signal)
+      .single();
+    clearTimeout(timeoutId);
 
-  const { data, error } = await supabase
-    .from('waitlist_entries')
-    .upsert(payload, { onConflict: 'auth_user_id' })
-    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
-    .single();
+    if(error){
+      console.error('Submit failed', error);
+      showSubmitError('Submit failed. Make sure the waitlist table and Discord access are configured correctly.', false);
+      return;
+    }
 
-  if(error){
-    showSubmitError('Submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.', false);
+    myEntry = {
+      ...payload,
+      ...data,
+      submitted_at: data?.submitted_at || myEntry?.submitted_at || new Date().toISOString()
+    };
+
+    mergeEntryIntoWaitlist(myEntry);
+    updateCounter();
+    renderWaitlist();
+    showResult(myEntry);
+    resetFormFields();
+    clearSubmitError();
+
+    await loadWaitlist();
+  }catch(error){
+    console.error('Submit crashed', error);
+    showSubmitError('Submit timed out before the waiting list confirmed your spot. Try once more in a few seconds.', false);
+  }finally{
     submitPending = false;
     dom.submitBtn.disabled = false;
     dom.submitBtn.textContent = 'Submit to Waiting List';
-    return;
   }
-
-  myEntry = data || payload;
-  resetFormFields();
-  clearSubmitError();
-  await loadWaitlist();
-  if(myEntry){
-    showResult(myEntry);
-  }
-  submitPending = false;
-  dom.submitBtn.disabled = false;
-  dom.submitBtn.textContent = 'Submit to Waiting List';
 }
 
 window.copyCode = function copyCode(){
