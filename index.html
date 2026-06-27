@@ -48,7 +48,7 @@
   .crp-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:clamp(4px,1.1vw,8px);color:#0088ff;text-transform:uppercase;margin-bottom:28px}
   .crp-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,44px);line-height:1.08;text-transform:uppercase;color:#fff;letter-spacing:-.5px}
   .crp-headline span{color:#0088ff}
-  .crp-sub{font-size:clamp(13px,1.55vw,15px);color:#888;margin:18px auto 0;max-width:520px;line-height:1.7}
+  .crp-sub{font-size:clamp(13px,1.55vw,15px);color:#888;margin:18px auto 0;max-width:560px;line-height:1.7}
   .crp-line{width:40px;height:2px;background:#0088ff;margin:24px auto 0}
   .crp-counter-row{display:flex;justify-content:center;flex-wrap:wrap;gap:0;margin:32px 0 0}
   .crp-stat{text-align:center;padding:18px clamp(26px,4vw,42px);border:1px solid rgba(0,136,255,.15);background:rgba(0,0,0,.82);min-width:190px}
@@ -57,9 +57,26 @@
   .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
   .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
   .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
-  .crp-form-wrap{max-width:540px;margin:36px auto 0;padding:0}
+  .crp-form-wrap{max-width:600px;margin:36px auto 0;padding:0}
   .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
   .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
+  .crp-auth-card,.crp-form-card,.crp-result,.crp-setup-card{border:1px solid rgba(0,136,255,.2);background:rgba(0,0,0,.86)}
+  .crp-auth-card{padding:18px;margin-bottom:16px}
+  .crp-auth-top{display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .crp-auth-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase}
+  .crp-auth-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-top:8px}
+  .crp-auth-copy{font-size:13px;color:#77818a;line-height:1.6;margin-top:10px;max-width:380px}
+  .crp-auth-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .crp-auth-status{margin-top:14px;padding:12px 14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-size:12px;color:#8e98a0;line-height:1.6}
+  .crp-auth-status strong{color:#fff}
+  .crp-auth-connected{display:flex;align-items:center;gap:12px;border:1px solid rgba(0,136,255,.16);background:rgba(0,136,255,.05);padding:12px 14px;margin-top:14px}
+  .crp-auth-meta{min-width:0}
+  .crp-auth-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1}
+  .crp-auth-note{font-size:11px;color:#6f7a83;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .crp-setup-card{padding:18px;margin-bottom:16px;display:none}
+  .crp-setup-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff}
+  .crp-setup-copy{font-size:13px;color:#7e8892;line-height:1.6;margin-top:8px}
+  .crp-form-card{padding:24px}
   .crp-field{margin-bottom:13px}
   .crp-label{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:block;margin-bottom:7px;font-weight:600}
   .crp-label-opt{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-weight:600}
@@ -72,20 +89,22 @@
   .crp-select option{background:#000;color:#fff}
   .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
   .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
-  .crp-avatar-help{font-size:11px;color:#5f6a74;line-height:1.5;margin-top:8px}
+  .crp-helper{font-size:12px;color:#62707b;line-height:1.6;margin-top:8px}
   .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
   .crp-btn:hover{background:#e0e0e0}
   .crp-btn:active{transform:scale(.98)}
+  .crp-btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
   .crp-btn-secondary{background:transparent;border:1px solid rgba(0,136,255,.25);color:#0088ff}
   .crp-btn-secondary:hover{background:rgba(0,136,255,.08)}
-  .crp-result{display:none;text-align:center;padding:32px 24px;border:1px solid rgba(0,136,255,.2);background:rgba(0,0,0,.86);margin:0}
+  .crp-btn-inline{width:auto;margin-top:0;padding:12px 18px;letter-spacing:2px}
+  .crp-result{display:none;text-align:center;padding:32px 24px;margin-top:16px}
   .crp-result-rank{font-size:10px;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:10px}
   .crp-result-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;color:#0088ff;line-height:1}
   .crp-result-card{display:flex;align-items:center;gap:16px;justify-content:center;padding:18px;margin-top:18px;border:1px solid rgba(0,136,255,.15);background:rgba(0,136,255,.05)}
   .crp-result-meta{text-align:left}
   .crp-result-name{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1}
   .crp-result-role{font-size:12px;color:#0088ff;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
-  .crp-result-msg{font-size:13px;color:#666;margin-top:18px;line-height:1.7;max-width:320px;margin-inline:auto}
+  .crp-result-msg{font-size:13px;color:#666;margin-top:18px;line-height:1.7;max-width:360px;margin-inline:auto}
   .crp-result-code{margin-top:20px}
   .crp-code-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:8px}
   .crp-code-box{background:rgba(0,136,255,.06);border:1px solid rgba(0,136,255,.25);padding:12px 15px;font-family:monospace;font-size:13px;color:#0088ff;letter-spacing:2px;cursor:pointer;transition:background .2s}
@@ -105,6 +124,7 @@
   .crp-entry-role{font-size:11px;color:#0088ff;letter-spacing:1.4px;text-transform:uppercase;margin-top:5px}
   .crp-entry-meta{font-size:10px;color:#4f5860;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
   .crp-list-empty{text-align:center;border:1px dashed rgba(0,136,255,.18);padding:22px;font-size:12px;color:#4f5860;letter-spacing:1px;text-transform:uppercase}
+  .crp-status-error{display:none;color:#ff7373;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px}
   .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
   @media (max-width:900px){
     .crp-content{width:min(100%,960px)}
@@ -126,6 +146,9 @@
     .crp-form-wrap{margin-top:28px}
     .crp-form-title{font-size:14px;letter-spacing:3px}
     .crp-form-sub{font-size:10px}
+    .crp-auth-top{flex-direction:column;align-items:flex-start}
+    .crp-auth-actions{width:100%}
+    .crp-btn-inline{width:100%}
     .crp-label-opt{gap:8px;align-items:flex-start}
     .crp-opt-tag{flex:0 0 auto}
     .crp-result{padding:28px 18px}
@@ -170,98 +193,116 @@
         <span>Build your empire. Own the city.</span><br>
         Every crew has a story - <span>what's yours?</span>
       </div>
-      <div class="crp-sub">Mafia empires. Biker crews. Player-run businesses. Gang turfs. Real consequences. Coming soon.</div>
+      <div class="crp-sub">Official waitlist access is locked behind a real Discord connection so every spot on the board is attached to a real player profile.</div>
       <div class="crp-line"></div>
     </div>
 
     <div class="crp-counter-row">
       <div class="crp-stat">
         <div class="crp-stat-num" id="counterNum">0</div>
-        <div class="crp-stat-label">Players Waiting</div>
+        <div class="crp-stat-label">Official Spots</div>
       </div>
       <div class="crp-stat">
-        <div class="crp-stat-num">Soon</div>
-        <div class="crp-stat-label">Launch</div>
+        <div class="crp-stat-num" id="authStat">Discord</div>
+        <div class="crp-stat-label">Verification</div>
       </div>
     </div>
 
     <div class="crp-features">
-      <div class="crp-badge">Gang Turfs</div>
-      <div class="crp-badge">Drug System</div>
-      <div class="crp-badge">Mafia Orgs</div>
-      <div class="crp-badge">Biker MCs</div>
-      <div class="crp-badge">Player Business</div>
-      <div class="crp-badge">Street Economy</div>
+      <div class="crp-badge">Official Board</div>
+      <div class="crp-badge">Discord Verified</div>
+      <div class="crp-badge">Real Avatars</div>
+      <div class="crp-badge">Shared Waitlist</div>
+      <div class="crp-badge">Live Updates</div>
+      <div class="crp-badge">Player Reputation</div>
     </div>
 
     <div class="crp-form-wrap">
-      <div class="crp-form-title">- Claim Your Spot -</div>
-      <div class="crp-form-sub">Tell us who you are before you hit the streets</div>
+      <div class="crp-form-title">- Secure Your Spot -</div>
+      <div class="crp-form-sub">Connect Discord first, then submit your official ClutchRP application</div>
 
-      <div id="theForm">
-        <div class="crp-field">
-          <label class="crp-label">Discord Username</label>
-          <input class="crp-input" id="discordInput" placeholder="@yourname" type="text"/>
-        </div>
-        <div class="crp-field">
-          <div class="crp-label-opt">
-            <span>Discord Avatar URL</span>
-            <span class="crp-opt-tag">Optional</span>
-          </div>
-          <input class="crp-input" id="avatarInput" placeholder="https://cdn.discordapp.com/avatars/..." type="text"/>
-          <div class="crp-avatar-help">Paste a Discord CDN image link if you want the real Discord profile picture to show. If left blank, the card uses an automatic fallback avatar.</div>
-        </div>
-        <div class="crp-field">
-          <label class="crp-label">Your Role in the City</label>
-          <select class="crp-select" id="roleSelect">
-            <option value="" disabled selected>- Choose your path -</option>
-            <option value="mafia">Mafia / Crime Family</option>
-            <option value="biker">Biker MC</option>
-            <option value="gang">Street Gang</option>
-            <option value="business">Business Owner</option>
-            <option value="law">Law Enforcement</option>
-            <option value="civilian">Civilian / Freelancer</option>
-          </select>
-        </div>
+      <div class="crp-setup-card" id="setupCard">
+        <div class="crp-setup-title">Setup Required Before This Version Can Go Live</div>
+        <div class="crp-setup-copy">This Supabase draft is ready for real Discord sign-in, but it still needs your Supabase project URL, publishable key, and Discord OAuth provider configuration before the official waitlist can accept live applications.</div>
+      </div>
 
-        <hr class="crp-divider"/>
-        <div class="crp-opt-note">- Optional - tell us more about yourself -</div>
+      <div class="crp-auth-card">
+        <div class="crp-auth-top">
+          <div>
+            <div class="crp-auth-label">Step 1</div>
+            <div class="crp-auth-title">Connect Real Discord</div>
+            <div class="crp-auth-copy">Every official waitlist spot pulls the real Discord username and avatar from the connected account. No manual typing, no fake profile image field.</div>
+          </div>
+          <div class="crp-auth-actions">
+            <button class="crp-btn crp-btn-inline" id="connectBtn" type="button">Connect Discord</button>
+            <button class="crp-btn crp-btn-secondary crp-btn-inline" id="signOutBtn" type="button" style="display:none">Sign Out</button>
+          </div>
+        </div>
+        <div class="crp-auth-status" id="authStatus">Waiting for Discord connection.</div>
+        <div class="crp-auth-connected" id="authConnected" style="display:none">
+          <div id="authAvatar"></div>
+          <div class="crp-auth-meta">
+            <div class="crp-auth-name" id="authName">@discord</div>
+            <div class="crp-auth-note" id="authNote">Verified Discord account ready to submit</div>
+          </div>
+        </div>
+      </div>
 
-        <div class="crp-field">
-          <div class="crp-label-opt">
-            <span>What does RP mean to you?</span>
-            <span class="crp-opt-tag">Optional</span>
+      <div class="crp-form-card">
+        <div id="theForm">
+          <div class="crp-field">
+            <label class="crp-label">Your Role in the City</label>
+            <select class="crp-select" id="roleSelect">
+              <option value="" selected>- Choose your path -</option>
+              <option value="mafia">Mafia / Crime Family</option>
+              <option value="biker">Biker MC</option>
+              <option value="gang">Street Gang</option>
+              <option value="business">Business Owner</option>
+              <option value="law">Law Enforcement</option>
+              <option value="civilian">Civilian / Freelancer</option>
+            </select>
           </div>
-          <input class="crp-input" id="rpMeaning" placeholder="In your own words..." type="text"/>
-        </div>
-        <div class="crp-field">
-          <div class="crp-label-opt">
-            <span>How long have you been roleplaying?</span>
-            <span class="crp-opt-tag">Optional</span>
-          </div>
-          <select class="crp-select" id="rpExperience">
-            <option value="" disabled selected>- Select -</option>
-            <option value="new">Brand new, just starting out</option>
-            <option value="under1">Less than a year</option>
-            <option value="1to3">1 - 3 years</option>
-            <option value="3to5">3 - 5 years</option>
-            <option value="5plus">5+ years</option>
-          </select>
-        </div>
-        <div class="crp-field">
-          <div class="crp-label-opt">
-            <span>What server are you coming from?</span>
-            <span class="crp-opt-tag">Optional</span>
-          </div>
-          <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text"/>
-        </div>
 
-        <button class="crp-btn" onclick="submitForm()" type="button">Submit</button>
-        <div id="errMsg" style="color:#ff4444;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px;display:none">Please fill out your Discord username and role to continue.</div>
+          <hr class="crp-divider">
+          <div class="crp-opt-note">- Optional - build your file -</div>
+
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>What does RP mean to you?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <input class="crp-input" id="rpMeaning" placeholder="In your own words..." type="text">
+          </div>
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>How long have you been roleplaying?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <select class="crp-select" id="rpExperience">
+              <option value="" selected>- Select -</option>
+              <option value="new">Brand new, just starting out</option>
+              <option value="under1">Less than a year</option>
+              <option value="1to3">1 - 3 years</option>
+              <option value="3to5">3 - 5 years</option>
+              <option value="5plus">5+ years</option>
+            </select>
+          </div>
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>What server are you coming from?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text">
+          </div>
+
+          <div class="crp-helper">Official submission is locked until Discord is connected. Once submitted, your verified Discord profile is added to the shared board for everyone to see.</div>
+          <button class="crp-btn" id="submitBtn" onclick="submitForm()" type="button">Submit Official Application</button>
+          <div class="crp-status-error" id="errMsg">Connect Discord and choose your role before submitting your official application.</div>
+        </div>
       </div>
 
       <div class="crp-result" id="resultPanel">
-        <div class="crp-result-rank">Your Street File</div>
+        <div class="crp-result-rank">Your Official Street File</div>
         <div class="crp-result-num" id="spotNum">-</div>
         <div class="crp-result-card">
           <div id="resultAvatar"></div>
@@ -270,7 +311,7 @@
             <div class="crp-result-role" id="resultRole">Civilian / Freelancer</div>
           </div>
         </div>
-        <div class="crp-result-msg">You're on the list. The city knows your name. Share your link to move up the ranks.</div>
+        <div class="crp-result-msg">Your verified Discord account is officially on the ClutchRP waitlist board.</div>
         <div class="crp-result-code">
           <div class="crp-code-label">Referral Link</div>
           <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
@@ -282,64 +323,116 @@
 
     <div class="crp-list-wrap">
       <div class="crp-list-head">
-        <div class="crp-list-title">Public Waitlist</div>
-        <div class="crp-list-sub">Live usernames and profile cards from recent submissions</div>
+        <div class="crp-list-title">Official Waitlist Board</div>
+        <div class="crp-list-sub">Verified Discord accounts only. Every card below comes from a real official submission.</div>
       </div>
-      <div class="crp-list-empty" id="waitlistEmpty">No applications yet. The first name on the board goes down in city history.</div>
+      <div class="crp-list-empty" id="waitlistEmpty">No verified applications yet. Once Discord auth and database setup are live, official players will appear here.</div>
       <div class="crp-list" id="waitlistList"></div>
     </div>
 
-    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Coming Soon</div>
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Official Waitlist Draft</div>
   </div>
 </div>
 
 <script>
-var STORAGE_KEY='clutchrp_waitlist_entries_v1';
-var ROLE_LABELS={
-  mafia:'Mafia / Crime Family',
-  biker:'Biker MC',
-  gang:'Street Gang',
-  business:'Business Owner',
-  law:'Law Enforcement',
-  civilian:'Civilian / Freelancer'
+window.CLUTCHRP_CONFIG = window.CLUTCHRP_CONFIG || {
+  supabaseUrl: 'https://szlrfgmbnkccmyovqpuy.supabase.co',
+  supabaseAnonKey: 'sb_publishable_VY0dfJov8dMx_RrRlENKyw_U2FGHgpF',
+  redirectTo: 'https://clutchrp.github.io/'
 };
-var entries=loadEntries();
-var rainCanvas=null;
-var rainCtx=null;
-var rainWidth=0;
-var rainHeight=0;
-var rainFloor=0;
-var rainDrops=[];
-var rainBursts=[];
-var rainRipples=[];
-var rainAnimationFrame=0;
-var rainLastTime=0;
-var rainResizeBound=false;
+</script>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const ROLE_LABELS = {
+  mafia: 'Mafia / Crime Family',
+  biker: 'Biker MC',
+  gang: 'Street Gang',
+  business: 'Business Owner',
+  law: 'Law Enforcement',
+  civilian: 'Civilian / Freelancer'
+};
+
+const dom = {
+  counterNum: document.getElementById('counterNum'),
+  authStat: document.getElementById('authStat'),
+  authStatus: document.getElementById('authStatus'),
+  authConnected: document.getElementById('authConnected'),
+  authAvatar: document.getElementById('authAvatar'),
+  authName: document.getElementById('authName'),
+  authNote: document.getElementById('authNote'),
+  connectBtn: document.getElementById('connectBtn'),
+  signOutBtn: document.getElementById('signOutBtn'),
+  submitBtn: document.getElementById('submitBtn'),
+  errMsg: document.getElementById('errMsg'),
+  roleSelect: document.getElementById('roleSelect'),
+  rpMeaning: document.getElementById('rpMeaning'),
+  rpExperience: document.getElementById('rpExperience'),
+  prevServer: document.getElementById('prevServer'),
+  resultPanel: document.getElementById('resultPanel'),
+  resultAvatar: document.getElementById('resultAvatar'),
+  resultName: document.getElementById('resultName'),
+  resultRole: document.getElementById('resultRole'),
+  spotNum: document.getElementById('spotNum'),
+  refCode: document.getElementById('refCode'),
+  copyHint: document.getElementById('copyHint'),
+  waitlistList: document.getElementById('waitlistList'),
+  waitlistEmpty: document.getElementById('waitlistEmpty'),
+  setupCard: document.getElementById('setupCard'),
+  theForm: document.getElementById('theForm')
+};
+
+const config = window.CLUTCHRP_CONFIG;
+const configReady = Boolean(
+  config &&
+  config.supabaseUrl &&
+  config.supabaseAnonKey &&
+  !config.supabaseUrl.includes('YOUR_SUPABASE_URL') &&
+  !config.supabaseAnonKey.includes('YOUR_SUPABASE_PUBLISHABLE_KEY')
+);
+
+let supabase = null;
+let authUser = null;
+let entries = [];
+let myEntry = null;
+
+let rainCanvas = null;
+let rainCtx = null;
+let rainWidth = 0;
+let rainHeight = 0;
+let rainFloor = 0;
+let rainDrops = [];
+let rainBursts = [];
+let rainRipples = [];
+let rainAnimationFrame = 0;
+let rainLastTime = 0;
+let rainResizeBound = false;
 
 function prefersReducedMotion(){
-  return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 function isMobileViewport(){
-  return window.matchMedia&&window.matchMedia('(max-width: 640px)').matches;
+  return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
 }
 
 function buildAtmosphere(){
-  var smokeLayer=document.getElementById('smokeLayer');
+  const smokeLayer = document.getElementById('smokeLayer');
   if(!smokeLayer){return;}
 
-  smokeLayer.innerHTML='';
+  smokeLayer.innerHTML = '';
 
-  var plumeCount=prefersReducedMotion()?2:(isMobileViewport()?3:6);
-  for(var j=0;j<plumeCount;j++){
-    var plume=document.createElement('span');
-    var size=180+Math.random()*210;
-    plume.style.width=size.toFixed(0)+'px';
-    plume.style.height=(size*.72).toFixed(0)+'px';
-    plume.style.left=(-8+Math.random()*96).toFixed(2)+'%';
-    plume.style.animationDuration=(16+Math.random()*12).toFixed(2)+'s';
-    plume.style.animationDelay=(-Math.random()*16).toFixed(2)+'s';
-    plume.style.opacity=(.16+Math.random()*.14).toFixed(2);
+  const plumeCount = prefersReducedMotion() ? 2 : (isMobileViewport() ? 3 : 6);
+  for(let j = 0; j < plumeCount; j++){
+    const plume = document.createElement('span');
+    const size = 180 + Math.random() * 210;
+    plume.style.width = size.toFixed(0) + 'px';
+    plume.style.height = (size * .72).toFixed(0) + 'px';
+    plume.style.left = (-8 + Math.random() * 96).toFixed(2) + '%';
+    plume.style.animationDuration = (16 + Math.random() * 12).toFixed(2) + 's';
+    plume.style.animationDelay = (-Math.random() * 16).toFixed(2) + 's';
+    plume.style.opacity = (.16 + Math.random() * .14).toFixed(2);
     smokeLayer.appendChild(plume);
   }
 
@@ -347,226 +440,219 @@ function buildAtmosphere(){
 }
 
 function initRainSystem(){
-  rainCanvas=document.getElementById('rainCanvas');
+  rainCanvas = document.getElementById('rainCanvas');
   if(!rainCanvas){return;}
 
-  rainCtx=rainCanvas.getContext('2d');
+  rainCtx = rainCanvas.getContext('2d');
   if(!rainCtx){return;}
 
   resizeRainSystem();
   seedRainDrops();
 
   if(!rainResizeBound){
-    window.addEventListener('resize',resizeRainSystem,{passive:true});
-    rainResizeBound=true;
+    window.addEventListener('resize', resizeRainSystem, { passive: true });
+    rainResizeBound = true;
   }
 
   if(rainAnimationFrame){
     cancelAnimationFrame(rainAnimationFrame);
   }
 
-  rainLastTime=0;
-  rainAnimationFrame=requestAnimationFrame(animateRainSystem);
+  rainLastTime = 0;
+  rainAnimationFrame = requestAnimationFrame(animateRainSystem);
 }
 
 function resizeRainSystem(){
-  if(!rainCanvas||!rainCtx){return;}
-  var rect=rainCanvas.getBoundingClientRect();
-  var dpr=Math.min(window.devicePixelRatio||1,1.5);
-  rainWidth=Math.max(1,Math.round(rect.width));
-  rainHeight=Math.max(1,Math.round(rect.height));
-  rainFloor=rainHeight-8;
-  rainCanvas.width=Math.max(1,Math.round(rect.width*dpr));
-  rainCanvas.height=Math.max(1,Math.round(rect.height*dpr));
-  rainCtx.setTransform(dpr,0,0,dpr,0,0);
+  if(!rainCanvas || !rainCtx){return;}
+  const rect = rainCanvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  rainWidth = Math.max(1, Math.round(rect.width));
+  rainHeight = Math.max(1, Math.round(rect.height));
+  rainFloor = rainHeight - 8;
+  rainCanvas.width = Math.max(1, Math.round(rect.width * dpr));
+  rainCanvas.height = Math.max(1, Math.round(rect.height * dpr));
+  rainCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   if(rainDrops.length){
     seedRainDrops();
   }
 }
 
 function seedRainDrops(){
-  rainDrops=[];
-  rainBursts=[];
-  rainRipples=[];
-  var count;
+  rainDrops = [];
+  rainBursts = [];
+  rainRipples = [];
+  let count;
   if(prefersReducedMotion()){
-    count=Math.max(8,Math.min(12,Math.floor(rainWidth/95)));
+    count = Math.max(8, Math.min(12, Math.floor(rainWidth / 95)));
   }else if(isMobileViewport()){
-    count=Math.max(10,Math.min(16,Math.floor(rainWidth/70)));
+    count = Math.max(10, Math.min(16, Math.floor(rainWidth / 70)));
   }else{
-    count=Math.max(16,Math.min(28,Math.floor(rainWidth/52)));
+    count = Math.max(16, Math.min(28, Math.floor(rainWidth / 52)));
   }
-  for(var i=0;i<count;i++){
+
+  for(let i = 0; i < count; i++){
     rainDrops.push(createRainDrop(true));
   }
 }
 
 function createRainDrop(initial){
   return {
-    x:Math.random()*rainWidth,
-    y:initial?Math.random()*rainHeight:-20-Math.random()*rainHeight*.35,
-    vy:12+Math.random()*6,
-    drift:.12+Math.random()*.55,
-    len:18+Math.random()*26,
-    width:.8+Math.random()*1.1,
-    alpha:.26+Math.random()*.34
+    x: Math.random() * rainWidth,
+    y: initial ? Math.random() * rainHeight : -20 - Math.random() * rainHeight * .35,
+    vy: 12 + Math.random() * 6,
+    drift: .12 + Math.random() * .55,
+    len: 18 + Math.random() * 26,
+    width: .8 + Math.random() * 1.1,
+    alpha: .26 + Math.random() * .34
   };
 }
 
 function resetRainDrop(drop){
-  drop.x=Math.random()*rainWidth;
-  drop.y=-20-Math.random()*rainHeight*.35;
-  drop.vy=12+Math.random()*6;
-  drop.drift=.12+Math.random()*.55;
-  drop.len=18+Math.random()*26;
-  drop.width=.8+Math.random()*1.1;
-  drop.alpha=.26+Math.random()*.34;
+  drop.x = Math.random() * rainWidth;
+  drop.y = -20 - Math.random() * rainHeight * .35;
+  drop.vy = 12 + Math.random() * 6;
+  drop.drift = .12 + Math.random() * .55;
+  drop.len = 18 + Math.random() * 26;
+  drop.width = .8 + Math.random() * 1.1;
+  drop.alpha = .26 + Math.random() * .34;
 }
 
 function spawnRainSplash(x){
-  var burstCount=4+Math.floor(Math.random()*3);
-  for(var i=0;i<burstCount;i++){
+  const burstCount = 4 + Math.floor(Math.random() * 3);
+  for(let i = 0; i < burstCount; i++){
     rainBursts.push({
-      x:x,
-      y:rainFloor,
-      vx:(Math.random()-.5)*2.6,
-      vy:-(1.8+Math.random()*2.4),
-      size:1+Math.random()*1.7,
-      life:1,
-      alpha:.42+Math.random()*.28
+      x,
+      y: rainFloor,
+      vx: (Math.random() - .5) * 2.6,
+      vy: -(1.8 + Math.random() * 2.4),
+      size: 1 + Math.random() * 1.7,
+      life: 1,
+      alpha: .42 + Math.random() * .28
     });
   }
 
   rainRipples.push({
-    x:x,
-    y:rainFloor+1,
-    radius:2,
-    maxRadius:10+Math.random()*10,
-    alpha:.3+Math.random()*.12
+    x,
+    y: rainFloor + 1,
+    radius: 2,
+    maxRadius: 10 + Math.random() * 10,
+    alpha: .3 + Math.random() * .12
   });
 }
 
 function animateRainSystem(time){
   if(!rainCtx){return;}
-  if(!rainLastTime){rainLastTime=time;}
-  var step=Math.min(1.35,(time-rainLastTime)/16.667||1);
-  rainLastTime=time;
+  if(!rainLastTime){rainLastTime = time;}
+  const step = Math.min(1.35, (time - rainLastTime) / 16.667 || 1);
+  rainLastTime = time;
 
-  rainCtx.clearRect(0,0,rainWidth,rainHeight);
+  rainCtx.clearRect(0, 0, rainWidth, rainHeight);
   drawRainFloor();
 
-  for(var i=0;i<rainDrops.length;i++){
-    var drop=rainDrops[i];
-    drop.x+=drop.drift*step;
-    drop.y+=drop.vy*step;
+  for(let i = 0; i < rainDrops.length; i++){
+    const drop = rainDrops[i];
+    drop.x += drop.drift * step;
+    drop.y += drop.vy * step;
 
-    if(drop.x>rainWidth+24){
+    if(drop.x > rainWidth + 24){
       resetRainDrop(drop);
       continue;
     }
 
-    if(drop.y>=rainFloor){
+    if(drop.y >= rainFloor){
       spawnRainSplash(drop.x);
       resetRainDrop(drop);
       continue;
     }
 
     rainCtx.beginPath();
-    rainCtx.strokeStyle='rgba(120,198,255,'+drop.alpha.toFixed(2)+')';
-    rainCtx.lineWidth=drop.width;
-    rainCtx.lineCap='round';
-    rainCtx.moveTo(drop.x-drop.drift*drop.len*.16,drop.y-drop.len);
-    rainCtx.lineTo(drop.x,drop.y);
+    rainCtx.strokeStyle = 'rgba(120,198,255,' + drop.alpha.toFixed(2) + ')';
+    rainCtx.lineWidth = drop.width;
+    rainCtx.lineCap = 'round';
+    rainCtx.moveTo(drop.x - drop.drift * drop.len * .16, drop.y - drop.len);
+    rainCtx.lineTo(drop.x, drop.y);
     rainCtx.stroke();
   }
 
-  for(var j=rainBursts.length-1;j>=0;j--){
-    var burst=rainBursts[j];
-    burst.x+=burst.vx*step;
-    burst.y+=burst.vy*step;
-    burst.vy+=.22*step;
-    burst.life-=.05*step;
-    if(burst.life<=0){
-      rainBursts.splice(j,1);
+  for(let j = rainBursts.length - 1; j >= 0; j--){
+    const burst = rainBursts[j];
+    burst.x += burst.vx * step;
+    burst.y += burst.vy * step;
+    burst.vy += .22 * step;
+    burst.life -= .05 * step;
+    if(burst.life <= 0){
+      rainBursts.splice(j, 1);
       continue;
     }
     rainCtx.beginPath();
-    rainCtx.fillStyle='rgba(145,215,255,'+(burst.alpha*burst.life).toFixed(2)+')';
-    rainCtx.arc(burst.x,burst.y,burst.size,0,Math.PI*2);
+    rainCtx.fillStyle = 'rgba(145,215,255,' + (burst.alpha * burst.life).toFixed(2) + ')';
+    rainCtx.arc(burst.x, burst.y, burst.size, 0, Math.PI * 2);
     rainCtx.fill();
   }
 
-  for(var k=rainRipples.length-1;k>=0;k--){
-    var ripple=rainRipples[k];
-    ripple.radius+=1.15*step;
-    ripple.alpha-=.018*step;
-    if(ripple.alpha<=0||ripple.radius>=ripple.maxRadius){
-      rainRipples.splice(k,1);
+  for(let k = rainRipples.length - 1; k >= 0; k--){
+    const ripple = rainRipples[k];
+    ripple.radius += 1.15 * step;
+    ripple.alpha -= .018 * step;
+    if(ripple.alpha <= 0 || ripple.radius >= ripple.maxRadius){
+      rainRipples.splice(k, 1);
       continue;
     }
     rainCtx.beginPath();
-    rainCtx.strokeStyle='rgba(110,185,255,'+ripple.alpha.toFixed(2)+')';
-    rainCtx.lineWidth=.9;
-    rainCtx.ellipse(ripple.x,ripple.y,ripple.radius,ripple.radius*.28,0,0,Math.PI*2);
+    rainCtx.strokeStyle = 'rgba(110,185,255,' + ripple.alpha.toFixed(2) + ')';
+    rainCtx.lineWidth = .9;
+    rainCtx.ellipse(ripple.x, ripple.y, ripple.radius, ripple.radius * .28, 0, 0, Math.PI * 2);
     rainCtx.stroke();
   }
 
-  rainAnimationFrame=requestAnimationFrame(animateRainSystem);
+  rainAnimationFrame = requestAnimationFrame(animateRainSystem);
 }
 
 function drawRainFloor(){
   rainCtx.beginPath();
-  rainCtx.strokeStyle='rgba(70,140,190,.16)';
-  rainCtx.lineWidth=1;
-  rainCtx.moveTo(0,rainFloor+.5);
-  rainCtx.lineTo(rainWidth,rainFloor+.5);
+  rainCtx.strokeStyle = 'rgba(70,140,190,.16)';
+  rainCtx.lineWidth = 1;
+  rainCtx.moveTo(0, rainFloor + .5);
+  rainCtx.lineTo(rainWidth, rainFloor + .5);
   rainCtx.stroke();
 }
 
-function loadEntries(){
-  try{
-    var raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw){return [];}
-    var parsed=JSON.parse(raw);
-    return Array.isArray(parsed)?parsed:[];
-  }catch(err){
-    return [];
+function setSetupMode(active){
+  dom.setupCard.style.display = active ? 'block' : 'none';
+  dom.connectBtn.disabled = active;
+  dom.submitBtn.disabled = active;
+  if(active){
+    dom.authStat.textContent = 'Setup';
+    dom.authStatus.innerHTML = 'Add your <strong>Supabase URL</strong>, <strong>publishable key</strong>, and finish the Discord provider setup before this version can accept live official applications.';
   }
 }
 
-function saveEntries(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(entries));
-}
-
-function genCode(){
-  var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  var out='';
-  for(var i=0;i<6;i++){out+=c[Math.floor(Math.random()*c.length)];}
-  return out;
+function setAuthStatus(message){
+  dom.authStatus.innerHTML = message;
 }
 
 function getRoleLabel(role){
-  return ROLE_LABELS[role]||'Player';
+  return ROLE_LABELS[role] || 'Player';
 }
 
 function getInitials(name){
-  var clean=(name||'').replace(/^@+/,'').trim();
+  const clean = (name || '').replace(/^@+/, '').trim();
   if(!clean){return 'CR';}
-  return clean.slice(0,2).toUpperCase();
+  return clean.slice(0, 2).toUpperCase();
 }
 
-function buildAvatar(name,url){
-  var wrap=document.createElement('div');
-  wrap.className='crp-user-chip';
+function buildAvatar(name, url){
+  const wrap = document.createElement('div');
+  wrap.className = 'crp-user-chip';
 
   if(url){
-    var img=document.createElement('img');
-    img.src=url;
-    img.alt=name+' avatar';
-    img.loading='lazy';
-    img.referrerPolicy='no-referrer';
-    img.onerror=function(){
-      wrap.innerHTML='';
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = name + ' avatar';
+    img.loading = 'lazy';
+    img.referrerPolicy = 'no-referrer';
+    img.onerror = function(){
+      wrap.innerHTML = '';
       wrap.appendChild(buildFallback(name));
     };
     wrap.appendChild(img);
@@ -578,132 +664,279 @@ function buildAvatar(name,url){
 }
 
 function buildFallback(name){
-  var fallback=document.createElement('div');
-  fallback.className='crp-user-fallback';
-  fallback.textContent=getInitials(name);
+  const fallback = document.createElement('div');
+  fallback.className = 'crp-user-fallback';
+  fallback.textContent = getInitials(name);
   return fallback;
 }
 
+function genCode(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let out = '';
+  for(let i = 0; i < 6; i++){
+    out += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return out;
+}
+
+function normaliseHandle(name){
+  if(!name){return '@discord';}
+  return name.startsWith('@') ? name : '@' + name;
+}
+
+function extractDiscordProfile(user){
+  const identity = (user?.identities || []).find((item) => item.provider === 'discord');
+  const raw = identity?.identity_data || {};
+  const meta = user?.user_metadata || {};
+  const discordId = raw.provider_id || raw.sub || raw.id || meta.provider_id || user?.id || '';
+  const username = raw.username || meta.user_name || meta.preferred_username || raw.global_name || meta.full_name || 'discord';
+  const displayName = raw.global_name || meta.full_name || username;
+  const avatarHash = raw.avatar || meta.avatar || '';
+  let avatarUrl = raw.avatar_url || meta.avatar_url || '';
+  if(!avatarUrl && discordId && avatarHash){
+    avatarUrl = 'https://cdn.discordapp.com/avatars/' + discordId + '/' + avatarHash + '.png?size=256';
+  }
+
+  return {
+    authUserId: user?.id || '',
+    discordId,
+    username: normaliseHandle(username),
+    displayName,
+    avatarUrl
+  };
+}
+
 function updateCounter(){
-  document.getElementById('counterNum').textContent=entries.length;
+  dom.counterNum.textContent = entries.length;
 }
 
 function renderWaitlist(){
-  var list=document.getElementById('waitlistList');
-  var empty=document.getElementById('waitlistEmpty');
-  list.innerHTML='';
+  dom.waitlistList.innerHTML = '';
 
   if(!entries.length){
-    empty.style.display='block';
+    dom.waitlistEmpty.style.display = 'block';
     return;
   }
 
-  empty.style.display='none';
+  dom.waitlistEmpty.style.display = 'none';
 
-  for(var i=0;i<entries.length;i++){
-    var entry=entries[i];
-    var card=document.createElement('div');
-    card.className='crp-entry';
+  entries.forEach((entry, index) => {
+    const card = document.createElement('div');
+    card.className = 'crp-entry';
 
-    var avatar=buildAvatar(entry.discord,entry.avatarUrl);
-    card.appendChild(avatar);
+    card.appendChild(buildAvatar(entry.discord_username, entry.discord_avatar_url));
 
-    var copy=document.createElement('div');
-    copy.className='crp-entry-copy';
+    const copy = document.createElement('div');
+    copy.className = 'crp-entry-copy';
 
-    var name=document.createElement('div');
-    name.className='crp-entry-name';
-    name.textContent=entry.discord;
+    const name = document.createElement('div');
+    name.className = 'crp-entry-name';
+    name.textContent = entry.discord_username;
     copy.appendChild(name);
 
-    var role=document.createElement('div');
-    role.className='crp-entry-role';
-    role.textContent=getRoleLabel(entry.role);
+    const role = document.createElement('div');
+    role.className = 'crp-entry-role';
+    role.textContent = getRoleLabel(entry.role);
     copy.appendChild(role);
 
-    var meta=document.createElement('div');
-    meta.className='crp-entry-meta';
-    meta.textContent='Spot #'+(i+1)+'  |  '+entry.referralCode;
+    const meta = document.createElement('div');
+    meta.className = 'crp-entry-meta';
+    meta.textContent = 'Spot #' + (index + 1) + '  |  ' + (entry.referral_code || 'PENDING');
     copy.appendChild(meta);
 
     card.appendChild(copy);
-    list.appendChild(card);
-  }
+    dom.waitlistList.appendChild(card);
+  });
 }
 
-function showResult(entry,spot){
-  document.getElementById('spotNum').textContent='#'+spot;
-  document.getElementById('resultName').textContent=entry.discord;
-  document.getElementById('resultRole').textContent=getRoleLabel(entry.role);
-  document.getElementById('refCode').textContent='clutchrp.gg/ref/'+entry.referralCode;
-  document.getElementById('copyHint').textContent='Tap to copy';
-
-  var avatarWrap=document.getElementById('resultAvatar');
-  avatarWrap.innerHTML='';
-  avatarWrap.appendChild(buildAvatar(entry.discord,entry.avatarUrl));
-
-  document.getElementById('theForm').style.display='none';
-  document.getElementById('resultPanel').style.display='block';
+function showResult(entry){
+  const spot = entries.findIndex((item) => item.auth_user_id === entry.auth_user_id) + 1;
+  dom.spotNum.textContent = spot > 0 ? '#' + spot : '#-';
+  dom.resultName.textContent = entry.discord_username;
+  dom.resultRole.textContent = getRoleLabel(entry.role);
+  dom.refCode.textContent = 'clutchrp.gg/ref/' + (entry.referral_code || 'PENDING');
+  dom.copyHint.textContent = 'Tap to copy';
+  dom.resultAvatar.innerHTML = '';
+  dom.resultAvatar.appendChild(buildAvatar(entry.discord_username, entry.discord_avatar_url));
+  dom.theForm.style.display = 'none';
+  dom.resultPanel.style.display = 'block';
 }
 
 function resetFormFields(){
-  document.getElementById('discordInput').value='';
-  document.getElementById('avatarInput').value='';
-  document.getElementById('roleSelect').selectedIndex=0;
-  document.getElementById('rpMeaning').value='';
-  document.getElementById('rpExperience').selectedIndex=0;
-  document.getElementById('prevServer').value='';
+  dom.roleSelect.value = '';
+  dom.rpMeaning.value = '';
+  dom.rpExperience.value = '';
+  dom.prevServer.value = '';
 }
 
 function showForm(){
-  document.getElementById('resultPanel').style.display='none';
-  document.getElementById('theForm').style.display='block';
-  document.getElementById('errMsg').style.display='none';
+  dom.resultPanel.style.display = 'none';
+  dom.theForm.style.display = 'block';
+  dom.errMsg.style.display = 'none';
 }
 
-function submitForm(){
-  var discord=document.getElementById('discordInput').value.trim();
-  var avatarUrl=document.getElementById('avatarInput').value.trim();
-  var role=document.getElementById('roleSelect').value;
-  var err=document.getElementById('errMsg');
-
-  if(!discord||!role){
-    err.style.display='block';
+function syncAuthUi(){
+  if(!configReady){
+    setSetupMode(true);
     return;
   }
 
-  err.style.display='none';
+  setSetupMode(false);
 
-  var entry={
-    discord:discord,
-    avatarUrl:avatarUrl,
-    role:role,
-    rpMeaning:document.getElementById('rpMeaning').value.trim(),
-    rpExperience:document.getElementById('rpExperience').value,
-    prevServer:document.getElementById('prevServer').value.trim(),
-    referralCode:genCode()
-  };
+  if(!authUser){
+    dom.authStat.textContent = 'Discord';
+    dom.authConnected.style.display = 'none';
+    dom.connectBtn.style.display = 'inline-block';
+    dom.signOutBtn.style.display = 'none';
+    dom.submitBtn.disabled = true;
+    setAuthStatus('Connect your <strong>real Discord account</strong> before you can submit an official application.');
+    return;
+  }
 
-  entries.push(entry);
-  saveEntries();
+  const profile = extractDiscordProfile(authUser);
+  dom.authStat.textContent = 'Verified';
+  dom.connectBtn.style.display = 'none';
+  dom.signOutBtn.style.display = 'inline-block';
+  dom.submitBtn.disabled = false;
+  dom.authConnected.style.display = 'flex';
+  dom.authAvatar.innerHTML = '';
+  dom.authAvatar.appendChild(buildAvatar(profile.username, profile.avatarUrl));
+  dom.authName.textContent = profile.username;
+  dom.authNote.textContent = 'Official Discord linked to this browser session';
+  setAuthStatus('Discord verified. This application will be written to the shared board under <strong>' + profile.username + '</strong>.');
+}
+
+async function loadWaitlist(){
+  if(!supabase){return;}
+
+  const { data, error } = await supabase
+    .from('waitlist_entries')
+    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+    .eq('status', 'submitted')
+    .order('submitted_at', { ascending: true });
+
+  if(error){
+    setAuthStatus('Database ready check failed. Create the <strong>waitlist_entries</strong> table and policies first.');
+    return;
+  }
+
+  entries = data || [];
+  myEntry = authUser ? entries.find((entry) => entry.auth_user_id === authUser.id) || null : null;
   updateCounter();
   renderWaitlist();
-  showResult(entry,entries.length);
+  if(myEntry){
+    showResult(myEntry);
+  }
+}
+
+async function restoreSession(){
+  if(!supabase){return;}
+  const { data } = await supabase.auth.getSession();
+  authUser = data.session?.user || null;
+  syncAuthUi();
+  await loadWaitlist();
+}
+
+window.submitForm = async function submitForm(){
+  if(!configReady || !supabase){
+    dom.errMsg.textContent = 'Finish the Supabase and Discord setup first.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
+  if(!authUser || !dom.roleSelect.value){
+    dom.errMsg.textContent = 'Connect Discord and choose your role before submitting your official application.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
+  dom.errMsg.style.display = 'none';
+
+  const profile = extractDiscordProfile(authUser);
+  const payload = {
+    auth_user_id: authUser.id,
+    discord_id: profile.discordId,
+    discord_username: profile.username,
+    discord_avatar_url: profile.avatarUrl,
+    role: dom.roleSelect.value,
+    rp_meaning: dom.rpMeaning.value.trim(),
+    rp_experience: dom.rpExperience.value,
+    prev_server: dom.prevServer.value.trim(),
+    referral_code: myEntry?.referral_code || genCode(),
+    status: 'submitted'
+  };
+
+  const { error } = await supabase
+    .from('waitlist_entries')
+    .upsert(payload, { onConflict: 'auth_user_id' });
+
+  if(error){
+    dom.errMsg.textContent = 'Official submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
   resetFormFields();
+  await loadWaitlist();
 }
 
-function copyCode(){
-  var txt=document.getElementById('refCode').textContent;
-  if(navigator.clipboard){navigator.clipboard.writeText(txt);}
-  document.getElementById('copyHint').textContent='Copied!';
-  setTimeout(function(){
-    document.getElementById('copyHint').textContent='Tap to copy';
-  },2000);
-}
+window.copyCode = function copyCode(){
+  const txt = dom.refCode.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt);
+  }
+  dom.copyHint.textContent = 'Copied!';
+  setTimeout(() => {
+    dom.copyHint.textContent = 'Tap to copy';
+  }, 2000);
+};
 
-updateCounter();
-renderWaitlist();
+window.showForm = showForm;
+
+dom.connectBtn.addEventListener('click', async () => {
+  if(!supabase){return;}
+  await supabase.auth.signInWithOAuth({
+    provider: 'discord',
+    options: {
+      redirectTo: config.redirectTo || window.location.origin + window.location.pathname,
+      scopes: 'identify'
+    }
+  });
+});
+
+dom.signOutBtn.addEventListener('click', async () => {
+  if(!supabase){return;}
+  await supabase.auth.signOut();
+  authUser = null;
+  myEntry = null;
+  dom.resultPanel.style.display = 'none';
+  dom.theForm.style.display = 'block';
+  syncAuthUi();
+});
+
 buildAtmosphere();
+
+if(configReady){
+  supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
+    auth: {
+      flowType: 'pkce',
+      detectSessionInUrl: true,
+      persistSession: true
+    }
+  });
+
+  supabase.auth.onAuthStateChange(async (_event, session) => {
+    authUser = session?.user || null;
+    syncAuthUi();
+    await loadWaitlist();
+  });
+
+  await restoreSession();
+}else{
+  syncAuthUi();
+  updateCounter();
+  renderWaitlist();
+}
 </script>
 </body>
 </html>
