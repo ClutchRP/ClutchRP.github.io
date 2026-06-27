@@ -28,7 +28,7 @@
   .crp-gallery{position:absolute;inset:0;z-index:0;overflow:hidden}
   .crp-gallery::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,22,.6) 0%,rgba(0,8,20,.36) 28%,rgba(0,6,16,.68) 100%);z-index:2}
   .crp-gallery::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(0,150,255,.24),transparent 48%),linear-gradient(135deg,rgba(0,136,255,.18),rgba(0,0,0,.08) 45%,rgba(0,136,255,.22));mix-blend-mode:screen;z-index:3}
-  .crp-gallery-slide{position:absolute;inset:-3%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.06);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
+  .crp-gallery-slide{position:absolute;inset:-1%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.02);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
   .crp-gallery-slide:nth-child(1){animation-delay:0s}
   .crp-gallery-slide:nth-child(2){animation-delay:6s}
   .crp-gallery-slide:nth-child(3){animation-delay:12s}
@@ -250,7 +250,7 @@
       <div class="crp-headline">
         The streets remember everything.<br>
         <span>Build your empire. Own the city.</span><br>
-        Every crew has a story - <span>what's yours?</span>
+        Every crew has a story. <span>What's yours?</span>
       </div>
       <div class="crp-sub">Connect your Discord, submit your application, and your name shows up on the leaderboard with your Discord profile.</div>
       <div class="crp-line"></div>
@@ -304,7 +304,6 @@
           <div>
             <div class="crp-auth-label">Step 1</div>
             <div class="crp-auth-title">Connect Discord to Start</div>
-            <div class="crp-auth-copy">Users need to connect their Discord before their name can be shown on the leaderboard.</div>
           </div>
           <div class="crp-auth-actions">
             <button class="crp-btn crp-btn-inline" id="connectBtn" type="button">Connect Discord</button>
@@ -336,8 +335,6 @@
           </div>
 
           <hr class="crp-divider">
-          <div class="crp-opt-note">- Optional - build your file -</div>
-
           <div class="crp-field">
             <div class="crp-label-opt">
               <span>What does RP mean to you?</span>
@@ -396,7 +393,6 @@
     <div class="crp-list-wrap">
       <div class="crp-list-head">
         <div class="crp-list-title">ClutchRP Leaderboard</div>
-        <div class="crp-list-sub">Discord-connected applications only. That helps block spam and fake accounts.</div>
       </div>
       <div class="crp-list-empty" id="waitlistEmpty">No applications on the leaderboard yet.</div>
       <div class="crp-list" id="waitlistList"></div>
