@@ -25,24 +25,24 @@
     animation:crpGlow 12s ease-in-out infinite alternate;
     z-index:-1}
   .crp-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-  .crp-rain{position:absolute;inset:0;z-index:0;opacity:.95}
+  .crp-gallery{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .crp-gallery::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,22,.6) 0%,rgba(0,8,20,.36) 28%,rgba(0,6,16,.68) 100%);z-index:2}
+  .crp-gallery::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(0,150,255,.24),transparent 48%),linear-gradient(135deg,rgba(0,136,255,.18),rgba(0,0,0,.08) 45%,rgba(0,136,255,.22));mix-blend-mode:screen;z-index:3}
+  .crp-gallery-slide{position:absolute;inset:-3%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.06);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
+  .crp-gallery-slide:nth-child(1){animation-delay:0s}
+  .crp-gallery-slide:nth-child(2){animation-delay:6s}
+  .crp-gallery-slide:nth-child(3){animation-delay:12s}
+  .crp-gallery-slide:nth-child(4){animation-delay:18s}
+  .crp-gallery-slide:nth-child(5){animation-delay:24s}
+  .crp-gallery-slide:nth-child(6){animation-delay:30s}
+  .crp-rain{position:absolute;inset:0;z-index:1;opacity:.95}
   .crp-rain-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
   .crp-floor-glow{position:absolute;left:0;right:0;bottom:0;height:96px;background:
     radial-gradient(circle at 50% 100%,rgba(0,136,255,.22),transparent 48%),
     linear-gradient(180deg,rgba(0,136,255,0),rgba(0,136,255,.08) 70%,rgba(125,198,255,.15) 100%);
     opacity:.75}
-  .crp-smoke{position:absolute;inset:0;z-index:0;mix-blend-mode:screen;opacity:.42}
+  .crp-smoke{position:absolute;inset:0;z-index:1;mix-blend-mode:screen;opacity:.42}
   .crp-smoke span{position:absolute;bottom:-14%;display:block;border-radius:50%;background:radial-gradient(circle,rgba(118,155,180,.18) 0%,rgba(84,113,134,.1) 38%,rgba(30,42,51,.04) 62%,rgba(0,0,0,0) 74%);filter:blur(24px);animation:crpSmoke linear infinite}
-  .crp-campfire{position:absolute;left:clamp(14px,4vw,42px);bottom:18px;width:140px;height:140px;z-index:0;opacity:.92}
-  .crp-campfire-glow{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:132px;height:62px;border-radius:50%;background:radial-gradient(circle,rgba(255,151,56,.34) 0%,rgba(255,98,0,.18) 42%,rgba(255,98,0,0) 74%);filter:blur(10px);animation:crpFireGlow 2.6s ease-in-out infinite}
-  .crp-log{position:absolute;bottom:18px;width:54px;height:10px;border-radius:999px;background:linear-gradient(90deg,#493321,#6f4a2b 50%,#3a2819 100%);box-shadow:0 0 0 1px rgba(255,255,255,.03) inset}
-  .crp-log-a{left:32px;transform:rotate(24deg)}
-  .crp-log-b{left:55px;transform:rotate(-24deg)}
-  .crp-flame{position:absolute;left:50%;bottom:28px;transform-origin:50% 100%;border-radius:50% 50% 44% 44%;filter:blur(.4px);animation:crpFlame 1.9s ease-in-out infinite}
-  .crp-flame-main{width:34px;height:58px;margin-left:-17px;background:radial-gradient(circle at 50% 78%,rgba(255,245,210,.98) 0 18%,rgba(255,188,82,.98) 30%,rgba(255,110,28,.92) 62%,rgba(255,93,0,.18) 100%)}
-  .crp-flame-mid{width:24px;height:42px;margin-left:-12px;bottom:36px;background:radial-gradient(circle at 50% 75%,rgba(255,250,232,.98) 0 20%,rgba(255,214,124,.95) 42%,rgba(255,146,28,.85) 74%,rgba(255,146,28,0) 100%);animation-duration:1.45s}
-  .crp-flame-small{width:16px;height:28px;margin-left:-8px;bottom:43px;background:radial-gradient(circle at 50% 72%,rgba(255,255,244,.95) 0 24%,rgba(255,234,162,.9) 48%,rgba(255,168,45,.55) 82%,rgba(255,168,45,0) 100%);animation-duration:1.12s}
-  .crp-ember{position:absolute;bottom:42px;left:50%;width:4px;height:4px;border-radius:50%;background:rgba(255,190,84,.9);box-shadow:0 0 10px rgba(255,137,51,.65);animation:crpEmber linear infinite}
   @keyframes crpGlow{
     0%{transform:translate3d(-1.5%,0,0) scale(1)}
     100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
@@ -53,22 +53,18 @@
     55%{opacity:.34}
     100%{transform:translate3d(34px,-115vh,0) scale(1.45);opacity:0}
   }
-  @keyframes crpFlame{
-    0%{transform:translateX(0) scaleY(.94) rotate(-2deg)}
-    50%{transform:translateX(2px) scaleY(1.08) rotate(2deg)}
-    100%{transform:translateX(-1px) scaleY(.97) rotate(-1deg)}
-  }
-  @keyframes crpFireGlow{
-    0%{opacity:.72;transform:translateX(-50%) scale(1)}
-    50%{opacity:.96;transform:translateX(-50%) scale(1.08)}
-    100%{opacity:.76;transform:translateX(-50%) scale(.98)}
-  }
-  @keyframes crpEmber{
-    0%{transform:translate3d(0,0,0) scale(.6);opacity:0}
-    18%{opacity:.95}
-    100%{transform:translate3d(var(--x,0px),calc(-40px - var(--rise,26px)),0) scale(1.2);opacity:0}
+  @keyframes crpGalleryFade{
+    0%{opacity:0;transform:scale(1.08)}
+    4%{opacity:.18}
+    16%{opacity:.48}
+    26%{opacity:.48}
+    32%{opacity:0;transform:scale(1.02)}
+    100%{opacity:0;transform:scale(1)}
   }
   .crp-content{position:relative;z-index:1;width:min(100%,1240px);margin:0 auto;padding:0 clamp(14px,2vw,24px)}
+  .crp-discord-link{position:absolute;top:18px;right:clamp(14px,2vw,24px);z-index:4;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(88,101,242,.35);background:rgba(6,10,20,.76);backdrop-filter:blur(12px);color:#eef3ff;text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;transition:transform .15s,background .2s,border-color .2s,box-shadow .2s}
+  .crp-discord-link:hover{transform:translateY(-1px);background:rgba(18,26,48,.88);border-color:rgba(88,101,242,.58);box-shadow:0 0 26px rgba(88,101,242,.16)}
+  .crp-discord-link svg{width:18px;height:18px;fill:#8ea1ff;flex:0 0 18px}
   .crp-header{text-align:center;padding:clamp(38px,7vw,68px) clamp(10px,1.4vw,18px) clamp(24px,3vw,34px)}
   .crp-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:clamp(4px,1.1vw,8px);color:#0088ff;text-transform:uppercase;margin-bottom:28px}
   .crp-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,44px);line-height:1.08;text-transform:uppercase;color:#fff;letter-spacing:-.5px}
@@ -82,12 +78,8 @@
   .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
   .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
   .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
-  .crp-music{max-width:700px;margin:18px auto 0;border:1px solid rgba(0,136,255,.18);background:rgba(0,0,0,.82);padding:16px 18px}
-  .crp-music-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-  .crp-music-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase}
-  .crp-music-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-top:6px}
-  .crp-music-copy{font-size:12px;color:#72808b;line-height:1.6;margin-top:8px;max-width:460px}
-  .crp-player-wrap{position:relative;margin-top:14px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(0,136,255,.06));padding:14px 16px;overflow:hidden}
+  .crp-music{max-width:440px;margin:18px auto 0}
+  .crp-player-wrap{position:relative;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(0,0,0,.78),rgba(0,40,78,.48));padding:13px 14px;overflow:hidden;backdrop-filter:blur(14px)}
   .crp-player-wrap::after{content:'';position:absolute;inset:auto -40px -56px auto;width:180px;height:180px;background:radial-gradient(circle,rgba(0,136,255,.16) 0%,rgba(0,136,255,0) 72%);pointer-events:none}
   .crp-player-shell{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
   .crp-player-toggle{min-width:162px;background:#fff;border:1px solid rgba(255,255,255,.2);color:#000;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:14px 18px;cursor:pointer;transition:transform .15s,background .2s,color .2s,border-color .2s,box-shadow .2s}
@@ -95,8 +87,8 @@
   .crp-player-toggle:active{transform:translateY(0)}
   .crp-player-toggle.is-live{background:#0088ff;color:#00111f;border-color:rgba(0,136,255,.6);box-shadow:0 0 24px rgba(0,136,255,.18)}
   .crp-player-meta{min-width:0}
-  .crp-player-status{font-size:12px;color:#92a0ab;line-height:1.6}
-  .crp-volume-row{display:flex;align-items:center;gap:12px;margin-top:12px}
+  .crp-player-status{display:none}
+  .crp-volume-row{display:flex;align-items:center;gap:12px;margin-top:0}
   .crp-volume-label{font-size:10px;letter-spacing:2px;color:#51606a;text-transform:uppercase;white-space:nowrap}
   .crp-volume-slider{appearance:none;-webkit-appearance:none;flex:1;height:6px;border-radius:999px;outline:none;background:linear-gradient(90deg,rgba(0,136,255,1) 0%,rgba(102,204,255,1) 36%,rgba(255,255,255,.16) 36%,rgba(255,255,255,.16) 100%)}
   .crp-volume-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #0088ff;box-shadow:0 0 0 4px rgba(0,136,255,.15);cursor:pointer}
@@ -181,6 +173,7 @@
   @media (max-width:640px){
     .crp-wrap{padding-bottom:40px}
     .crp-content{padding:0 14px}
+    .crp-discord-link{top:12px;right:14px;padding:9px 12px;font-size:10px;letter-spacing:1.5px}
     .crp-header{padding:34px 4px 22px}
     .crp-wordmark{font-size:11px;margin-bottom:18px}
     .crp-headline{font-size:clamp(24px,8vw,32px);line-height:1.08}
@@ -190,13 +183,11 @@
     .crp-stat{width:min(100%,320px);min-width:0}
     .crp-features{padding-top:22px}
     .crp-badge{font-size:9px;letter-spacing:1.2px}
-    .crp-music{margin-top:16px;padding:14px}
-    .crp-music-title{font-size:21px}
+    .crp-music{margin-top:16px}
     .crp-player-shell{grid-template-columns:1fr}
     .crp-player-toggle{width:100%;min-width:0}
     .crp-volume-row{flex-wrap:wrap}
     .crp-volume-value{min-width:0}
-    .crp-campfire{left:8px;bottom:12px;width:110px;height:110px;opacity:.8}
     .crp-form-wrap{margin-top:28px}
     .crp-form-title{font-size:14px;letter-spacing:3px}
     .crp-form-sub{font-size:10px}
@@ -233,25 +224,27 @@
 
 <div class="crp-wrap">
   <div class="crp-fx" aria-hidden="true">
+    <div class="crp-gallery">
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-1.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-2.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-3.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-4.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-5.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-6.jpg')"></span>
+    </div>
     <div class="crp-smoke" id="smokeLayer"></div>
     <div class="crp-rain">
       <canvas class="crp-rain-canvas" id="rainCanvas"></canvas>
       <div class="crp-floor-glow"></div>
     </div>
-    <div class="crp-campfire">
-      <div class="crp-campfire-glow"></div>
-      <div class="crp-log crp-log-a"></div>
-      <div class="crp-log crp-log-b"></div>
-      <div class="crp-flame crp-flame-main"></div>
-      <div class="crp-flame crp-flame-mid"></div>
-      <div class="crp-flame crp-flame-small"></div>
-      <span class="crp-ember" style="--x:-16px;--rise:18px;animation-duration:2.8s;animation-delay:-1.2s"></span>
-      <span class="crp-ember" style="--x:6px;--rise:24px;animation-duration:2.3s;animation-delay:-.4s"></span>
-      <span class="crp-ember" style="--x:18px;--rise:30px;animation-duration:3.2s;animation-delay:-2.1s"></span>
-      <span class="crp-ember" style="--x:-4px;--rise:22px;animation-duration:2.6s;animation-delay:-.8s"></span>
-    </div>
   </div>
   <div class="crp-content">
+    <a class="crp-discord-link" href="https://discord.gg/xzcRudXZs4" target="_blank" rel="noreferrer" aria-label="Join the ClutchRP Discord server">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.317 4.369A19.791 19.791 0 0 0 15.885 3c-.191.328-.403.77-.552 1.117a18.27 18.27 0 0 0-5.106 0A12.64 12.64 0 0 0 9.671 3a19.736 19.736 0 0 0-4.435 1.372C2.431 8.61 1.67 12.743 2.053 16.817a19.9 19.9 0 0 0 5.993 3.03c.486-.665.918-1.37 1.287-2.109a12.923 12.923 0 0 1-2.024-.975c.17-.124.336-.255.498-.389 3.905 1.78 8.14 1.78 11.999 0 .164.134.33.265.498.389a12.895 12.895 0 0 1-2.027.976c.37.738.803 1.443 1.289 2.108a19.875 19.875 0 0 0 5.995-3.03c.453-4.714-.775-8.81-3.244-12.448ZM9.756 14.429c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.95-2.419 2.157-2.419 1.214 0 2.175 1.094 2.157 2.419 0 1.334-.952 2.419-2.157 2.419Zm4.488 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.95-2.419 2.157-2.419 1.214 0 2.175 1.094 2.157 2.419 0 1.334-.943 2.419-2.157 2.419Z"/>
+      </svg>
+      <span>Join Discord</span>
+    </a>
     <div class="crp-header">
       <div class="crp-wordmark">ClutchRP &nbsp;&mdash;&nbsp; FiveM</div>
       <div class="crp-headline">
@@ -268,10 +261,6 @@
         <div class="crp-stat-num" id="counterNum">0</div>
         <div class="crp-stat-label">Official Spots</div>
       </div>
-      <div class="crp-stat">
-        <div class="crp-stat-num" id="authStat">Discord</div>
-        <div class="crp-stat-label">Verification</div>
-      </div>
     </div>
 
     <div class="crp-features">
@@ -284,18 +273,10 @@
     </div>
 
     <div class="crp-music">
-      <div class="crp-music-top">
-        <div>
-          <div class="crp-music-label">Atmosphere</div>
-          <div class="crp-music-title">Campfire Radio</div>
-          <div class="crp-music-copy">The track stays offscreen so the page keeps the vibe without throwing a video player in anyone's face.</div>
-        </div>
-      </div>
       <div class="crp-player-wrap">
         <div class="crp-player-shell">
-          <button class="crp-player-toggle" id="musicToggleBtn" type="button" aria-pressed="false">Play Audio</button>
+          <button class="crp-player-toggle" id="musicToggleBtn" type="button" aria-pressed="false">Pause Audio</button>
           <div class="crp-player-meta">
-            <div class="crp-player-status" id="musicStatus">Loading hidden background audio...</div>
             <div class="crp-volume-row">
               <span class="crp-volume-label">Volume</span>
               <input class="crp-volume-slider" id="musicVolume" type="range" min="0" max="100" value="36" aria-label="Background audio volume">
@@ -496,6 +477,7 @@ let myEntry = null;
 let ytPlayer = null;
 let musicReady = false;
 let musicPlaying = false;
+let musicWakeBound = false;
 let musicVolumeLevel = Number(dom.musicVolume?.value || 36);
 
 let resolveYouTubeApi;
@@ -760,6 +742,32 @@ function isMusicAudible(){
   return true;
 }
 
+async function tryStartMusic(){
+  await ensureHiddenPlayer();
+  if(!ytPlayer || !musicReady){return;}
+  if(musicVolumeLevel <= 0){
+    musicVolumeLevel = 36;
+  }
+  ytPlayer.setVolume(musicVolumeLevel);
+  if(typeof ytPlayer.unMute === 'function'){
+    ytPlayer.unMute();
+  }
+  ytPlayer.playVideo();
+  syncMusicUi();
+}
+
+function bindMusicWakeEvents(){
+  if(musicWakeBound){return;}
+  musicWakeBound = true;
+  const wake = () => {
+    tryStartMusic();
+    window.removeEventListener('pointerdown', wake);
+    window.removeEventListener('keydown', wake);
+  };
+  window.addEventListener('pointerdown', wake, { passive: true });
+  window.addEventListener('keydown', wake);
+}
+
 function syncMusicUi(){
   paintVolumeSlider();
   if(!dom.musicToggleBtn){return;}
@@ -805,24 +813,16 @@ async function ensureHiddenPlayer(){
       onReady(event){
         musicReady = true;
         event.target.setVolume(musicVolumeLevel);
-        event.target.mute();
-        event.target.playVideo();
-        musicPlaying = true;
-        setMusicStatus('Audio is loaded in the background. Press play if your browser keeps it muted.');
+        bindMusicWakeEvents();
+        tryStartMusic();
         syncMusicUi();
       },
       onStateChange(event){
         if(!window.YT || !window.YT.PlayerState){return;}
         if(event.data === window.YT.PlayerState.PLAYING){
           musicPlaying = true;
-          if(isMusicAudible()){
-            setMusicStatus('Background audio is live. Dial it in with the slider whenever you want.');
-          }else{
-            setMusicStatus('Audio is running in the background. Press play or raise the slider to hear it.');
-          }
         }else if(event.data === window.YT.PlayerState.PAUSED){
           musicPlaying = false;
-          setMusicStatus('Background audio paused. Hit play whenever you want it back.');
         }else if(event.data === window.YT.PlayerState.ENDED){
           event.target.seekTo(0);
           event.target.playVideo();
@@ -830,7 +830,6 @@ async function ensureHiddenPlayer(){
         syncMusicUi();
       },
       onError(){
-        setMusicStatus('Background audio could not load right now. Refresh and try again.');
         syncMusicUi();
       }
     }
@@ -840,7 +839,6 @@ async function ensureHiddenPlayer(){
 async function toggleMusicPlayback(){
   await ensureHiddenPlayer();
   if(!ytPlayer || !musicReady){
-    setMusicStatus('Background audio is still loading...');
     syncMusicUi();
     return;
   }
@@ -848,7 +846,6 @@ async function toggleMusicPlayback(){
   if(isMusicAudible()){
     ytPlayer.pauseVideo();
     musicPlaying = false;
-    setMusicStatus('Background audio paused. Hit play whenever you want it back.');
   }else{
     if(musicVolumeLevel <= 0){
       musicVolumeLevel = 36;
@@ -857,7 +854,6 @@ async function toggleMusicPlayback(){
     ytPlayer.setVolume(musicVolumeLevel);
     ytPlayer.playVideo();
     musicPlaying = true;
-    setMusicStatus('Background audio is live. Dial it in with the slider whenever you want.');
   }
 
   syncMusicUi();
@@ -872,13 +868,11 @@ async function applyMusicVolumeFromInput(){
   if(musicVolumeLevel <= 0){
     ytPlayer.setVolume(0);
     ytPlayer.mute();
-    setMusicStatus('Background audio muted. Slide the volume back up whenever you want it again.');
   }else{
     ytPlayer.setVolume(musicVolumeLevel);
     ytPlayer.unMute();
     ytPlayer.playVideo();
     musicPlaying = true;
-    setMusicStatus('Background audio is live. Dial it in with the slider whenever you want.');
   }
 
   syncMusicUi();
@@ -889,7 +883,9 @@ function setSetupMode(active){
   dom.connectBtn.disabled = active;
   dom.submitBtn.disabled = active;
   if(active){
-    dom.authStat.textContent = 'Setup';
+    if(dom.authStat){
+      dom.authStat.textContent = 'Setup';
+    }
     dom.authStatus.innerHTML = 'Add your <strong>Supabase URL</strong>, <strong>publishable key</strong>, and finish the Discord provider setup before this version can accept live applications.';
   }
 }
@@ -1051,7 +1047,9 @@ function syncAuthUi(){
   setSetupMode(false);
 
   if(!authUser){
-    dom.authStat.textContent = 'Discord';
+    if(dom.authStat){
+      dom.authStat.textContent = 'Discord';
+    }
     dom.authConnected.style.display = 'none';
     dom.connectBtn.style.display = 'inline-block';
     dom.submitBtn.disabled = true;
@@ -1060,7 +1058,9 @@ function syncAuthUi(){
   }
 
   const profile = extractDiscordProfile(authUser);
-  dom.authStat.textContent = 'Verified';
+  if(dom.authStat){
+    dom.authStat.textContent = 'Verified';
+  }
   dom.connectBtn.style.display = 'none';
   dom.submitBtn.disabled = false;
   dom.authConnected.style.display = 'flex';
@@ -1183,8 +1183,8 @@ dom.connectBtn.addEventListener('click', async () => {
   });
 });
 
-setMusicStatus('Loading hidden background audio...');
 syncMusicUi();
+bindMusicWakeEvents();
 ensureHiddenPlayer();
 buildAtmosphere();
 
