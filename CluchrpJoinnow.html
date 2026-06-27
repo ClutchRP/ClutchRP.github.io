@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>ClutchRP Waitlist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000!important;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+  body{min-height:100svh}
+  .crp-wrap{background:#000!important;min-height:100svh;font-family:'Barlow',sans-serif;color:#e8e8e8;overflow:hidden;position:relative;padding:0 0 clamp(44px,6vw,72px);isolation:isolate}
+  .crp-wrap::before{content:'';position:absolute;inset:0;background:
+    radial-gradient(circle at 15% 20%,rgba(0,136,255,.18),transparent 28%),
+    radial-gradient(circle at 82% 12%,rgba(0,180,255,.12),transparent 24%),
+    radial-gradient(circle at 50% 78%,rgba(0,136,255,.08),transparent 30%),
+    linear-gradient(180deg,#03070c 0%,#000 55%,#020406 100%);
+    z-index:-2}
+  .crp-wrap::after{content:'';position:absolute;inset:-10%;background:
+    radial-gradient(circle at 25% 30%,rgba(0,136,255,.08),transparent 22%),
+    radial-gradient(circle at 70% 40%,rgba(0,180,255,.06),transparent 20%);
+    filter:blur(30px);
+    opacity:.9;
+    animation:crpGlow 12s ease-in-out infinite alternate;
+    z-index:-1}
+  .crp-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .crp-gallery{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .crp-gallery::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,22,.6) 0%,rgba(0,8,20,.36) 28%,rgba(0,6,16,.68) 100%);z-index:2}
+  .crp-gallery::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(0,150,255,.24),transparent 48%),linear-gradient(135deg,rgba(0,136,255,.18),rgba(0,0,0,.08) 45%,rgba(0,136,255,.22));mix-blend-mode:screen;z-index:3}
+  .crp-gallery-slide{position:absolute;inset:-3%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.06);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
+  .crp-gallery-slide:nth-child(1){animation-delay:0s}
+  .crp-gallery-slide:nth-child(2){animation-delay:6s}
+  .crp-gallery-slide:nth-child(3){animation-delay:12s}
+  .crp-gallery-slide:nth-child(4){animation-delay:18s}
+  .crp-gallery-slide:nth-child(5){animation-delay:24s}
+  .crp-gallery-slide:nth-child(6){animation-delay:30s}
+  .crp-rain{position:absolute;inset:0;z-index:1;opacity:.95}
+  .crp-rain-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .crp-floor-glow{position:absolute;left:0;right:0;bottom:0;height:96px;background:
+    radial-gradient(circle at 50% 100%,rgba(0,136,255,.22),transparent 48%),
+    linear-gradient(180deg,rgba(0,136,255,0),rgba(0,136,255,.08) 70%,rgba(125,198,255,.15) 100%);
+    opacity:.75}
+  .crp-smoke{position:absolute;inset:0;z-index:1;mix-blend-mode:screen;opacity:.42}
+  .crp-smoke span{position:absolute;bottom:-14%;display:block;border-radius:50%;background:radial-gradient(circle,rgba(118,155,180,.18) 0%,rgba(84,113,134,.1) 38%,rgba(30,42,51,.04) 62%,rgba(0,0,0,0) 74%);filter:blur(24px);animation:crpSmoke linear infinite}
+  @keyframes crpGlow{
+    0%{transform:translate3d(-1.5%,0,0) scale(1)}
+    100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
+  }
+  @keyframes crpSmoke{
+    0%{transform:translate3d(0,0,0) scale(.72);opacity:0}
+    18%{opacity:.18}
+    55%{opacity:.34}
+    100%{transform:translate3d(34px,-115vh,0) scale(1.45);opacity:0}
+  }
+  @keyframes crpGalleryFade{
+    0%{opacity:0;transform:scale(1.08)}
+    4%{opacity:.18}
+    16%{opacity:.48}
+    26%{opacity:.48}
+    32%{opacity:0;transform:scale(1.02)}
+    100%{opacity:0;transform:scale(1)}
+  }
+  .crp-content{position:relative;z-index:1;width:min(100%,1240px);margin:0 auto;padding:0 clamp(14px,2vw,24px)}
+  .crp-discord-link{position:absolute;top:18px;right:clamp(14px,2vw,24px);z-index:4;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(88,101,242,.35);background:rgba(6,10,20,.76);backdrop-filter:blur(12px);color:#eef3ff;text-decoration:none;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;transition:transform .15s,background .2s,border-color .2s,box-shadow .2s}
+  .crp-discord-link:hover{transform:translateY(-1px);background:rgba(18,26,48,.88);border-color:rgba(88,101,242,.58);box-shadow:0 0 26px rgba(88,101,242,.16)}
+  .crp-discord-link svg{width:18px;height:18px;fill:#8ea1ff;flex:0 0 18px}
+  .crp-header{text-align:center;padding:clamp(38px,7vw,68px) clamp(10px,1.4vw,18px) clamp(24px,3vw,34px)}
+  .crp-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:clamp(4px,1.1vw,8px);color:#0088ff;text-transform:uppercase;margin-bottom:28px}
+  .crp-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,44px);line-height:1.08;text-transform:uppercase;color:#fff;letter-spacing:-.5px}
+  .crp-headline span{color:#0088ff}
+  .crp-sub{font-size:clamp(13px,1.55vw,15px);color:#888;margin:18px auto 0;max-width:560px;line-height:1.7}
+  .crp-line{width:40px;height:2px;background:#0088ff;margin:24px auto 0}
+  .crp-counter-row{display:flex;justify-content:center;flex-wrap:wrap;gap:0;margin:32px 0 0}
+  .crp-stat{text-align:center;padding:18px clamp(26px,4vw,42px);border:1px solid rgba(0,136,255,.15);background:rgba(0,0,0,.82);min-width:190px}
+  .crp-stat:first-child{border-right:none}
+  .crp-stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:40px;color:#0088ff;line-height:1}
+  .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
+  .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
+  .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
+  .crp-music{max-width:440px;margin:18px auto 0}
+  .crp-player-wrap{position:relative;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(0,0,0,.78),rgba(0,40,78,.48));padding:13px 14px;overflow:hidden;backdrop-filter:blur(14px)}
+  .crp-player-wrap::after{content:'';position:absolute;inset:auto -40px -56px auto;width:180px;height:180px;background:radial-gradient(circle,rgba(0,136,255,.16) 0%,rgba(0,136,255,0) 72%);pointer-events:none}
+  .crp-player-shell{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
+  .crp-player-toggle{min-width:162px;background:#fff;border:1px solid rgba(255,255,255,.2);color:#000;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:14px 18px;cursor:pointer;transition:transform .15s,background .2s,color .2s,border-color .2s,box-shadow .2s}
+  .crp-player-toggle:hover{transform:translateY(-1px);background:#e8f3ff}
+  .crp-player-toggle:active{transform:translateY(0)}
+  .crp-player-toggle.is-live{background:#0088ff;color:#00111f;border-color:rgba(0,136,255,.6);box-shadow:0 0 24px rgba(0,136,255,.18)}
+  .crp-player-meta{min-width:0}
+  .crp-player-status{display:none}
+  .crp-volume-row{display:flex;align-items:center;gap:12px;margin-top:0}
+  .crp-volume-label{font-size:10px;letter-spacing:2px;color:#51606a;text-transform:uppercase;white-space:nowrap}
+  .crp-volume-slider{appearance:none;-webkit-appearance:none;flex:1;height:6px;border-radius:999px;outline:none;background:linear-gradient(90deg,rgba(0,136,255,1) 0%,rgba(102,204,255,1) 36%,rgba(255,255,255,.16) 36%,rgba(255,255,255,.16) 100%)}
+  .crp-volume-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #0088ff;box-shadow:0 0 0 4px rgba(0,136,255,.15);cursor:pointer}
+  .crp-volume-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #0088ff;box-shadow:0 0 0 4px rgba(0,136,255,.15);cursor:pointer}
+  .crp-volume-slider::-moz-range-track{height:6px;border:none;border-radius:999px;background:transparent}
+  .crp-volume-value{font-size:11px;letter-spacing:1.5px;color:#dfe7ee;text-transform:uppercase;min-width:40px;text-align:right}
+  .crp-player-hidden{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+  .crp-form-wrap{max-width:600px;margin:36px auto 0;padding:0}
+  .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
+  .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
+  .crp-auth-card,.crp-form-card,.crp-result,.crp-setup-card{border:1px solid rgba(0,136,255,.2);background:rgba(0,0,0,.86)}
+  .crp-auth-card{padding:18px;margin-bottom:16px}
+  .crp-auth-top{display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .crp-auth-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase}
+  .crp-auth-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-top:8px}
+  .crp-auth-copy{font-size:13px;color:#77818a;line-height:1.6;margin-top:10px;max-width:380px}
+  .crp-auth-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .crp-auth-status{margin-top:14px;padding:12px 14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-size:12px;color:#8e98a0;line-height:1.6}
+  .crp-auth-status strong{color:#fff}
+  .crp-auth-connected{display:flex;align-items:center;gap:12px;border:1px solid rgba(0,136,255,.16);background:rgba(0,136,255,.05);padding:12px 14px;margin-top:14px}
+  .crp-auth-meta{min-width:0}
+  .crp-auth-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1}
+  .crp-auth-note{font-size:11px;color:#6f7a83;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .crp-setup-card{padding:18px;margin-bottom:16px;display:none}
+  .crp-setup-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff}
+  .crp-setup-copy{font-size:13px;color:#7e8892;line-height:1.6;margin-top:8px}
+  .crp-form-card{padding:24px}
+  .crp-field{margin-bottom:13px}
+  .crp-label{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:block;margin-bottom:7px;font-weight:600}
+  .crp-label-opt{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-weight:600}
+  .crp-opt-tag{font-size:9px;letter-spacing:1px;color:#0077dd;text-transform:uppercase;font-weight:400;border:1px solid rgba(0,119,221,.3);padding:2px 7px}
+  .crp-input{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s}
+  .crp-input:focus{border-color:rgba(0,136,255,.6)}
+  .crp-input::placeholder{color:#333}
+  .crp-select{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;cursor:pointer;appearance:none;transition:border-color .2s}
+  .crp-select:focus{border-color:rgba(0,136,255,.6)}
+  .crp-select option{background:#000;color:#fff}
+  .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
+  .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
+  .crp-helper{font-size:12px;color:#62707b;line-height:1.6;margin-top:8px}
+  .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
+  .crp-btn:hover{background:#e0e0e0}
+  .crp-btn:active{transform:scale(.98)}
+  .crp-btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
+  .crp-btn-secondary{background:transparent;border:1px solid rgba(0,136,255,.25);color:#0088ff}
+  .crp-btn-secondary:hover{background:rgba(0,136,255,.08)}
+  .crp-btn-inline{width:auto;margin-top:0;padding:12px 18px;letter-spacing:2px}
+  .crp-result{display:none;text-align:center;padding:32px 24px;margin-top:16px}
+  .crp-result-rank{font-size:10px;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:10px}
+  .crp-result-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;color:#0088ff;line-height:1}
+  .crp-result-card{display:flex;align-items:center;gap:16px;justify-content:center;padding:18px;margin-top:18px;border:1px solid rgba(0,136,255,.15);background:rgba(0,136,255,.05)}
+  .crp-result-meta{text-align:left}
+  .crp-result-name{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1}
+  .crp-result-role{font-size:12px;color:#0088ff;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
+  .crp-result-msg{font-size:13px;color:#666;margin-top:18px;line-height:1.7;max-width:360px;margin-inline:auto}
+  .crp-result-code{margin-top:20px}
+  .crp-code-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:8px}
+  .crp-code-box{background:rgba(0,136,255,.06);border:1px solid rgba(0,136,255,.25);padding:12px 15px;font-family:monospace;font-size:13px;color:#0088ff;letter-spacing:2px;cursor:pointer;transition:background .2s}
+  .crp-code-box:hover{background:rgba(0,136,255,.15)}
+  .crp-copy-hint{font-size:10px;color:#333;margin-top:6px;letter-spacing:1px;text-transform:uppercase}
+  .crp-user-chip{width:64px;height:64px;border-radius:50%;overflow:hidden;flex:0 0 64px;border:1px solid rgba(0,136,255,.3);background:#050b12;display:flex;align-items:center;justify-content:center}
+  .crp-user-chip img{width:100%;height:100%;object-fit:cover;display:block}
+  .crp-user-fallback{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;letter-spacing:1px;color:#0088ff}
+  .crp-list-wrap{max-width:1080px;margin:44px auto 0;padding:0}
+  .crp-list-head{text-align:center;margin-bottom:18px}
+  .crp-list-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff}
+  .crp-list-sub{font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .crp-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .crp-entry{border:1px solid rgba(0,136,255,.14);background:rgba(0,0,0,.86);padding:16px;display:flex;align-items:center;gap:12px}
+  .crp-entry-copy{min-width:0}
+  .crp-entry-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1}
+  .crp-entry-role{font-size:11px;color:#0088ff;letter-spacing:1.4px;text-transform:uppercase;margin-top:5px}
+  .crp-entry-meta{font-size:10px;color:#4f5860;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+  .crp-list-empty{text-align:center;border:1px dashed rgba(0,136,255,.18);padding:22px;font-size:12px;color:#4f5860;letter-spacing:1px;text-transform:uppercase}
+  .crp-status-error{display:none;color:#ff7373;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px}
+  .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
+  @media (max-width:900px){
+    .crp-content{width:min(100%,960px)}
+    .crp-headline{font-size:clamp(28px,6vw,38px)}
+    .crp-list{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  }
+  @media (max-width:640px){
+    .crp-wrap{padding-bottom:40px}
+    .crp-content{padding:0 14px}
+    .crp-discord-link{top:12px;right:14px;padding:9px 12px;font-size:10px;letter-spacing:1.5px}
+    .crp-header{padding:34px 4px 22px}
+    .crp-wordmark{font-size:11px;margin-bottom:18px}
+    .crp-headline{font-size:clamp(24px,8vw,32px);line-height:1.08}
+    .crp-sub{max-width:100%;font-size:13px}
+    .crp-counter-row{flex-direction:column;align-items:center}
+    .crp-stat:first-child{border-right:1px solid rgba(0,136,255,.15);border-bottom:none}
+    .crp-stat{width:min(100%,320px);min-width:0}
+    .crp-features{padding-top:22px}
+    .crp-badge{font-size:9px;letter-spacing:1.2px}
+    .crp-music{margin-top:16px}
+    .crp-player-shell{grid-template-columns:1fr}
+    .crp-player-toggle{width:100%;min-width:0}
+    .crp-volume-row{flex-wrap:wrap}
+    .crp-volume-value{min-width:0}
+    .crp-form-wrap{margin-top:28px}
+    .crp-form-title{font-size:14px;letter-spacing:3px}
+    .crp-form-sub{font-size:10px}
+    .crp-auth-top{flex-direction:column;align-items:flex-start}
+    .crp-auth-actions{width:100%}
+    .crp-btn-inline{width:100%}
+    .crp-label-opt{gap:8px;align-items:flex-start}
+    .crp-opt-tag{flex:0 0 auto}
+    .crp-result{padding:28px 18px}
+    .crp-result-num{font-size:58px}
+    .crp-result-card{flex-direction:column;text-align:center}
+    .crp-result-meta{text-align:center}
+    .crp-result-name{font-size:22px}
+    .crp-code-box{font-size:12px;letter-spacing:1.2px;overflow-wrap:anywhere}
+    .crp-list-wrap{margin-top:36px}
+    .crp-list-title{font-size:19px}
+    .crp-list{grid-template-columns:1fr}
+    .crp-entry{padding:14px}
+    .crp-entry-name{font-size:20px}
+    .crp-user-chip{width:56px;height:56px;flex-basis:56px}
+    .crp-user-fallback{font-size:22px}
+    .crp-footer{margin-top:36px;letter-spacing:2px}
+  }
+  @media (max-width:420px){
+    .crp-wordmark{letter-spacing:3px}
+    .crp-headline{font-size:23px}
+    .crp-label,.crp-label-opt{font-size:9px;letter-spacing:1.4px}
+    .crp-input,.crp-select{padding:11px 13px;font-size:13px}
+    .crp-btn{font-size:14px;letter-spacing:3px}
+  }
+</style>
+</head>
+<body>
+
+<div class="crp-wrap">
+  <div class="crp-fx" aria-hidden="true">
+    <div class="crp-gallery">
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-1.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-2.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-3.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-4.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-5.jpg')"></span>
+      <span class="crp-gallery-slide" style="background-image:url('media/slide-6.jpg')"></span>
+    </div>
+    <div class="crp-smoke" id="smokeLayer"></div>
+    <div class="crp-rain">
+      <canvas class="crp-rain-canvas" id="rainCanvas"></canvas>
+      <div class="crp-floor-glow"></div>
+    </div>
+  </div>
+  <div class="crp-content">
+    <a class="crp-discord-link" href="https://discord.gg/xzcRudXZs4" target="_blank" rel="noreferrer" aria-label="Join the ClutchRP Discord server">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.317 4.369A19.791 19.791 0 0 0 15.885 3c-.191.328-.403.77-.552 1.117a18.27 18.27 0 0 0-5.106 0A12.64 12.64 0 0 0 9.671 3a19.736 19.736 0 0 0-4.435 1.372C2.431 8.61 1.67 12.743 2.053 16.817a19.9 19.9 0 0 0 5.993 3.03c.486-.665.918-1.37 1.287-2.109a12.923 12.923 0 0 1-2.024-.975c.17-.124.336-.255.498-.389 3.905 1.78 8.14 1.78 11.999 0 .164.134.33.265.498.389a12.895 12.895 0 0 1-2.027.976c.37.738.803 1.443 1.289 2.108a19.875 19.875 0 0 0 5.995-3.03c.453-4.714-.775-8.81-3.244-12.448ZM9.756 14.429c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.95-2.419 2.157-2.419 1.214 0 2.175 1.094 2.157 2.419 0 1.334-.952 2.419-2.157 2.419Zm4.488 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.95-2.419 2.157-2.419 1.214 0 2.175 1.094 2.157 2.419 0 1.334-.943 2.419-2.157 2.419Z"/>
+      </svg>
+      <span>Join Discord</span>
+    </a>
+    <div class="crp-header">
+      <div class="crp-wordmark">ClutchRP &nbsp;&mdash;&nbsp; FiveM</div>
+      <div class="crp-headline">
+        The streets remember everything.<br>
+        <span>Build your empire. Own the city.</span><br>
+        Every crew has a story - <span>what's yours?</span>
+      </div>
+      <div class="crp-sub">Connect your Discord, submit your application, and your name shows up on the leaderboard with your Discord profile.</div>
+      <div class="crp-line"></div>
+    </div>
+
+    <div class="crp-counter-row">
+      <div class="crp-stat">
+        <div class="crp-stat-num" id="counterNum">0</div>
+        <div class="crp-stat-label">Official Spots</div>
+      </div>
+    </div>
+
+    <div class="crp-features">
+      <div class="crp-badge">Official Board</div>
+      <div class="crp-badge">Discord Verified</div>
+      <div class="crp-badge">Real Avatars</div>
+      <div class="crp-badge">Shared Waitlist</div>
+      <div class="crp-badge">Live Updates</div>
+      <div class="crp-badge">Player Reputation</div>
+    </div>
+
+    <div class="crp-music">
+      <div class="crp-player-wrap">
+        <div class="crp-player-shell">
+          <button class="crp-player-toggle" id="musicToggleBtn" type="button" aria-pressed="false">Pause Audio</button>
+          <div class="crp-player-meta">
+            <div class="crp-volume-row">
+              <span class="crp-volume-label">Volume</span>
+              <input class="crp-volume-slider" id="musicVolume" type="range" min="0" max="100" value="36" aria-label="Background audio volume">
+              <span class="crp-volume-value" id="musicVolumeValue">36%</span>
+            </div>
+          </div>
+        </div>
+        <div class="crp-player-hidden" aria-hidden="true">
+          <div id="ytPlayerMount"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="crp-form-wrap">
+      <div class="crp-form-title">- Secure Your Spot -</div>
+      <div class="crp-form-sub">Connect Discord to start, then hit submit to join the leaderboard</div>
+
+      <div class="crp-setup-card" id="setupCard">
+        <div class="crp-setup-title">Setup Required Before This Version Can Go Live</div>
+        <div class="crp-setup-copy">This Supabase draft is ready for Discord sign-in, but it still needs your Supabase project URL, publishable key, and Discord OAuth provider configuration before the waitlist can accept live applications.</div>
+      </div>
+
+      <div class="crp-auth-card">
+        <div class="crp-auth-top">
+          <div>
+            <div class="crp-auth-label">Step 1</div>
+            <div class="crp-auth-title">Connect Discord to Start</div>
+            <div class="crp-auth-copy">Users need to connect their Discord before their name can be shown on the leaderboard.</div>
+          </div>
+          <div class="crp-auth-actions">
+            <button class="crp-btn crp-btn-inline" id="connectBtn" type="button">Connect Discord</button>
+          </div>
+        </div>
+        <div class="crp-auth-status" id="authStatus">Waiting for Discord connection.</div>
+        <div class="crp-auth-connected" id="authConnected" style="display:none">
+          <div id="authAvatar"></div>
+          <div class="crp-auth-meta">
+            <div class="crp-auth-name" id="authName">@discord</div>
+            <div class="crp-auth-note" id="authNote">Connected and ready to submit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="crp-form-card">
+        <div id="theForm">
+          <div class="crp-field">
+            <label class="crp-label">Your Role in the City</label>
+            <select class="crp-select" id="roleSelect">
+              <option value="" selected>- Choose your path -</option>
+              <option value="mafia">Mafia / Crime Family</option>
+              <option value="biker">Biker MC</option>
+              <option value="gang">Street Gang</option>
+              <option value="business">Business Owner</option>
+              <option value="law">Law Enforcement</option>
+              <option value="civilian">Civilian / Freelancer</option>
+            </select>
+          </div>
+
+          <hr class="crp-divider">
+          <div class="crp-opt-note">- Optional - build your file -</div>
+
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>What does RP mean to you?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <input class="crp-input" id="rpMeaning" placeholder="In your own words..." type="text">
+          </div>
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>How long have you been roleplaying?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <select class="crp-select" id="rpExperience">
+              <option value="" selected>- Select -</option>
+              <option value="new">Brand new, just starting out</option>
+              <option value="under1">Less than a year</option>
+              <option value="1to3">1 - 3 years</option>
+              <option value="3to5">3 - 5 years</option>
+              <option value="5plus">5+ years</option>
+            </select>
+          </div>
+          <div class="crp-field">
+            <div class="crp-label-opt">
+              <span>What server are you coming from?</span>
+              <span class="crp-opt-tag">Optional</span>
+            </div>
+            <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text">
+          </div>
+
+          <div class="crp-helper">Connect Discord to unlock submit. Once you submit, your Discord name and avatar go straight onto the leaderboard.</div>
+          <button class="crp-btn" id="submitBtn" onclick="submitForm()" type="button">Submit Application</button>
+          <div class="crp-status-error" id="errMsg">Connect Discord and choose your role before submitting your application.</div>
+        </div>
+      </div>
+
+      <div class="crp-result" id="resultPanel">
+        <div class="crp-result-rank">Your Leaderboard Spot</div>
+        <div class="crp-result-num" id="spotNum">-</div>
+        <div class="crp-result-card">
+          <div id="resultAvatar"></div>
+          <div class="crp-result-meta">
+            <div class="crp-result-name" id="resultName">@username</div>
+            <div class="crp-result-role" id="resultRole">Civilian / Freelancer</div>
+          </div>
+        </div>
+        <div class="crp-result-msg">Your Discord account is now on the ClutchRP leaderboard.</div>
+        <div class="crp-result-code">
+          <div class="crp-code-label">Referral Link</div>
+          <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
+          <div class="crp-copy-hint" id="copyHint">Tap to copy</div>
+        </div>
+        <button class="crp-btn crp-btn-secondary" onclick="showForm()" type="button">Back to Form</button>
+      </div>
+    </div>
+
+    <div class="crp-list-wrap">
+      <div class="crp-list-head">
+        <div class="crp-list-title">ClutchRP Leaderboard</div>
+        <div class="crp-list-sub">Discord-connected applications only. That helps block spam and fake accounts.</div>
+      </div>
+      <div class="crp-list-empty" id="waitlistEmpty">No applications on the leaderboard yet.</div>
+      <div class="crp-list" id="waitlistList"></div>
+    </div>
+
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Discord Waitlist</div>
+  </div>
+</div>
+
+<script>
+window.CLUTCHRP_CONFIG = window.CLUTCHRP_CONFIG || {
+  supabaseUrl: 'https://szlrfgmbnkccmyovqpuy.supabase.co',
+  supabaseAnonKey: 'sb_publishable_VY0dfJov8dMx_RrRlENKyw_U2FGHgpF',
+  redirectTo: 'https://clutchrp.github.io/'
+};
+</script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const ROLE_LABELS = {
+  mafia: 'Mafia / Crime Family',
+  biker: 'Biker MC',
+  gang: 'Street Gang',
+  business: 'Business Owner',
+  law: 'Law Enforcement',
+  civilian: 'Civilian / Freelancer'
+};
+
+const dom = {
+  counterNum: document.getElementById('counterNum'),
+  authStat: document.getElementById('authStat'),
+  authStatus: document.getElementById('authStatus'),
+  authConnected: document.getElementById('authConnected'),
+  authAvatar: document.getElementById('authAvatar'),
+  authName: document.getElementById('authName'),
+  authNote: document.getElementById('authNote'),
+  connectBtn: document.getElementById('connectBtn'),
+  submitBtn: document.getElementById('submitBtn'),
+  errMsg: document.getElementById('errMsg'),
+  roleSelect: document.getElementById('roleSelect'),
+  rpMeaning: document.getElementById('rpMeaning'),
+  rpExperience: document.getElementById('rpExperience'),
+  prevServer: document.getElementById('prevServer'),
+  resultPanel: document.getElementById('resultPanel'),
+  resultAvatar: document.getElementById('resultAvatar'),
+  resultName: document.getElementById('resultName'),
+  resultRole: document.getElementById('resultRole'),
+  spotNum: document.getElementById('spotNum'),
+  refCode: document.getElementById('refCode'),
+  copyHint: document.getElementById('copyHint'),
+  waitlistList: document.getElementById('waitlistList'),
+  waitlistEmpty: document.getElementById('waitlistEmpty'),
+  setupCard: document.getElementById('setupCard'),
+  theForm: document.getElementById('theForm'),
+  musicToggleBtn: document.getElementById('musicToggleBtn'),
+  musicStatus: document.getElementById('musicStatus'),
+  musicVolume: document.getElementById('musicVolume'),
+  musicVolumeValue: document.getElementById('musicVolumeValue'),
+  ytPlayerMount: document.getElementById('ytPlayerMount')
+};
+
+const config = window.CLUTCHRP_CONFIG;
+const configReady = Boolean(
+  config &&
+  config.supabaseUrl &&
+  config.supabaseAnonKey &&
+  !config.supabaseUrl.includes('YOUR_SUPABASE_URL') &&
+  !config.supabaseAnonKey.includes('YOUR_SUPABASE_PUBLISHABLE_KEY')
+);
+
+let supabase = null;
+let authUser = null;
+let entries = [];
+let myEntry = null;
+let ytPlayer = null;
+let musicReady = false;
+let musicPlaying = false;
+let musicWakeBound = false;
+let musicVolumeLevel = Number(dom.musicVolume?.value || 36);
+
+let resolveYouTubeApi;
+const youtubeApiReady = new Promise((resolve) => {
+  resolveYouTubeApi = resolve;
+});
+
+if(window.YT && window.YT.Player){
+  resolveYouTubeApi(window.YT);
+}else{
+  const previousYouTubeReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady(){
+    if(typeof previousYouTubeReady === 'function'){
+      previousYouTubeReady();
+    }
+    resolveYouTubeApi(window.YT);
+  };
+}
+
+let rainCanvas = null;
+let rainCtx = null;
+let rainWidth = 0;
+let rainHeight = 0;
+let rainFloor = 0;
+let rainDrops = [];
+let rainBursts = [];
+let rainRipples = [];
+let rainAnimationFrame = 0;
+let rainLastTime = 0;
+let rainResizeBound = false;
+
+function prefersReducedMotion(){
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function isMobileViewport(){
+  return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+}
+
+function buildAtmosphere(){
+  const smokeLayer = document.getElementById('smokeLayer');
+  if(!smokeLayer){return;}
+
+  smokeLayer.innerHTML = '';
+
+  const plumeCount = prefersReducedMotion() ? 2 : (isMobileViewport() ? 3 : 6);
+  for(let j = 0; j < plumeCount; j++){
+    const plume = document.createElement('span');
+    const size = 180 + Math.random() * 210;
+    plume.style.width = size.toFixed(0) + 'px';
+    plume.style.height = (size * .72).toFixed(0) + 'px';
+    plume.style.left = (-8 + Math.random() * 96).toFixed(2) + '%';
+    plume.style.animationDuration = (16 + Math.random() * 12).toFixed(2) + 's';
+    plume.style.animationDelay = (-Math.random() * 16).toFixed(2) + 's';
+    plume.style.opacity = (.16 + Math.random() * .14).toFixed(2);
+    smokeLayer.appendChild(plume);
+  }
+
+  initRainSystem();
+}
+
+function initRainSystem(){
+  rainCanvas = document.getElementById('rainCanvas');
+  if(!rainCanvas){return;}
+
+  rainCtx = rainCanvas.getContext('2d');
+  if(!rainCtx){return;}
+
+  resizeRainSystem();
+  seedRainDrops();
+
+  if(!rainResizeBound){
+    window.addEventListener('resize', resizeRainSystem, { passive: true });
+    rainResizeBound = true;
+  }
+
+  if(rainAnimationFrame){
+    cancelAnimationFrame(rainAnimationFrame);
+  }
+
+  rainLastTime = 0;
+  rainAnimationFrame = requestAnimationFrame(animateRainSystem);
+}
+
+function resizeRainSystem(){
+  if(!rainCanvas || !rainCtx){return;}
+  const rect = rainCanvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  rainWidth = Math.max(1, Math.round(rect.width));
+  rainHeight = Math.max(1, Math.round(rect.height));
+  rainFloor = rainHeight - 8;
+  rainCanvas.width = Math.max(1, Math.round(rect.width * dpr));
+  rainCanvas.height = Math.max(1, Math.round(rect.height * dpr));
+  rainCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if(rainDrops.length){
+    seedRainDrops();
+  }
+}
+
+function seedRainDrops(){
+  rainDrops = [];
+  rainBursts = [];
+  rainRipples = [];
+  let count;
+  if(prefersReducedMotion()){
+    count = Math.max(8, Math.min(12, Math.floor(rainWidth / 95)));
+  }else if(isMobileViewport()){
+    count = Math.max(10, Math.min(16, Math.floor(rainWidth / 70)));
+  }else{
+    count = Math.max(16, Math.min(28, Math.floor(rainWidth / 52)));
+  }
+
+  for(let i = 0; i < count; i++){
+    rainDrops.push(createRainDrop(true));
+  }
+}
+
+function createRainDrop(initial){
+  return {
+    x: Math.random() * rainWidth,
+    y: initial ? Math.random() * rainHeight : -20 - Math.random() * rainHeight * .35,
+    vy: 12 + Math.random() * 6,
+    drift: .12 + Math.random() * .55,
+    len: 18 + Math.random() * 26,
+    width: .8 + Math.random() * 1.1,
+    alpha: .26 + Math.random() * .34
+  };
+}
+
+function resetRainDrop(drop){
+  drop.x = Math.random() * rainWidth;
+  drop.y = -20 - Math.random() * rainHeight * .35;
+  drop.vy = 12 + Math.random() * 6;
+  drop.drift = .12 + Math.random() * .55;
+  drop.len = 18 + Math.random() * 26;
+  drop.width = .8 + Math.random() * 1.1;
+  drop.alpha = .26 + Math.random() * .34;
+}
+
+function spawnRainSplash(x){
+  const burstCount = 4 + Math.floor(Math.random() * 3);
+  for(let i = 0; i < burstCount; i++){
+    rainBursts.push({
+      x,
+      y: rainFloor,
+      vx: (Math.random() - .5) * 2.6,
+      vy: -(1.8 + Math.random() * 2.4),
+      size: 1 + Math.random() * 1.7,
+      life: 1,
+      alpha: .42 + Math.random() * .28
+    });
+  }
+
+  rainRipples.push({
+    x,
+    y: rainFloor + 1,
+    radius: 2,
+    maxRadius: 10 + Math.random() * 10,
+    alpha: .3 + Math.random() * .12
+  });
+}
+
+function animateRainSystem(time){
+  if(!rainCtx){return;}
+  if(!rainLastTime){rainLastTime = time;}
+  const step = Math.min(1.35, (time - rainLastTime) / 16.667 || 1);
+  rainLastTime = time;
+
+  rainCtx.clearRect(0, 0, rainWidth, rainHeight);
+  drawRainFloor();
+
+  for(let i = 0; i < rainDrops.length; i++){
+    const drop = rainDrops[i];
+    drop.x += drop.drift * step;
+    drop.y += drop.vy * step;
+
+    if(drop.x > rainWidth + 24){
+      resetRainDrop(drop);
+      continue;
+    }
+
+    if(drop.y >= rainFloor){
+      spawnRainSplash(drop.x);
+      resetRainDrop(drop);
+      continue;
+    }
+
+    rainCtx.beginPath();
+    rainCtx.strokeStyle = 'rgba(120,198,255,' + drop.alpha.toFixed(2) + ')';
+    rainCtx.lineWidth = drop.width;
+    rainCtx.lineCap = 'round';
+    rainCtx.moveTo(drop.x - drop.drift * drop.len * .16, drop.y - drop.len);
+    rainCtx.lineTo(drop.x, drop.y);
+    rainCtx.stroke();
+  }
+
+  for(let j = rainBursts.length - 1; j >= 0; j--){
+    const burst = rainBursts[j];
+    burst.x += burst.vx * step;
+    burst.y += burst.vy * step;
+    burst.vy += .22 * step;
+    burst.life -= .05 * step;
+    if(burst.life <= 0){
+      rainBursts.splice(j, 1);
+      continue;
+    }
+    rainCtx.beginPath();
+    rainCtx.fillStyle = 'rgba(145,215,255,' + (burst.alpha * burst.life).toFixed(2) + ')';
+    rainCtx.arc(burst.x, burst.y, burst.size, 0, Math.PI * 2);
+    rainCtx.fill();
+  }
+
+  for(let k = rainRipples.length - 1; k >= 0; k--){
+    const ripple = rainRipples[k];
+    ripple.radius += 1.15 * step;
+    ripple.alpha -= .018 * step;
+    if(ripple.alpha <= 0 || ripple.radius >= ripple.maxRadius){
+      rainRipples.splice(k, 1);
+      continue;
+    }
+    rainCtx.beginPath();
+    rainCtx.strokeStyle = 'rgba(110,185,255,' + ripple.alpha.toFixed(2) + ')';
+    rainCtx.lineWidth = .9;
+    rainCtx.ellipse(ripple.x, ripple.y, ripple.radius, ripple.radius * .28, 0, 0, Math.PI * 2);
+    rainCtx.stroke();
+  }
+
+  rainAnimationFrame = requestAnimationFrame(animateRainSystem);
+}
+
+function drawRainFloor(){
+  rainCtx.beginPath();
+  rainCtx.strokeStyle = 'rgba(70,140,190,.16)';
+  rainCtx.lineWidth = 1;
+  rainCtx.moveTo(0, rainFloor + .5);
+  rainCtx.lineTo(rainWidth, rainFloor + .5);
+  rainCtx.stroke();
+}
+
+function setMusicStatus(message){
+  if(dom.musicStatus){
+    dom.musicStatus.textContent = message;
+  }
+}
+
+function paintVolumeSlider(){
+  if(!dom.musicVolume){return;}
+  const value = Math.max(0, Math.min(100, musicVolumeLevel));
+  dom.musicVolume.value = String(value);
+  dom.musicVolume.style.background = 'linear-gradient(90deg, rgba(0,136,255,1) 0%, rgba(102,204,255,1) ' + value + '%, rgba(255,255,255,.16) ' + value + '%, rgba(255,255,255,.16) 100%)';
+  if(dom.musicVolumeValue){
+    dom.musicVolumeValue.textContent = value + '%';
+  }
+}
+
+function isMusicAudible(){
+  if(!ytPlayer || !musicReady || !musicPlaying){return false;}
+  if(musicVolumeLevel <= 0){return false;}
+  if(typeof ytPlayer.isMuted === 'function'){
+    return !ytPlayer.isMuted();
+  }
+  return true;
+}
+
+async function tryStartMusic(){
+  await ensureHiddenPlayer();
+  if(!ytPlayer || !musicReady){return;}
+  if(musicVolumeLevel <= 0){
+    musicVolumeLevel = 36;
+  }
+  ytPlayer.setVolume(musicVolumeLevel);
+  if(typeof ytPlayer.unMute === 'function'){
+    ytPlayer.unMute();
+  }
+  ytPlayer.playVideo();
+  syncMusicUi();
+}
+
+function bindMusicWakeEvents(){
+  if(musicWakeBound){return;}
+  musicWakeBound = true;
+  const wake = () => {
+    tryStartMusic();
+    window.removeEventListener('pointerdown', wake);
+    window.removeEventListener('keydown', wake);
+  };
+  window.addEventListener('pointerdown', wake, { passive: true });
+  window.addEventListener('keydown', wake);
+}
+
+function syncMusicUi(){
+  paintVolumeSlider();
+  if(!dom.musicToggleBtn){return;}
+  if(!musicReady){
+    dom.musicToggleBtn.textContent = 'Loading Audio';
+    dom.musicToggleBtn.classList.remove('is-live');
+    dom.musicToggleBtn.setAttribute('aria-pressed', 'false');
+    return;
+  }
+
+  const audible = isMusicAudible();
+  dom.musicToggleBtn.textContent = audible ? 'Pause Audio' : 'Play Audio';
+  dom.musicToggleBtn.classList.toggle('is-live', audible);
+  dom.musicToggleBtn.setAttribute('aria-pressed', audible ? 'true' : 'false');
+}
+
+async function ensureHiddenPlayer(){
+  if(ytPlayer || !dom.ytPlayerMount){return;}
+  if(!window.YT || !window.YT.Player){
+    await youtubeApiReady;
+  }
+  if(ytPlayer || !window.YT || !window.YT.Player){return;}
+
+  ytPlayer = new window.YT.Player('ytPlayerMount', {
+    width: '1',
+    height: '1',
+    videoId: '-c9BV_lHbj8',
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      disablekb: 1,
+      enablejsapi: 1,
+      fs: 0,
+      iv_load_policy: 3,
+      loop: 1,
+      modestbranding: 1,
+      origin: window.location.origin,
+      playsinline: 1,
+      rel: 0,
+      playlist: '-c9BV_lHbj8'
+    },
+    events: {
+      onReady(event){
+        musicReady = true;
+        event.target.setVolume(musicVolumeLevel);
+        bindMusicWakeEvents();
+        tryStartMusic();
+        syncMusicUi();
+      },
+      onStateChange(event){
+        if(!window.YT || !window.YT.PlayerState){return;}
+        if(event.data === window.YT.PlayerState.PLAYING){
+          musicPlaying = true;
+        }else if(event.data === window.YT.PlayerState.PAUSED){
+          musicPlaying = false;
+        }else if(event.data === window.YT.PlayerState.ENDED){
+          event.target.seekTo(0);
+          event.target.playVideo();
+        }
+        syncMusicUi();
+      },
+      onError(){
+        syncMusicUi();
+      }
+    }
+  });
+}
+
+async function toggleMusicPlayback(){
+  await ensureHiddenPlayer();
+  if(!ytPlayer || !musicReady){
+    syncMusicUi();
+    return;
+  }
+
+  if(isMusicAudible()){
+    ytPlayer.pauseVideo();
+    musicPlaying = false;
+  }else{
+    if(musicVolumeLevel <= 0){
+      musicVolumeLevel = 36;
+    }
+    ytPlayer.unMute();
+    ytPlayer.setVolume(musicVolumeLevel);
+    ytPlayer.playVideo();
+    musicPlaying = true;
+  }
+
+  syncMusicUi();
+}
+
+async function applyMusicVolumeFromInput(){
+  musicVolumeLevel = Number(dom.musicVolume?.value || 0);
+  paintVolumeSlider();
+  await ensureHiddenPlayer();
+  if(!ytPlayer || !musicReady){return;}
+
+  if(musicVolumeLevel <= 0){
+    ytPlayer.setVolume(0);
+    ytPlayer.mute();
+  }else{
+    ytPlayer.setVolume(musicVolumeLevel);
+    ytPlayer.unMute();
+    ytPlayer.playVideo();
+    musicPlaying = true;
+  }
+
+  syncMusicUi();
+}
+
+function setSetupMode(active){
+  dom.setupCard.style.display = active ? 'block' : 'none';
+  dom.connectBtn.disabled = active;
+  dom.submitBtn.disabled = active;
+  if(active){
+    if(dom.authStat){
+      dom.authStat.textContent = 'Setup';
+    }
+    dom.authStatus.innerHTML = 'Add your <strong>Supabase URL</strong>, <strong>publishable key</strong>, and finish the Discord provider setup before this version can accept live applications.';
+  }
+}
+
+function setAuthStatus(message){
+  dom.authStatus.innerHTML = message;
+}
+
+function getRoleLabel(role){
+  return ROLE_LABELS[role] || 'Player';
+}
+
+function getInitials(name){
+  const clean = (name || '').replace(/^@+/, '').trim();
+  if(!clean){return 'CR';}
+  return clean.slice(0, 2).toUpperCase();
+}
+
+function buildAvatar(name, url){
+  const wrap = document.createElement('div');
+  wrap.className = 'crp-user-chip';
+
+  if(url){
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = name + ' avatar';
+    img.loading = 'lazy';
+    img.referrerPolicy = 'no-referrer';
+    img.onerror = function(){
+      wrap.innerHTML = '';
+      wrap.appendChild(buildFallback(name));
+    };
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  wrap.appendChild(buildFallback(name));
+  return wrap;
+}
+
+function buildFallback(name){
+  const fallback = document.createElement('div');
+  fallback.className = 'crp-user-fallback';
+  fallback.textContent = getInitials(name);
+  return fallback;
+}
+
+function genCode(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let out = '';
+  for(let i = 0; i < 6; i++){
+    out += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return out;
+}
+
+function normaliseHandle(name){
+  if(!name){return '@discord';}
+  return name.startsWith('@') ? name : '@' + name;
+}
+
+function extractDiscordProfile(user){
+  const identity = (user?.identities || []).find((item) => item.provider === 'discord');
+  const raw = identity?.identity_data || {};
+  const meta = user?.user_metadata || {};
+  const discordId = raw.provider_id || raw.sub || raw.id || meta.provider_id || user?.id || '';
+  const username = raw.username || meta.user_name || meta.preferred_username || raw.global_name || meta.full_name || 'discord';
+  const displayName = raw.global_name || meta.full_name || username;
+  const avatarHash = raw.avatar || meta.avatar || '';
+  let avatarUrl = raw.avatar_url || meta.avatar_url || '';
+  if(!avatarUrl && discordId && avatarHash){
+    avatarUrl = 'https://cdn.discordapp.com/avatars/' + discordId + '/' + avatarHash + '.png?size=256';
+  }
+
+  return {
+    authUserId: user?.id || '',
+    discordId,
+    username: normaliseHandle(username),
+    displayName,
+    avatarUrl
+  };
+}
+
+function updateCounter(){
+  dom.counterNum.textContent = entries.length;
+}
+
+function renderWaitlist(){
+  dom.waitlistList.innerHTML = '';
+
+  if(!entries.length){
+    dom.waitlistEmpty.style.display = 'block';
+    return;
+  }
+
+  dom.waitlistEmpty.style.display = 'none';
+
+  entries.forEach((entry, index) => {
+    const card = document.createElement('div');
+    card.className = 'crp-entry';
+
+    card.appendChild(buildAvatar(entry.discord_username, entry.discord_avatar_url));
+
+    const copy = document.createElement('div');
+    copy.className = 'crp-entry-copy';
+
+    const name = document.createElement('div');
+    name.className = 'crp-entry-name';
+    name.textContent = entry.discord_username;
+    copy.appendChild(name);
+
+    const role = document.createElement('div');
+    role.className = 'crp-entry-role';
+    role.textContent = getRoleLabel(entry.role);
+    copy.appendChild(role);
+
+    const meta = document.createElement('div');
+    meta.className = 'crp-entry-meta';
+    meta.textContent = 'Spot #' + (index + 1) + '  |  ' + (entry.referral_code || 'PENDING');
+    copy.appendChild(meta);
+
+    card.appendChild(copy);
+    dom.waitlistList.appendChild(card);
+  });
+}
+
+function showResult(entry){
+  const spot = entries.findIndex((item) => item.auth_user_id === entry.auth_user_id) + 1;
+  dom.spotNum.textContent = spot > 0 ? '#' + spot : '#-';
+  dom.resultName.textContent = entry.discord_username;
+  dom.resultRole.textContent = getRoleLabel(entry.role);
+  dom.refCode.textContent = 'clutchrp.gg/ref/' + (entry.referral_code || 'PENDING');
+  dom.copyHint.textContent = 'Tap to copy';
+  dom.resultAvatar.innerHTML = '';
+  dom.resultAvatar.appendChild(buildAvatar(entry.discord_username, entry.discord_avatar_url));
+  dom.theForm.style.display = 'none';
+  dom.resultPanel.style.display = 'block';
+}
+
+function resetFormFields(){
+  dom.roleSelect.value = '';
+  dom.rpMeaning.value = '';
+  dom.rpExperience.value = '';
+  dom.prevServer.value = '';
+}
+
+function showForm(){
+  dom.resultPanel.style.display = 'none';
+  dom.theForm.style.display = 'block';
+  dom.errMsg.style.display = 'none';
+}
+
+function syncAuthUi(){
+  if(!configReady){
+    setSetupMode(true);
+    return;
+  }
+
+  setSetupMode(false);
+
+  if(!authUser){
+    if(dom.authStat){
+      dom.authStat.textContent = 'Discord';
+    }
+    dom.authConnected.style.display = 'none';
+    dom.connectBtn.style.display = 'inline-block';
+    dom.submitBtn.disabled = true;
+    setAuthStatus('Connect your <strong>Discord account</strong> to start. Your name will not show on the leaderboard until Discord is connected.');
+    return;
+  }
+
+  const profile = extractDiscordProfile(authUser);
+  if(dom.authStat){
+    dom.authStat.textContent = 'Verified';
+  }
+  dom.connectBtn.style.display = 'none';
+  dom.submitBtn.disabled = false;
+  dom.authConnected.style.display = 'flex';
+  dom.authAvatar.innerHTML = '';
+  dom.authAvatar.appendChild(buildAvatar(profile.username, profile.avatarUrl));
+  dom.authName.textContent = profile.username;
+  dom.authNote.textContent = 'Connected and ready to submit';
+  setAuthStatus('Discord connected. Hit <strong>Submit Application</strong> and <strong>' + profile.username + '</strong> will be added to the leaderboard.');
+}
+
+async function loadWaitlist(){
+  if(!supabase){return;}
+
+  const { data, error } = await supabase
+    .from('waitlist_entries')
+    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+    .eq('status', 'submitted')
+    .order('submitted_at', { ascending: true });
+
+  if(error){
+    setAuthStatus('Database ready check failed. Create the <strong>waitlist_entries</strong> table and policies first.');
+    return;
+  }
+
+  entries = data || [];
+  myEntry = authUser ? entries.find((entry) => entry.auth_user_id === authUser.id) || null : null;
+  updateCounter();
+  renderWaitlist();
+  if(myEntry){
+    showResult(myEntry);
+  }
+}
+
+async function restoreSession(){
+  if(!supabase){return;}
+  const { data } = await supabase.auth.getSession();
+  authUser = data.session?.user || null;
+  syncAuthUi();
+  await loadWaitlist();
+}
+
+window.submitForm = async function submitForm(){
+  if(!configReady || !supabase){
+    dom.errMsg.textContent = 'Finish the Supabase and Discord setup first.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
+  if(!authUser || !dom.roleSelect.value){
+    dom.errMsg.textContent = 'Connect Discord and choose your role before submitting your application.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
+  dom.errMsg.style.display = 'none';
+
+  const profile = extractDiscordProfile(authUser);
+  const payload = {
+    auth_user_id: authUser.id,
+    discord_id: profile.discordId,
+    discord_username: profile.username,
+    discord_avatar_url: profile.avatarUrl,
+    role: dom.roleSelect.value,
+    rp_meaning: dom.rpMeaning.value.trim(),
+    rp_experience: dom.rpExperience.value,
+    prev_server: dom.prevServer.value.trim(),
+    referral_code: myEntry?.referral_code || genCode(),
+    status: 'submitted'
+  };
+
+  const { data, error } = await supabase
+    .from('waitlist_entries')
+    .upsert(payload, { onConflict: 'auth_user_id' })
+    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+    .single();
+
+  if(error){
+    dom.errMsg.textContent = 'Submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.';
+    dom.errMsg.style.display = 'block';
+    return;
+  }
+
+  myEntry = data || payload;
+  resetFormFields();
+  await loadWaitlist();
+  if(myEntry){
+    showResult(myEntry);
+  }
+}
+
+window.copyCode = function copyCode(){
+  const txt = dom.refCode.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt);
+  }
+  dom.copyHint.textContent = 'Copied!';
+  setTimeout(() => {
+    dom.copyHint.textContent = 'Tap to copy';
+  }, 2000);
+};
+
+window.showForm = showForm;
+
+dom.musicToggleBtn.addEventListener('click', () => {
+  toggleMusicPlayback();
+});
+
+dom.musicVolume.addEventListener('input', () => {
+  applyMusicVolumeFromInput();
+});
+
+dom.connectBtn.addEventListener('click', async () => {
+  if(!supabase){return;}
+  await supabase.auth.signInWithOAuth({
+    provider: 'discord',
+    options: {
+      redirectTo: config.redirectTo || window.location.origin + window.location.pathname,
+      scopes: 'identify'
+    }
+  });
+});
+
+syncMusicUi();
+bindMusicWakeEvents();
+ensureHiddenPlayer();
+buildAtmosphere();
+
+if(configReady){
+  supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
+    auth: {
+      flowType: 'pkce',
+      detectSessionInUrl: true,
+      persistSession: true
+    }
+  });
+
+  supabase.auth.onAuthStateChange(async (_event, session) => {
+    authUser = session?.user || null;
+    syncAuthUi();
+    await loadWaitlist();
+  });
+
+  await restoreSession();
+}else{
+  syncAuthUi();
+  updateCounter();
+  renderWaitlist();
+}
+</script>
+</body>
+</html>
