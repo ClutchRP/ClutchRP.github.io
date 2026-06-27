@@ -1,0 +1,317 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000!important}
+  .crp-wrap{background:#000!important;min-height:600px;font-family:'Barlow',sans-serif;color:#e8e8e8;overflow:hidden;position:relative;padding:0 0 60px;isolation:isolate}
+  .crp-wrap::before{content:'';position:absolute;inset:0;background:#000;z-index:-1}
+  canvas#rain{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .crp-content{position:relative;z-index:1}
+  .crp-header{text-align:center;padding:56px 24px 32px}
+  .crp-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:8px;color:#0088ff;text-transform:uppercase;margin-bottom:28px}
+  .crp-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(22px,4vw,36px);line-height:1.15;text-transform:uppercase;color:#fff;letter-spacing:-.5px}
+  .crp-headline span{color:#0088ff}
+  .crp-sub{font-size:13px;color:#888;margin:18px auto 0;max-width:340px;line-height:1.7}
+  .crp-line{width:40px;height:2px;background:#0088ff;margin:24px auto 0}
+  .crp-counter-row{display:flex;justify-content:center;margin:32px 24px 0}
+  .crp-stat{text-align:center;padding:18px 36px;border:1px solid rgba(0,136,255,.15);background:#000}
+  .crp-stat:first-child{border-right:none}
+  .crp-stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:40px;color:#0088ff;line-height:1}
+  .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
+  .crp-features{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:26px 24px 0}
+  .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
+  .crp-form-wrap{max-width:460px;margin:36px auto 0;padding:0 24px}
+  .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
+  .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
+  .crp-field{margin-bottom:13px}
+  .crp-label{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:block;margin-bottom:7px;font-weight:600}
+  .crp-label-opt{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-weight:600}
+  .crp-opt-tag{font-size:9px;letter-spacing:1px;color:#0077dd;text-transform:uppercase;font-weight:400;border:1px solid rgba(0,119,221,.3);padding:2px 7px}
+  .crp-input{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s}
+  .crp-input:focus{border-color:rgba(0,136,255,.6)}
+  .crp-input::placeholder{color:#333}
+  .crp-select{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;cursor:pointer;appearance:none;transition:border-color .2s}
+  .crp-select:focus{border-color:rgba(0,136,255,.6)}
+  .crp-select option{background:#000;color:#fff}
+  .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
+  .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
+  .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
+  .crp-btn:hover{background:#e0e0e0}
+  .crp-btn:active{transform:scale(.98)}
+  .crp-result{display:none;text-align:center;padding:32px 24px;border:1px solid rgba(0,136,255,.2);background:#000;margin:0 24px}
+  .crp-result-rank{font-size:10px;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:10px}
+  .crp-result-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;color:#0088ff;line-height:1}
+  .crp-result-msg{font-size:13px;color:#666;margin-top:12px;line-height:1.7;max-width:280px;margin-inline:auto}
+  .crp-result-code{margin-top:20px}
+  .crp-code-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:8px}
+  .crp-code-box{background:rgba(0,136,255,.06);border:1px solid rgba(0,136,255,.25);padding:12px 15px;font-family:monospace;font-size:13px;color:#0088ff;letter-spacing:2px;cursor:pointer;transition:background .2s}
+  .crp-code-box:hover{background:rgba(0,136,255,.15)}
+  .crp-copy-hint{font-size:10px;color:#333;margin-top:6px;letter-spacing:1px;text-transform:uppercase}
+  .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
+</style>
+
+<div class="crp-wrap">
+  <canvas id="rain"></canvas>
+  <div class="crp-content">
+    <div class="crp-header">
+      <div class="crp-wordmark">ClutchRP &nbsp;&mdash;&nbsp; FiveM</div>
+      <div class="crp-headline">
+        The streets remember everything.<br>
+        <span>Build your empire. Own the city.</span><br>
+        Every crew has a story — <span>what's yours?</span>
+      </div>
+      <div class="crp-sub">Mafia empires. Biker crews. Player-run businesses. Gang turfs. Real consequences. Coming soon.</div>
+      <div class="crp-line"></div>
+    </div>
+
+    <div class="crp-counter-row">
+      <div class="crp-stat">
+        <div class="crp-stat-num" id="counterNum">0</div>
+        <div class="crp-stat-label">Players Waiting</div>
+      </div>
+      <div class="crp-stat">
+        <div class="crp-stat-num">Soon</div>
+        <div class="crp-stat-label">Launch</div>
+      </div>
+    </div>
+
+    <div class="crp-features">
+      <div class="crp-badge">Gang Turfs</div>
+      <div class="crp-badge">Drug System</div>
+      <div class="crp-badge">Mafia Orgs</div>
+      <div class="crp-badge">Biker MCs</div>
+      <div class="crp-badge">Player Business</div>
+      <div class="crp-badge">Street Economy</div>
+    </div>
+
+    <div class="crp-form-wrap">
+      <div class="crp-form-title">— Claim Your Spot —</div>
+      <div class="crp-form-sub">Tell us who you are before you hit the streets</div>
+
+      <div id="theForm">
+        <div class="crp-field">
+          <label class="crp-label">Discord Username</label>
+          <input class="crp-input" id="discordInput" placeholder="yourname" type="text"/>
+        </div>
+        <div class="crp-field">
+          <label class="crp-label">Your Role in the City</label>
+          <select class="crp-select" id="roleSelect">
+            <option value="" disabled selected>— Choose your path —</option>
+            <option value="mafia">Mafia / Crime Family</option>
+            <option value="biker">Biker MC</option>
+            <option value="gang">Street Gang</option>
+            <option value="business">Business Owner</option>
+            <option value="law">Law Enforcement</option>
+            <option value="civilian">Civilian / Freelancer</option>
+          </select>
+        </div>
+
+        <hr class="crp-divider"/>
+        <div class="crp-opt-note">— Optional — tell us more about yourself —</div>
+
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>What does RP mean to you?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <input class="crp-input" id="rpMeaning" placeholder="In your own words..." type="text"/>
+        </div>
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>How long have you been roleplaying?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <select class="crp-select" id="rpExperience">
+            <option value="" disabled selected>— Select —</option>
+            <option value="new">Brand new, just starting out</option>
+            <option value="under1">Less than a year</option>
+            <option value="1to3">1 – 3 years</option>
+            <option value="3to5">3 – 5 years</option>
+            <option value="5plus">5+ years</option>
+          </select>
+        </div>
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>What server are you coming from?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text"/>
+        </div>
+
+        <button class="crp-btn" onclick="submitForm()">Submit</button>
+        <div id="errMsg" style="color:#ff4444;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px;display:none">Please fill out your Discord username and role to continue.</div>
+      </div>
+
+      <div class="crp-result" id="resultPanel">
+        <div class="crp-result-rank">Your Street File</div>
+        <div class="crp-result-num" id="spotNum">—</div>
+        <div class="crp-result-msg">You're on the list. The city knows your name. Share your link to move up the ranks.</div>
+        <div class="crp-result-code">
+          <div class="crp-code-label">Referral Link</div>
+          <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
+          <div class="crp-copy-hint" id="copyHint">Tap to copy</div>
+        </div>
+      </div>
+    </div>
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Coming Soon</div>
+  </div>
+</div>
+
+<script>
+var canvas=document.getElementById('rain');
+var ctx=canvas.getContext('2d');
+var W,H,drops=[],splashes=[];
+
+function resize(){
+  W=canvas.width=canvas.offsetWidth;
+  H=canvas.height=canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize',resize);
+
+var COLORS=['rgba(0,136,255,','rgba(0,180,255,','rgba(0,210,255,','rgba(80,180,255,'];
+
+function Drop(){this.reset(true);}
+Drop.prototype.reset=function(init){
+  this.x=Math.random()*W;
+  this.y=init?Math.random()*H:-10;
+  this.vy=Math.random()*3+2;
+  this.vx=(Math.random()-.5)*.3;
+  this.len=Math.random()*16+8;
+  this.width=Math.random()*1.2+.4;
+  this.alpha=Math.random()*.6+.2;
+  this.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+  this.bouncing=false;
+  this.bounceCount=0;
+  this.maxBounce=Math.floor(Math.random()*3)+1;
+  this.dead=false;
+};
+Drop.prototype.update=function(){
+  if(this.dead){return;}
+  this.vy+=0.12;
+  this.y+=this.vy;
+  this.x+=this.vx;
+  if(this.y>=H-2){
+    this.y=H-2;
+    if(this.bounceCount<this.maxBounce){
+      this.vy=-this.vy*(0.35+Math.random()*.2);
+      this.vx+=(Math.random()-.5)*.5;
+      this.len*=.7;
+      this.alpha*=.7;
+      this.bounceCount++;
+      splashes.push(new Splash(this.x,H,this.color));
+    } else {
+      splashes.push(new Splash(this.x,H,this.color));
+      this.dead=true;
+      var self=this;
+      setTimeout(function(){self.reset(false);},Math.random()*300);
+    }
+  }
+};
+Drop.prototype.draw=function(){
+  if(this.dead)return;
+  var spd=Math.sqrt(this.vx*this.vx+this.vy*this.vy);
+  var nx=this.vx/spd, ny=this.vy/spd;
+  var x0=this.x-nx*this.len*.3;
+  var y0=this.y-ny*this.len*.3;
+  var x1=this.x+nx*this.len*.7;
+  var y1=this.y+ny*this.len*.7;
+  var g=ctx.createLinearGradient(x0,y0,x1,y1);
+  g.addColorStop(0,this.color+'0)');
+  g.addColorStop(.4,this.color+this.alpha+')');
+  g.addColorStop(1,this.color+this.alpha+')');
+  ctx.beginPath();
+  ctx.strokeStyle=g;
+  ctx.lineWidth=this.width;
+  ctx.lineCap='round';
+  ctx.moveTo(x0,y0);
+  ctx.lineTo(x1,y1);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x1,y1,this.width*1.4,0,Math.PI*2);
+  ctx.fillStyle=this.color+this.alpha+')';
+  ctx.fill();
+};
+
+function Splash(x,y,color){
+  this.x=x;this.y=y;this.color=color;
+  this.life=0;this.maxLife=35;
+  this.rings=[];
+  for(var i=0;i<2;i++){
+    this.rings.push({r:0,maxR:Math.random()*12+5,speed:Math.random()*1+.5,alpha:Math.random()*.4+.15});
+  }
+  this.drops=[];
+  for(var j=0;j<5;j++){
+    var ang=-Math.PI+(Math.random()*Math.PI);
+    var spd=Math.random()*2.5+.8;
+    this.drops.push({x:x,y:y,vx:Math.cos(ang)*spd,vy:-(Math.random()*2.5+1),alpha:Math.random()*.5+.2,life:0,maxLife:Math.floor(Math.random()*14+8)});
+  }
+}
+Splash.prototype.update=function(){
+  this.life++;
+  for(var i=0;i<this.rings.length;i++)this.rings[i].r+=this.rings[i].speed;
+  for(var j=0;j<this.drops.length;j++){
+    var d=this.drops[j];
+    d.x+=d.vx;d.y+=d.vy;d.vy+=.15;d.life++;
+  }
+};
+Splash.prototype.draw=function(){
+  for(var i=0;i<this.rings.length;i++){
+    var ring=this.rings[i];
+    var a=ring.alpha*(1-ring.r/ring.maxR);
+    if(a<=0)continue;
+    ctx.beginPath();
+    ctx.ellipse(this.x,this.y,ring.r,ring.r*.2,0,0,Math.PI*2);
+    ctx.strokeStyle=this.color+a+')';
+    ctx.lineWidth=.7;
+    ctx.stroke();
+  }
+  for(var j=0;j<this.drops.length;j++){
+    var d=this.drops[j];
+    if(d.life>=d.maxLife)continue;
+    var da=d.alpha*(1-d.life/d.maxLife);
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,1,0,Math.PI*2);
+    ctx.fillStyle=this.color+da+')';
+    ctx.fill();
+  }
+};
+Splash.prototype.done=function(){return this.life>=this.maxLife;};
+
+for(var i=0;i<55;i++){drops.push(new Drop());}
+
+function loop(){
+  ctx.fillStyle='rgba(0,0,0,0.18)';
+  ctx.fillRect(0,0,W,H);
+  for(var i=0;i<drops.length;i++){drops[i].update();drops[i].draw();}
+  splashes=splashes.filter(function(s){s.update();s.draw();return!s.done();});
+  requestAnimationFrame(loop);
+}
+loop();
+
+var count=0;
+function genCode(){
+  var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',o='';
+  for(var i=0;i<6;i++)o+=c[Math.floor(Math.random()*c.length)];
+  return o;
+}
+function submitForm(){
+  var d=document.getElementById('discordInput').value.trim();
+  var r=document.getElementById('roleSelect').value;
+  var err=document.getElementById('errMsg');
+  if(!d||!r){err.style.display='block';return;}
+  err.style.display='none';
+  count++;
+  document.getElementById('counterNum').textContent=count;
+  document.getElementById('spotNum').textContent='#'+count;
+  document.getElementById('refCode').textContent='clutchrp.gg/ref/'+genCode();
+  document.getElementById('theForm').style.display='none';
+  document.getElementById('resultPanel').style.display='block';
+}
+function copyCode(){
+  var txt=document.getElementById('refCode').textContent;
+  if(navigator.clipboard)navigator.clipboard.writeText(txt);
+  document.getElementById('copyHint').textContent='Copied!';
+  setTimeout(function(){document.getElementById('copyHint').textContent='Tap to copy';},2000);
+}
+</script>
