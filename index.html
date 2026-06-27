@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>ClutchRP Waitlist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000!important;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+  body{min-height:100svh}
+  .crp-wrap{background:#000!important;min-height:100svh;font-family:'Barlow',sans-serif;color:#e8e8e8;overflow:hidden;position:relative;padding:0 0 clamp(44px,6vw,72px);isolation:isolate}
+  .crp-wrap::before{content:'';position:absolute;inset:0;background:
+    radial-gradient(circle at 15% 20%,rgba(0,136,255,.18),transparent 28%),
+    radial-gradient(circle at 82% 12%,rgba(0,180,255,.12),transparent 24%),
+    radial-gradient(circle at 50% 78%,rgba(0,136,255,.08),transparent 30%),
+    linear-gradient(180deg,#03070c 0%,#000 55%,#020406 100%);
+    z-index:-2}
+  .crp-wrap::after{content:'';position:absolute;inset:-10%;background:
+    radial-gradient(circle at 25% 30%,rgba(0,136,255,.08),transparent 22%),
+    radial-gradient(circle at 70% 40%,rgba(0,180,255,.06),transparent 20%);
+    filter:blur(30px);
+    opacity:.9;
+    animation:crpGlow 12s ease-in-out infinite alternate;
+    z-index:-1}
+  .crp-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .crp-rain{position:absolute;inset:0;z-index:0;opacity:.95}
+  .crp-rain-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .crp-floor-glow{position:absolute;left:0;right:0;bottom:0;height:96px;background:
+    radial-gradient(circle at 50% 100%,rgba(0,136,255,.22),transparent 48%),
+    linear-gradient(180deg,rgba(0,136,255,0),rgba(0,136,255,.08) 70%,rgba(125,198,255,.15) 100%);
+    opacity:.75}
+  .crp-smoke{position:absolute;inset:0;z-index:0;mix-blend-mode:screen;opacity:.42}
+  .crp-smoke span{position:absolute;bottom:-14%;display:block;border-radius:50%;background:radial-gradient(circle,rgba(118,155,180,.18) 0%,rgba(84,113,134,.1) 38%,rgba(30,42,51,.04) 62%,rgba(0,0,0,0) 74%);filter:blur(24px);animation:crpSmoke linear infinite}
+  @keyframes crpGlow{
+    0%{transform:translate3d(-1.5%,0,0) scale(1)}
+    100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
+  }
+  @keyframes crpSmoke{
+    0%{transform:translate3d(0,0,0) scale(.72);opacity:0}
+    18%{opacity:.18}
+    55%{opacity:.34}
+    100%{transform:translate3d(34px,-115vh,0) scale(1.45);opacity:0}
+  }
+  .crp-content{position:relative;z-index:1;width:min(100%,1240px);margin:0 auto;padding:0 clamp(14px,2vw,24px)}
+  .crp-header{text-align:center;padding:clamp(38px,7vw,68px) clamp(10px,1.4vw,18px) clamp(24px,3vw,34px)}
+  .crp-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:12px;letter-spacing:clamp(4px,1.1vw,8px);color:#0088ff;text-transform:uppercase;margin-bottom:28px}
+  .crp-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,44px);line-height:1.08;text-transform:uppercase;color:#fff;letter-spacing:-.5px}
+  .crp-headline span{color:#0088ff}
+  .crp-sub{font-size:clamp(13px,1.55vw,15px);color:#888;margin:18px auto 0;max-width:520px;line-height:1.7}
+  .crp-line{width:40px;height:2px;background:#0088ff;margin:24px auto 0}
+  .crp-counter-row{display:flex;justify-content:center;flex-wrap:wrap;gap:0;margin:32px 0 0}
+  .crp-stat{text-align:center;padding:18px clamp(26px,4vw,42px);border:1px solid rgba(0,136,255,.15);background:rgba(0,0,0,.82);min-width:190px}
+  .crp-stat:first-child{border-right:none}
+  .crp-stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:40px;color:#0088ff;line-height:1}
+  .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
+  .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
+  .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
+  .crp-form-wrap{max-width:540px;margin:36px auto 0;padding:0}
+  .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
+  .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
+  .crp-field{margin-bottom:13px}
+  .crp-label{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:block;margin-bottom:7px;font-weight:600}
+  .crp-label-opt{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-weight:600}
+  .crp-opt-tag{font-size:9px;letter-spacing:1px;color:#0077dd;text-transform:uppercase;font-weight:400;border:1px solid rgba(0,119,221,.3);padding:2px 7px}
+  .crp-input{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s}
+  .crp-input:focus{border-color:rgba(0,136,255,.6)}
+  .crp-input::placeholder{color:#333}
+  .crp-select{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;cursor:pointer;appearance:none;transition:border-color .2s}
+  .crp-select:focus{border-color:rgba(0,136,255,.6)}
+  .crp-select option{background:#000;color:#fff}
+  .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
+  .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
+  .crp-avatar-help{font-size:11px;color:#5f6a74;line-height:1.5;margin-top:8px}
+  .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
+  .crp-btn:hover{background:#e0e0e0}
+  .crp-btn:active{transform:scale(.98)}
+  .crp-btn-secondary{background:transparent;border:1px solid rgba(0,136,255,.25);color:#0088ff}
+  .crp-btn-secondary:hover{background:rgba(0,136,255,.08)}
+  .crp-result{display:none;text-align:center;padding:32px 24px;border:1px solid rgba(0,136,255,.2);background:rgba(0,0,0,.86);margin:0}
+  .crp-result-rank{font-size:10px;letter-spacing:3px;color:#444;text-transform:uppercase;margin-bottom:10px}
+  .crp-result-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;color:#0088ff;line-height:1}
+  .crp-result-card{display:flex;align-items:center;gap:16px;justify-content:center;padding:18px;margin-top:18px;border:1px solid rgba(0,136,255,.15);background:rgba(0,136,255,.05)}
+  .crp-result-meta{text-align:left}
+  .crp-result-name{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1}
+  .crp-result-role{font-size:12px;color:#0088ff;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
+  .crp-result-msg{font-size:13px;color:#666;margin-top:18px;line-height:1.7;max-width:320px;margin-inline:auto}
+  .crp-result-code{margin-top:20px}
+  .crp-code-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:8px}
+  .crp-code-box{background:rgba(0,136,255,.06);border:1px solid rgba(0,136,255,.25);padding:12px 15px;font-family:monospace;font-size:13px;color:#0088ff;letter-spacing:2px;cursor:pointer;transition:background .2s}
+  .crp-code-box:hover{background:rgba(0,136,255,.15)}
+  .crp-copy-hint{font-size:10px;color:#333;margin-top:6px;letter-spacing:1px;text-transform:uppercase}
+  .crp-user-chip{width:64px;height:64px;border-radius:50%;overflow:hidden;flex:0 0 64px;border:1px solid rgba(0,136,255,.3);background:#050b12;display:flex;align-items:center;justify-content:center}
+  .crp-user-chip img{width:100%;height:100%;object-fit:cover;display:block}
+  .crp-user-fallback{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;letter-spacing:1px;color:#0088ff}
+  .crp-list-wrap{max-width:1080px;margin:44px auto 0;padding:0}
+  .crp-list-head{text-align:center;margin-bottom:18px}
+  .crp-list-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff}
+  .crp-list-sub{font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .crp-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .crp-entry{border:1px solid rgba(0,136,255,.14);background:rgba(0,0,0,.86);padding:16px;display:flex;align-items:center;gap:12px}
+  .crp-entry-copy{min-width:0}
+  .crp-entry-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1}
+  .crp-entry-role{font-size:11px;color:#0088ff;letter-spacing:1.4px;text-transform:uppercase;margin-top:5px}
+  .crp-entry-meta{font-size:10px;color:#4f5860;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+  .crp-list-empty{text-align:center;border:1px dashed rgba(0,136,255,.18);padding:22px;font-size:12px;color:#4f5860;letter-spacing:1px;text-transform:uppercase}
+  .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
+  @media (max-width:900px){
+    .crp-content{width:min(100%,960px)}
+    .crp-headline{font-size:clamp(28px,6vw,38px)}
+    .crp-list{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  }
+  @media (max-width:640px){
+    .crp-wrap{padding-bottom:40px}
+    .crp-content{padding:0 14px}
+    .crp-header{padding:34px 4px 22px}
+    .crp-wordmark{font-size:11px;margin-bottom:18px}
+    .crp-headline{font-size:clamp(24px,8vw,32px);line-height:1.08}
+    .crp-sub{max-width:100%;font-size:13px}
+    .crp-counter-row{flex-direction:column;align-items:center}
+    .crp-stat:first-child{border-right:1px solid rgba(0,136,255,.15);border-bottom:none}
+    .crp-stat{width:min(100%,320px);min-width:0}
+    .crp-features{padding-top:22px}
+    .crp-badge{font-size:9px;letter-spacing:1.2px}
+    .crp-form-wrap{margin-top:28px}
+    .crp-form-title{font-size:14px;letter-spacing:3px}
+    .crp-form-sub{font-size:10px}
+    .crp-label-opt{gap:8px;align-items:flex-start}
+    .crp-opt-tag{flex:0 0 auto}
+    .crp-result{padding:28px 18px}
+    .crp-result-num{font-size:58px}
+    .crp-result-card{flex-direction:column;text-align:center}
+    .crp-result-meta{text-align:center}
+    .crp-result-name{font-size:22px}
+    .crp-code-box{font-size:12px;letter-spacing:1.2px;overflow-wrap:anywhere}
+    .crp-list-wrap{margin-top:36px}
+    .crp-list-title{font-size:19px}
+    .crp-list{grid-template-columns:1fr}
+    .crp-entry{padding:14px}
+    .crp-entry-name{font-size:20px}
+    .crp-user-chip{width:56px;height:56px;flex-basis:56px}
+    .crp-user-fallback{font-size:22px}
+    .crp-footer{margin-top:36px;letter-spacing:2px}
+  }
+  @media (max-width:420px){
+    .crp-wordmark{letter-spacing:3px}
+    .crp-headline{font-size:23px}
+    .crp-label,.crp-label-opt{font-size:9px;letter-spacing:1.4px}
+    .crp-input,.crp-select{padding:11px 13px;font-size:13px}
+    .crp-btn{font-size:14px;letter-spacing:3px}
+  }
+</style>
+</head>
+<body>
+
+<div class="crp-wrap">
+  <div class="crp-fx" aria-hidden="true">
+    <div class="crp-smoke" id="smokeLayer"></div>
+    <div class="crp-rain">
+      <canvas class="crp-rain-canvas" id="rainCanvas"></canvas>
+      <div class="crp-floor-glow"></div>
+    </div>
+  </div>
+  <div class="crp-content">
+    <div class="crp-header">
+      <div class="crp-wordmark">ClutchRP &nbsp;&mdash;&nbsp; FiveM</div>
+      <div class="crp-headline">
+        The streets remember everything.<br>
+        <span>Build your empire. Own the city.</span><br>
+        Every crew has a story - <span>what's yours?</span>
+      </div>
+      <div class="crp-sub">Mafia empires. Biker crews. Player-run businesses. Gang turfs. Real consequences. Coming soon.</div>
+      <div class="crp-line"></div>
+    </div>
+
+    <div class="crp-counter-row">
+      <div class="crp-stat">
+        <div class="crp-stat-num" id="counterNum">0</div>
+        <div class="crp-stat-label">Players Waiting</div>
+      </div>
+      <div class="crp-stat">
+        <div class="crp-stat-num">Soon</div>
+        <div class="crp-stat-label">Launch</div>
+      </div>
+    </div>
+
+    <div class="crp-features">
+      <div class="crp-badge">Gang Turfs</div>
+      <div class="crp-badge">Drug System</div>
+      <div class="crp-badge">Mafia Orgs</div>
+      <div class="crp-badge">Biker MCs</div>
+      <div class="crp-badge">Player Business</div>
+      <div class="crp-badge">Street Economy</div>
+    </div>
+
+    <div class="crp-form-wrap">
+      <div class="crp-form-title">- Claim Your Spot -</div>
+      <div class="crp-form-sub">Tell us who you are before you hit the streets</div>
+
+      <div id="theForm">
+        <div class="crp-field">
+          <label class="crp-label">Discord Username</label>
+          <input class="crp-input" id="discordInput" placeholder="@yourname" type="text"/>
+        </div>
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>Discord Avatar URL</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <input class="crp-input" id="avatarInput" placeholder="https://cdn.discordapp.com/avatars/..." type="text"/>
+          <div class="crp-avatar-help">Paste a Discord CDN image link if you want the real Discord profile picture to show. If left blank, the card uses an automatic fallback avatar.</div>
+        </div>
+        <div class="crp-field">
+          <label class="crp-label">Your Role in the City</label>
+          <select class="crp-select" id="roleSelect">
+            <option value="" disabled selected>- Choose your path -</option>
+            <option value="mafia">Mafia / Crime Family</option>
+            <option value="biker">Biker MC</option>
+            <option value="gang">Street Gang</option>
+            <option value="business">Business Owner</option>
+            <option value="law">Law Enforcement</option>
+            <option value="civilian">Civilian / Freelancer</option>
+          </select>
+        </div>
+
+        <hr class="crp-divider"/>
+        <div class="crp-opt-note">- Optional - tell us more about yourself -</div>
+
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>What does RP mean to you?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <input class="crp-input" id="rpMeaning" placeholder="In your own words..." type="text"/>
+        </div>
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>How long have you been roleplaying?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <select class="crp-select" id="rpExperience">
+            <option value="" disabled selected>- Select -</option>
+            <option value="new">Brand new, just starting out</option>
+            <option value="under1">Less than a year</option>
+            <option value="1to3">1 - 3 years</option>
+            <option value="3to5">3 - 5 years</option>
+            <option value="5plus">5+ years</option>
+          </select>
+        </div>
+        <div class="crp-field">
+          <div class="crp-label-opt">
+            <span>What server are you coming from?</span>
+            <span class="crp-opt-tag">Optional</span>
+          </div>
+          <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text"/>
+        </div>
+
+        <button class="crp-btn" onclick="submitForm()" type="button">Submit</button>
+        <div id="errMsg" style="color:#ff4444;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px;display:none">Please fill out your Discord username and role to continue.</div>
+      </div>
+
+      <div class="crp-result" id="resultPanel">
+        <div class="crp-result-rank">Your Street File</div>
+        <div class="crp-result-num" id="spotNum">-</div>
+        <div class="crp-result-card">
+          <div id="resultAvatar"></div>
+          <div class="crp-result-meta">
+            <div class="crp-result-name" id="resultName">@username</div>
+            <div class="crp-result-role" id="resultRole">Civilian / Freelancer</div>
+          </div>
+        </div>
+        <div class="crp-result-msg">You're on the list. The city knows your name. Share your link to move up the ranks.</div>
+        <div class="crp-result-code">
+          <div class="crp-code-label">Referral Link</div>
+          <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
+          <div class="crp-copy-hint" id="copyHint">Tap to copy</div>
+        </div>
+        <button class="crp-btn crp-btn-secondary" onclick="showForm()" type="button">Back to Form</button>
+      </div>
+    </div>
+
+    <div class="crp-list-wrap">
+      <div class="crp-list-head">
+        <div class="crp-list-title">Public Waitlist</div>
+        <div class="crp-list-sub">Live usernames and profile cards from recent submissions</div>
+      </div>
+      <div class="crp-list-empty" id="waitlistEmpty">No applications yet. The first name on the board goes down in city history.</div>
+      <div class="crp-list" id="waitlistList"></div>
+    </div>
+
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Coming Soon</div>
+  </div>
+</div>
+
+<script>
+var STORAGE_KEY='clutchrp_waitlist_entries_v1';
+var ROLE_LABELS={
+  mafia:'Mafia / Crime Family',
+  biker:'Biker MC',
+  gang:'Street Gang',
+  business:'Business Owner',
+  law:'Law Enforcement',
+  civilian:'Civilian / Freelancer'
+};
+var entries=loadEntries();
+var rainCanvas=null;
+var rainCtx=null;
+var rainWidth=0;
+var rainHeight=0;
+var rainFloor=0;
+var rainDrops=[];
+var rainBursts=[];
+var rainRipples=[];
+var rainAnimationFrame=0;
+var rainLastTime=0;
+var rainResizeBound=false;
+
+function prefersReducedMotion(){
+  return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function isMobileViewport(){
+  return window.matchMedia&&window.matchMedia('(max-width: 640px)').matches;
+}
+
+function buildAtmosphere(){
+  var smokeLayer=document.getElementById('smokeLayer');
+  if(!smokeLayer){return;}
+
+  smokeLayer.innerHTML='';
+
+  var plumeCount=prefersReducedMotion()?2:(isMobileViewport()?3:6);
+  for(var j=0;j<plumeCount;j++){
+    var plume=document.createElement('span');
+    var size=180+Math.random()*210;
+    plume.style.width=size.toFixed(0)+'px';
+    plume.style.height=(size*.72).toFixed(0)+'px';
+    plume.style.left=(-8+Math.random()*96).toFixed(2)+'%';
+    plume.style.animationDuration=(16+Math.random()*12).toFixed(2)+'s';
+    plume.style.animationDelay=(-Math.random()*16).toFixed(2)+'s';
+    plume.style.opacity=(.16+Math.random()*.14).toFixed(2);
+    smokeLayer.appendChild(plume);
+  }
+
+  initRainSystem();
+}
+
+function initRainSystem(){
+  rainCanvas=document.getElementById('rainCanvas');
+  if(!rainCanvas){return;}
+
+  rainCtx=rainCanvas.getContext('2d');
+  if(!rainCtx){return;}
+
+  resizeRainSystem();
+  seedRainDrops();
+
+  if(!rainResizeBound){
+    window.addEventListener('resize',resizeRainSystem,{passive:true});
+    rainResizeBound=true;
+  }
+
+  if(rainAnimationFrame){
+    cancelAnimationFrame(rainAnimationFrame);
+  }
+
+  rainLastTime=0;
+  rainAnimationFrame=requestAnimationFrame(animateRainSystem);
+}
+
+function resizeRainSystem(){
+  if(!rainCanvas||!rainCtx){return;}
+  var rect=rainCanvas.getBoundingClientRect();
+  var dpr=Math.min(window.devicePixelRatio||1,1.5);
+  rainWidth=Math.max(1,Math.round(rect.width));
+  rainHeight=Math.max(1,Math.round(rect.height));
+  rainFloor=rainHeight-8;
+  rainCanvas.width=Math.max(1,Math.round(rect.width*dpr));
+  rainCanvas.height=Math.max(1,Math.round(rect.height*dpr));
+  rainCtx.setTransform(dpr,0,0,dpr,0,0);
+  if(rainDrops.length){
+    seedRainDrops();
+  }
+}
+
+function seedRainDrops(){
+  rainDrops=[];
+  rainBursts=[];
+  rainRipples=[];
+  var count;
+  if(prefersReducedMotion()){
+    count=Math.max(8,Math.min(12,Math.floor(rainWidth/95)));
+  }else if(isMobileViewport()){
+    count=Math.max(10,Math.min(16,Math.floor(rainWidth/70)));
+  }else{
+    count=Math.max(16,Math.min(28,Math.floor(rainWidth/52)));
+  }
+  for(var i=0;i<count;i++){
+    rainDrops.push(createRainDrop(true));
+  }
+}
+
+function createRainDrop(initial){
+  return {
+    x:Math.random()*rainWidth,
+    y:initial?Math.random()*rainHeight:-20-Math.random()*rainHeight*.35,
+    vy:12+Math.random()*6,
+    drift:.12+Math.random()*.55,
+    len:18+Math.random()*26,
+    width:.8+Math.random()*1.1,
+    alpha:.26+Math.random()*.34
+  };
+}
+
+function resetRainDrop(drop){
+  drop.x=Math.random()*rainWidth;
+  drop.y=-20-Math.random()*rainHeight*.35;
+  drop.vy=12+Math.random()*6;
+  drop.drift=.12+Math.random()*.55;
+  drop.len=18+Math.random()*26;
+  drop.width=.8+Math.random()*1.1;
+  drop.alpha=.26+Math.random()*.34;
+}
+
+function spawnRainSplash(x){
+  var burstCount=4+Math.floor(Math.random()*3);
+  for(var i=0;i<burstCount;i++){
+    rainBursts.push({
+      x:x,
+      y:rainFloor,
+      vx:(Math.random()-.5)*2.6,
+      vy:-(1.8+Math.random()*2.4),
+      size:1+Math.random()*1.7,
+      life:1,
+      alpha:.42+Math.random()*.28
+    });
+  }
+
+  rainRipples.push({
+    x:x,
+    y:rainFloor+1,
+    radius:2,
+    maxRadius:10+Math.random()*10,
+    alpha:.3+Math.random()*.12
+  });
+}
+
+function animateRainSystem(time){
+  if(!rainCtx){return;}
+  if(!rainLastTime){rainLastTime=time;}
+  var step=Math.min(1.35,(time-rainLastTime)/16.667||1);
+  rainLastTime=time;
+
+  rainCtx.clearRect(0,0,rainWidth,rainHeight);
+  drawRainFloor();
+
+  for(var i=0;i<rainDrops.length;i++){
+    var drop=rainDrops[i];
+    drop.x+=drop.drift*step;
+    drop.y+=drop.vy*step;
+
+    if(drop.x>rainWidth+24){
+      resetRainDrop(drop);
+      continue;
+    }
+
+    if(drop.y>=rainFloor){
+      spawnRainSplash(drop.x);
+      resetRainDrop(drop);
+      continue;
+    }
+
+    rainCtx.beginPath();
+    rainCtx.strokeStyle='rgba(120,198,255,'+drop.alpha.toFixed(2)+')';
+    rainCtx.lineWidth=drop.width;
+    rainCtx.lineCap='round';
+    rainCtx.moveTo(drop.x-drop.drift*drop.len*.16,drop.y-drop.len);
+    rainCtx.lineTo(drop.x,drop.y);
+    rainCtx.stroke();
+  }
+
+  for(var j=rainBursts.length-1;j>=0;j--){
+    var burst=rainBursts[j];
+    burst.x+=burst.vx*step;
+    burst.y+=burst.vy*step;
+    burst.vy+=.22*step;
+    burst.life-=.05*step;
+    if(burst.life<=0){
+      rainBursts.splice(j,1);
+      continue;
+    }
+    rainCtx.beginPath();
+    rainCtx.fillStyle='rgba(145,215,255,'+(burst.alpha*burst.life).toFixed(2)+')';
+    rainCtx.arc(burst.x,burst.y,burst.size,0,Math.PI*2);
+    rainCtx.fill();
+  }
+
+  for(var k=rainRipples.length-1;k>=0;k--){
+    var ripple=rainRipples[k];
+    ripple.radius+=1.15*step;
+    ripple.alpha-=.018*step;
+    if(ripple.alpha<=0||ripple.radius>=ripple.maxRadius){
+      rainRipples.splice(k,1);
+      continue;
+    }
+    rainCtx.beginPath();
+    rainCtx.strokeStyle='rgba(110,185,255,'+ripple.alpha.toFixed(2)+')';
+    rainCtx.lineWidth=.9;
+    rainCtx.ellipse(ripple.x,ripple.y,ripple.radius,ripple.radius*.28,0,0,Math.PI*2);
+    rainCtx.stroke();
+  }
+
+  rainAnimationFrame=requestAnimationFrame(animateRainSystem);
+}
+
+function drawRainFloor(){
+  rainCtx.beginPath();
+  rainCtx.strokeStyle='rgba(70,140,190,.16)';
+  rainCtx.lineWidth=1;
+  rainCtx.moveTo(0,rainFloor+.5);
+  rainCtx.lineTo(rainWidth,rainFloor+.5);
+  rainCtx.stroke();
+}
+
+function loadEntries(){
+  try{
+    var raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw){return [];}
+    var parsed=JSON.parse(raw);
+    return Array.isArray(parsed)?parsed:[];
+  }catch(err){
+    return [];
+  }
+}
+
+function saveEntries(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(entries));
+}
+
+function genCode(){
+  var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var out='';
+  for(var i=0;i<6;i++){out+=c[Math.floor(Math.random()*c.length)];}
+  return out;
+}
+
+function getRoleLabel(role){
+  return ROLE_LABELS[role]||'Player';
+}
+
+function getInitials(name){
+  var clean=(name||'').replace(/^@+/,'').trim();
+  if(!clean){return 'CR';}
+  return clean.slice(0,2).toUpperCase();
+}
+
+function buildAvatar(name,url){
+  var wrap=document.createElement('div');
+  wrap.className='crp-user-chip';
+
+  if(url){
+    var img=document.createElement('img');
+    img.src=url;
+    img.alt=name+' avatar';
+    img.loading='lazy';
+    img.referrerPolicy='no-referrer';
+    img.onerror=function(){
+      wrap.innerHTML='';
+      wrap.appendChild(buildFallback(name));
+    };
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  wrap.appendChild(buildFallback(name));
+  return wrap;
+}
+
+function buildFallback(name){
+  var fallback=document.createElement('div');
+  fallback.className='crp-user-fallback';
+  fallback.textContent=getInitials(name);
+  return fallback;
+}
+
+function updateCounter(){
+  document.getElementById('counterNum').textContent=entries.length;
+}
+
+function renderWaitlist(){
+  var list=document.getElementById('waitlistList');
+  var empty=document.getElementById('waitlistEmpty');
+  list.innerHTML='';
+
+  if(!entries.length){
+    empty.style.display='block';
+    return;
+  }
+
+  empty.style.display='none';
+
+  for(var i=0;i<entries.length;i++){
+    var entry=entries[i];
+    var card=document.createElement('div');
+    card.className='crp-entry';
+
+    var avatar=buildAvatar(entry.discord,entry.avatarUrl);
+    card.appendChild(avatar);
+
+    var copy=document.createElement('div');
+    copy.className='crp-entry-copy';
+
+    var name=document.createElement('div');
+    name.className='crp-entry-name';
+    name.textContent=entry.discord;
+    copy.appendChild(name);
+
+    var role=document.createElement('div');
+    role.className='crp-entry-role';
+    role.textContent=getRoleLabel(entry.role);
+    copy.appendChild(role);
+
+    var meta=document.createElement('div');
+    meta.className='crp-entry-meta';
+    meta.textContent='Spot #'+(i+1)+'  |  '+entry.referralCode;
+    copy.appendChild(meta);
+
+    card.appendChild(copy);
+    list.appendChild(card);
+  }
+}
+
+function showResult(entry,spot){
+  document.getElementById('spotNum').textContent='#'+spot;
+  document.getElementById('resultName').textContent=entry.discord;
+  document.getElementById('resultRole').textContent=getRoleLabel(entry.role);
+  document.getElementById('refCode').textContent='clutchrp.gg/ref/'+entry.referralCode;
+  document.getElementById('copyHint').textContent='Tap to copy';
+
+  var avatarWrap=document.getElementById('resultAvatar');
+  avatarWrap.innerHTML='';
+  avatarWrap.appendChild(buildAvatar(entry.discord,entry.avatarUrl));
+
+  document.getElementById('theForm').style.display='none';
+  document.getElementById('resultPanel').style.display='block';
+}
+
+function resetFormFields(){
+  document.getElementById('discordInput').value='';
+  document.getElementById('avatarInput').value='';
+  document.getElementById('roleSelect').selectedIndex=0;
+  document.getElementById('rpMeaning').value='';
+  document.getElementById('rpExperience').selectedIndex=0;
+  document.getElementById('prevServer').value='';
+}
+
+function showForm(){
+  document.getElementById('resultPanel').style.display='none';
+  document.getElementById('theForm').style.display='block';
+  document.getElementById('errMsg').style.display='none';
+}
+
+function submitForm(){
+  var discord=document.getElementById('discordInput').value.trim();
+  var avatarUrl=document.getElementById('avatarInput').value.trim();
+  var role=document.getElementById('roleSelect').value;
+  var err=document.getElementById('errMsg');
+
+  if(!discord||!role){
+    err.style.display='block';
+    return;
+  }
+
+  err.style.display='none';
+
+  var entry={
+    discord:discord,
+    avatarUrl:avatarUrl,
+    role:role,
+    rpMeaning:document.getElementById('rpMeaning').value.trim(),
+    rpExperience:document.getElementById('rpExperience').value,
+    prevServer:document.getElementById('prevServer').value.trim(),
+    referralCode:genCode()
+  };
+
+  entries.push(entry);
+  saveEntries();
+  updateCounter();
+  renderWaitlist();
+  showResult(entry,entries.length);
+  resetFormFields();
+}
+
+function copyCode(){
+  var txt=document.getElementById('refCode').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(txt);}
+  document.getElementById('copyHint').textContent='Copied!';
+  setTimeout(function(){
+    document.getElementById('copyHint').textContent='Tap to copy';
+  },2000);
+}
+
+updateCounter();
+renderWaitlist();
+buildAtmosphere();
+</script>
+</body>
+</html>
