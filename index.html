@@ -57,6 +57,16 @@
   .crp-stat-label{font-size:10px;letter-spacing:2.5px;color:#444;text-transform:uppercase;margin-top:4px}
   .crp-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:26px 0 0}
   .crp-badge{padding:5px 12px;border:1px solid rgba(0,136,255,.2);font-size:10px;letter-spacing:1.5px;color:#0077dd;text-transform:uppercase;font-weight:600;background:#000}
+  .crp-music{max-width:600px;margin:18px auto 0;border:1px solid rgba(0,136,255,.18);background:rgba(0,0,0,.82);padding:16px 18px}
+  .crp-music-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .crp-music-label{font-size:10px;letter-spacing:2px;color:#444;text-transform:uppercase}
+  .crp-music-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-top:6px}
+  .crp-music-copy{font-size:12px;color:#72808b;line-height:1.6;margin-top:8px;max-width:380px}
+  .crp-music-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .crp-music-btn{width:auto;margin-top:0;padding:12px 18px;letter-spacing:2px}
+  .crp-volume{display:flex;align-items:center;gap:10px}
+  .crp-volume span{font-size:10px;letter-spacing:1.6px;color:#5d6973;text-transform:uppercase}
+  .crp-volume input{accent-color:#0088ff;width:110px}
   .crp-form-wrap{max-width:600px;margin:36px auto 0;padding:0}
   .crp-form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;color:#fff;text-transform:uppercase;text-align:center;margin-bottom:6px}
   .crp-form-sub{font-size:11px;color:#444;text-align:center;letter-spacing:1px;margin-bottom:24px}
@@ -143,6 +153,12 @@
     .crp-stat{width:min(100%,320px);min-width:0}
     .crp-features{padding-top:22px}
     .crp-badge{font-size:9px;letter-spacing:1.2px}
+    .crp-music{margin-top:16px;padding:14px}
+    .crp-music-title{font-size:21px}
+    .crp-music-actions{width:100%}
+    .crp-music-btn{width:100%}
+    .crp-volume{width:100%;justify-content:space-between}
+    .crp-volume input{width:100%;max-width:150px}
     .crp-form-wrap{margin-top:28px}
     .crp-form-title{font-size:14px;letter-spacing:3px}
     .crp-form-sub{font-size:10px}
@@ -193,7 +209,7 @@
         <span>Build your empire. Own the city.</span><br>
         Every crew has a story - <span>what's yours?</span>
       </div>
-      <div class="crp-sub">Official waitlist access is locked behind a real Discord connection so every spot on the board is attached to a real player profile.</div>
+      <div class="crp-sub">Connect your Discord, submit your application, and your name shows up on the leaderboard with your Discord profile.</div>
       <div class="crp-line"></div>
     </div>
 
@@ -217,25 +233,41 @@
       <div class="crp-badge">Player Reputation</div>
     </div>
 
+    <div class="crp-music">
+      <div class="crp-music-top">
+        <div>
+          <div class="crp-music-label">Atmosphere</div>
+          <div class="crp-music-title">Cozy Night Audio</div>
+          <div class="crp-music-copy">A built-in ambient loop players can start while they fill out the waitlist. No outside track, no copyright issues.</div>
+        </div>
+        <div class="crp-music-actions">
+          <button class="crp-btn crp-music-btn" id="musicToggleBtn" type="button">Play Music</button>
+          <label class="crp-volume" for="musicVolume">
+            <span>Volume</span>
+            <input id="musicVolume" max="100" min="0" type="range" value="38">
+          </label>
+        </div>
+      </div>
+    </div>
+
     <div class="crp-form-wrap">
       <div class="crp-form-title">- Secure Your Spot -</div>
-      <div class="crp-form-sub">Connect Discord first, then submit your official ClutchRP application</div>
+      <div class="crp-form-sub">Connect Discord to start, then hit submit to join the leaderboard</div>
 
       <div class="crp-setup-card" id="setupCard">
         <div class="crp-setup-title">Setup Required Before This Version Can Go Live</div>
-        <div class="crp-setup-copy">This Supabase draft is ready for real Discord sign-in, but it still needs your Supabase project URL, publishable key, and Discord OAuth provider configuration before the official waitlist can accept live applications.</div>
+        <div class="crp-setup-copy">This Supabase draft is ready for Discord sign-in, but it still needs your Supabase project URL, publishable key, and Discord OAuth provider configuration before the waitlist can accept live applications.</div>
       </div>
 
       <div class="crp-auth-card">
         <div class="crp-auth-top">
           <div>
             <div class="crp-auth-label">Step 1</div>
-            <div class="crp-auth-title">Connect Real Discord</div>
-            <div class="crp-auth-copy">Every official waitlist spot pulls the real Discord username and avatar from the connected account. No manual typing, no fake profile image field.</div>
+            <div class="crp-auth-title">Connect Discord to Start</div>
+            <div class="crp-auth-copy">Users need to connect their Discord before their name can be shown on the leaderboard.</div>
           </div>
           <div class="crp-auth-actions">
             <button class="crp-btn crp-btn-inline" id="connectBtn" type="button">Connect Discord</button>
-            <button class="crp-btn crp-btn-secondary crp-btn-inline" id="signOutBtn" type="button" style="display:none">Sign Out</button>
           </div>
         </div>
         <div class="crp-auth-status" id="authStatus">Waiting for Discord connection.</div>
@@ -243,7 +275,7 @@
           <div id="authAvatar"></div>
           <div class="crp-auth-meta">
             <div class="crp-auth-name" id="authName">@discord</div>
-            <div class="crp-auth-note" id="authNote">Verified Discord account ready to submit</div>
+            <div class="crp-auth-note" id="authNote">Connected and ready to submit</div>
           </div>
         </div>
       </div>
@@ -295,14 +327,14 @@
             <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text">
           </div>
 
-          <div class="crp-helper">Official submission is locked until Discord is connected. Once submitted, your verified Discord profile is added to the shared board for everyone to see.</div>
-          <button class="crp-btn" id="submitBtn" onclick="submitForm()" type="button">Submit Official Application</button>
-          <div class="crp-status-error" id="errMsg">Connect Discord and choose your role before submitting your official application.</div>
+          <div class="crp-helper">Connect Discord to unlock submit. Once you submit, your Discord name and avatar go straight onto the leaderboard.</div>
+          <button class="crp-btn" id="submitBtn" onclick="submitForm()" type="button">Submit Application</button>
+          <div class="crp-status-error" id="errMsg">Connect Discord and choose your role before submitting your application.</div>
         </div>
       </div>
 
       <div class="crp-result" id="resultPanel">
-        <div class="crp-result-rank">Your Official Street File</div>
+        <div class="crp-result-rank">Your Leaderboard Spot</div>
         <div class="crp-result-num" id="spotNum">-</div>
         <div class="crp-result-card">
           <div id="resultAvatar"></div>
@@ -311,7 +343,7 @@
             <div class="crp-result-role" id="resultRole">Civilian / Freelancer</div>
           </div>
         </div>
-        <div class="crp-result-msg">Your verified Discord account is officially on the ClutchRP waitlist board.</div>
+        <div class="crp-result-msg">Your Discord account is now on the ClutchRP leaderboard.</div>
         <div class="crp-result-code">
           <div class="crp-code-label">Referral Link</div>
           <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
@@ -323,14 +355,14 @@
 
     <div class="crp-list-wrap">
       <div class="crp-list-head">
-        <div class="crp-list-title">Official Waitlist Board</div>
-        <div class="crp-list-sub">Verified Discord accounts only. Every card below comes from a real official submission.</div>
+        <div class="crp-list-title">ClutchRP Leaderboard</div>
+        <div class="crp-list-sub">Discord-connected applications only. That helps block spam and fake accounts.</div>
       </div>
-      <div class="crp-list-empty" id="waitlistEmpty">No verified applications yet. Once Discord auth and database setup are live, official players will appear here.</div>
+      <div class="crp-list-empty" id="waitlistEmpty">No applications on the leaderboard yet.</div>
       <div class="crp-list" id="waitlistList"></div>
     </div>
 
-    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Official Waitlist Draft</div>
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Discord Waitlist</div>
   </div>
 </div>
 
@@ -363,7 +395,8 @@ const dom = {
   authName: document.getElementById('authName'),
   authNote: document.getElementById('authNote'),
   connectBtn: document.getElementById('connectBtn'),
-  signOutBtn: document.getElementById('signOutBtn'),
+  musicToggleBtn: document.getElementById('musicToggleBtn'),
+  musicVolume: document.getElementById('musicVolume'),
   submitBtn: document.getElementById('submitBtn'),
   errMsg: document.getElementById('errMsg'),
   roleSelect: document.getElementById('roleSelect'),
@@ -408,6 +441,12 @@ let rainRipples = [];
 let rainAnimationFrame = 0;
 let rainLastTime = 0;
 let rainResizeBound = false;
+let audioContext = null;
+let audioMaster = null;
+let audioNoiseGain = null;
+let audioPulseGain = null;
+let audioLfo = null;
+let audioPlaying = false;
 
 function prefersReducedMotion(){
   return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -617,13 +656,117 @@ function drawRainFloor(){
   rainCtx.stroke();
 }
 
+function setMusicButtonLabel(){
+  if(!dom.musicToggleBtn){return;}
+  dom.musicToggleBtn.textContent = audioPlaying ? 'Pause Music' : 'Play Music';
+}
+
+async function initAmbientAudio(){
+  if(audioContext){
+    return;
+  }
+
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if(!AudioCtx){
+    return;
+  }
+
+  audioContext = new AudioCtx();
+  audioMaster = audioContext.createGain();
+  audioMaster.gain.value = 0;
+  audioMaster.connect(audioContext.destination);
+
+  const warmPad = (frequency, gainValue, type) => {
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const filter = audioContext.createBiquadFilter();
+    osc.type = type;
+    osc.frequency.value = frequency;
+    filter.type = 'lowpass';
+    filter.frequency.value = 900;
+    gain.gain.value = gainValue;
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioMaster);
+    osc.start();
+    return { osc, gain };
+  };
+
+  warmPad(196, 0.035, 'sine');
+  warmPad(293.66, 0.025, 'triangle');
+  warmPad(392, 0.018, 'triangle');
+
+  const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 2, audioContext.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+  for(let i = 0; i < data.length; i++){
+    data[i] = (Math.random() * 2 - 1) * 0.24;
+  }
+
+  const noiseSource = audioContext.createBufferSource();
+  noiseSource.buffer = noiseBuffer;
+  noiseSource.loop = true;
+  const noiseFilter = audioContext.createBiquadFilter();
+  noiseFilter.type = 'lowpass';
+  noiseFilter.frequency.value = 500;
+  audioNoiseGain = audioContext.createGain();
+  audioNoiseGain.gain.value = 0.018;
+  noiseSource.connect(noiseFilter);
+  noiseFilter.connect(audioNoiseGain);
+  audioNoiseGain.connect(audioMaster);
+  noiseSource.start();
+
+  const pulse = audioContext.createOscillator();
+  pulse.type = 'sine';
+  pulse.frequency.value = 0.08;
+  audioPulseGain = audioContext.createGain();
+  audioPulseGain.gain.value = 0.025;
+  pulse.connect(audioPulseGain);
+  audioPulseGain.connect(audioMaster.gain);
+  pulse.start();
+
+  audioLfo = audioContext.createOscillator();
+  const lfoGain = audioContext.createGain();
+  audioLfo.type = 'sine';
+  audioLfo.frequency.value = 0.03;
+  lfoGain.gain.value = 120;
+  audioLfo.connect(lfoGain);
+  lfoGain.connect(noiseFilter.frequency);
+  audioLfo.start();
+}
+
+async function toggleAmbientAudio(){
+  await initAmbientAudio();
+  if(!audioContext || !audioMaster){
+    return;
+  }
+
+  if(audioContext.state === 'suspended'){
+    await audioContext.resume();
+  }
+
+  const volumeValue = Number(dom.musicVolume?.value || 38) / 100;
+  audioPlaying = !audioPlaying;
+  audioMaster.gain.cancelScheduledValues(audioContext.currentTime);
+  audioMaster.gain.linearRampToValueAtTime(audioPlaying ? volumeValue * 0.42 : 0, audioContext.currentTime + 0.5);
+  setMusicButtonLabel();
+}
+
+function updateAmbientVolume(){
+  if(!audioContext || !audioMaster || !audioPlaying){
+    return;
+  }
+  const volumeValue = Number(dom.musicVolume?.value || 38) / 100;
+  audioMaster.gain.cancelScheduledValues(audioContext.currentTime);
+  audioMaster.gain.linearRampToValueAtTime(volumeValue * 0.42, audioContext.currentTime + 0.2);
+}
+
 function setSetupMode(active){
   dom.setupCard.style.display = active ? 'block' : 'none';
   dom.connectBtn.disabled = active;
   dom.submitBtn.disabled = active;
   if(active){
     dom.authStat.textContent = 'Setup';
-    dom.authStatus.innerHTML = 'Add your <strong>Supabase URL</strong>, <strong>publishable key</strong>, and finish the Discord provider setup before this version can accept live official applications.';
+    dom.authStatus.innerHTML = 'Add your <strong>Supabase URL</strong>, <strong>publishable key</strong>, and finish the Discord provider setup before this version can accept live applications.';
   }
 }
 
@@ -787,23 +930,21 @@ function syncAuthUi(){
     dom.authStat.textContent = 'Discord';
     dom.authConnected.style.display = 'none';
     dom.connectBtn.style.display = 'inline-block';
-    dom.signOutBtn.style.display = 'none';
     dom.submitBtn.disabled = true;
-    setAuthStatus('Connect your <strong>real Discord account</strong> before you can submit an official application.');
+    setAuthStatus('Connect your <strong>Discord account</strong> to start. Your name will not show on the leaderboard until Discord is connected.');
     return;
   }
 
   const profile = extractDiscordProfile(authUser);
   dom.authStat.textContent = 'Verified';
   dom.connectBtn.style.display = 'none';
-  dom.signOutBtn.style.display = 'inline-block';
   dom.submitBtn.disabled = false;
   dom.authConnected.style.display = 'flex';
   dom.authAvatar.innerHTML = '';
   dom.authAvatar.appendChild(buildAvatar(profile.username, profile.avatarUrl));
   dom.authName.textContent = profile.username;
-  dom.authNote.textContent = 'Official Discord linked to this browser session';
-  setAuthStatus('Discord verified. This application will be written to the shared board under <strong>' + profile.username + '</strong>.');
+  dom.authNote.textContent = 'Connected and ready to submit';
+  setAuthStatus('Discord connected. Hit <strong>Submit Application</strong> and <strong>' + profile.username + '</strong> will be added to the leaderboard.');
 }
 
 async function loadWaitlist(){
@@ -845,7 +986,7 @@ window.submitForm = async function submitForm(){
   }
 
   if(!authUser || !dom.roleSelect.value){
-    dom.errMsg.textContent = 'Connect Discord and choose your role before submitting your official application.';
+    dom.errMsg.textContent = 'Connect Discord and choose your role before submitting your application.';
     dom.errMsg.style.display = 'block';
     return;
   }
@@ -866,18 +1007,24 @@ window.submitForm = async function submitForm(){
     status: 'submitted'
   };
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('waitlist_entries')
-    .upsert(payload, { onConflict: 'auth_user_id' });
+    .upsert(payload, { onConflict: 'auth_user_id' })
+    .select('auth_user_id, discord_id, discord_username, discord_avatar_url, role, rp_meaning, rp_experience, prev_server, referral_code, status, submitted_at')
+    .single();
 
   if(error){
-    dom.errMsg.textContent = 'Official submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.';
+    dom.errMsg.textContent = 'Submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.';
     dom.errMsg.style.display = 'block';
     return;
   }
 
+  myEntry = data || payload;
   resetFormFields();
   await loadWaitlist();
+  if(myEntry){
+    showResult(myEntry);
+  }
 }
 
 window.copyCode = function copyCode(){
@@ -904,17 +1051,16 @@ dom.connectBtn.addEventListener('click', async () => {
   });
 });
 
-dom.signOutBtn.addEventListener('click', async () => {
-  if(!supabase){return;}
-  await supabase.auth.signOut();
-  authUser = null;
-  myEntry = null;
-  dom.resultPanel.style.display = 'none';
-  dom.theForm.style.display = 'block';
-  syncAuthUi();
-});
+if(dom.musicToggleBtn){
+  dom.musicToggleBtn.addEventListener('click', toggleAmbientAudio);
+}
+
+if(dom.musicVolume){
+  dom.musicVolume.addEventListener('input', updateAmbientVolume);
+}
 
 buildAtmosphere();
+setMusicButtonLabel();
 
 if(configReady){
   supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
