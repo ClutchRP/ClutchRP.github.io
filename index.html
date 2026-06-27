@@ -126,7 +126,7 @@
   .crp-label{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:block;margin-bottom:7px;font-weight:600}
   .crp-label-opt{font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-weight:600}
   .crp-opt-tag{font-size:9px;letter-spacing:1px;color:#0077dd;text-transform:uppercase;font-weight:400;border:1px solid rgba(0,119,221,.3);padding:2px 7px}
-  .crp-input{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s}
+  .crp-input{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
   .crp-input:focus{border-color:rgba(0,136,255,.6)}
   .crp-input::placeholder{color:#333}
   .crp-select{width:100%;background:#000;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 15px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;cursor:pointer;appearance:none;transition:border-color .2s}
@@ -135,7 +135,7 @@
   .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
   .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
   .crp-helper{font-size:12px;color:#62707b;line-height:1.6;margin-top:8px}
-  .crp-select.is-error{border-color:rgba(255,115,115,.72);box-shadow:0 0 0 3px rgba(255,115,115,.12)}
+  .crp-select.is-error,.crp-input.is-error{border-color:rgba(255,115,115,.72);box-shadow:0 0 0 3px rgba(255,115,115,.12)}
   .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
   .crp-btn:hover{background:#e0e0e0}
   .crp-btn:active{transform:scale(.98)}
@@ -171,7 +171,17 @@
   .crp-entry-meta{font-size:10px;color:#4f5860;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
   .crp-list-empty{text-align:center;border:1px dashed rgba(0,136,255,.18);padding:22px;font-size:12px;color:#4f5860;letter-spacing:1px;text-transform:uppercase}
   .crp-status-error{display:none;color:#ffd0d0;font-size:12px;text-align:center;margin-top:12px;letter-spacing:1px;padding:12px 14px;border:1px solid rgba(255,115,115,.28);background:rgba(85,14,14,.26)}
-  .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
+  .crp-email-wrap{max-width:760px;margin:38px auto 0;padding:0}
+  .crp-email-card{border:1px solid rgba(0,136,255,.18);background:rgba(0,0,0,.86);padding:24px}
+  .crp-email-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-align:center}
+  .crp-email-sub{font-size:13px;color:#7c8791;line-height:1.7;text-align:center;max-width:560px;margin:10px auto 0}
+  .crp-email-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;margin-top:18px}
+  .crp-email-btn{width:auto;min-width:220px;margin-top:0}
+  .crp-email-note{font-size:11px;color:#55616c;letter-spacing:1px;text-transform:uppercase;text-align:center;margin-top:12px}
+  .crp-email-status{display:none;margin-top:14px;padding:13px 15px;font-size:12px;line-height:1.6;letter-spacing:.6px;text-align:center;border:1px solid rgba(0,136,255,.18);background:rgba(0,136,255,.08);color:#d9ecff}
+  .crp-email-status.is-success{display:block;border-color:rgba(0,136,255,.32);background:rgba(0,136,255,.12);color:#eef7ff}
+  .crp-email-status.is-error{display:block;border-color:rgba(255,115,115,.3);background:rgba(85,14,14,.26);color:#ffd0d0}
+  .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.88);text-transform:uppercase}
   @media (max-width:900px){
     .crp-content{width:min(100%,960px)}
     .crp-headline{font-size:clamp(28px,6vw,38px)}
@@ -180,7 +190,8 @@
   @media (max-width:640px){
     .crp-wrap{padding-bottom:40px}
     .crp-content{padding:0 14px}
-    .crp-discord-link{top:12px;right:14px;padding:9px 12px;font-size:10px;letter-spacing:1.5px}
+    .crp-discord-link{top:10px;right:12px;gap:8px;padding:8px 10px;font-size:9px;letter-spacing:1.2px}
+    .crp-discord-link svg{width:15px;height:15px;flex-basis:15px}
     .crp-header{padding:34px 4px 22px}
     .crp-wordmark{font-size:11px;margin-bottom:18px}
     .crp-headline{font-size:clamp(24px,8vw,32px);line-height:1.08}
@@ -216,9 +227,15 @@
     .crp-entry-name{font-size:20px}
     .crp-user-chip{width:56px;height:56px;flex-basis:56px}
     .crp-user-fallback{font-size:22px}
+    .crp-email-wrap{margin-top:32px}
+    .crp-email-card{padding:20px 16px}
+    .crp-email-form{grid-template-columns:1fr}
+    .crp-email-btn{width:100%;min-width:0}
     .crp-footer{margin-top:36px;letter-spacing:2px}
   }
   @media (max-width:420px){
+    .crp-discord-link{top:8px;right:10px;gap:6px;padding:7px 8px;font-size:8px;letter-spacing:1px}
+    .crp-discord-link svg{width:14px;height:14px;flex-basis:14px}
     .crp-wordmark{letter-spacing:3px}
     .crp-headline{font-size:23px}
     .crp-label,.crp-label-opt{font-size:9px;letter-spacing:1.4px}
@@ -408,6 +425,19 @@
       <div class="crp-list" id="waitlistList"></div>
     </div>
 
+    <div class="crp-email-wrap">
+      <div class="crp-email-card">
+        <div class="crp-email-title">Get Launch Updates</div>
+        <div class="crp-email-sub">Register your email to hear when the ClutchRP public server launches, when the doors officially open, and when major updates roll out.</div>
+        <div class="crp-email-form">
+          <input class="crp-input" id="emailSignupInput" type="email" inputmode="email" autocomplete="email" placeholder="Enter your email address">
+          <button class="crp-btn crp-email-btn" id="emailSignupBtn" type="button">Join Email List</button>
+        </div>
+        <div class="crp-email-note">Launch alerts and major server updates only.</div>
+        <div class="crp-email-status" id="emailSignupStatus">You are on the ClutchRP launch email list.</div>
+      </div>
+    </div>
+
     <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Public Server Waiting List</div>
   </div>
 </div>
@@ -416,7 +446,8 @@
 window.CLUTCHRP_CONFIG = window.CLUTCHRP_CONFIG || {
   supabaseUrl: 'https://szlrfgmbnkccmyovqpuy.supabase.co',
   supabaseAnonKey: 'sb_publishable_VY0dfJov8dMx_RrRlENKyw_U2FGHgpF',
-  redirectTo: 'https://clutchrp.github.io/'
+  redirectTo: 'https://clutchrp.github.io/',
+  launchEmailTable: 'launch_subscribers'
 };
 </script>
 
@@ -458,6 +489,9 @@ const dom = {
   copyHint: document.getElementById('copyHint'),
   waitlistList: document.getElementById('waitlistList'),
   waitlistEmpty: document.getElementById('waitlistEmpty'),
+  emailSignupInput: document.getElementById('emailSignupInput'),
+  emailSignupBtn: document.getElementById('emailSignupBtn'),
+  emailSignupStatus: document.getElementById('emailSignupStatus'),
   setupCard: document.getElementById('setupCard'),
   theForm: document.getElementById('theForm'),
   musicToggleBtn: document.getElementById('musicToggleBtn'),
@@ -481,6 +515,7 @@ let authUser = null;
 let entries = [];
 let myEntry = null;
 let submitPending = false;
+let emailSignupPending = false;
 let ytPlayer = null;
 let musicReady = false;
 let musicPlaying = false;
@@ -1107,6 +1142,20 @@ function clearSubmitError(){
   dom.roleSelect.classList.remove('is-error');
 }
 
+function isValidEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email || '');
+}
+
+function setEmailSignupStatus(message, tone){
+  dom.emailSignupStatus.textContent = message;
+  dom.emailSignupStatus.className = 'crp-email-status';
+  if(tone === 'success'){
+    dom.emailSignupStatus.classList.add('is-success');
+  }else if(tone === 'error'){
+    dom.emailSignupStatus.classList.add('is-error');
+  }
+}
+
 function showSubmitError(message, highlightRole){
   dom.errMsg.textContent = message;
   dom.errMsg.style.display = 'block';
@@ -1177,6 +1226,48 @@ async function restoreSession(){
   authUser = data.session?.user || null;
   syncAuthUi();
   await loadWaitlist();
+}
+
+async function submitEmailSignup(){
+  if(emailSignupPending){return;}
+
+  const email = dom.emailSignupInput.value.trim().toLowerCase();
+  dom.emailSignupInput.classList.remove('is-error');
+
+  if(!isValidEmail(email)){
+    dom.emailSignupInput.classList.add('is-error');
+    dom.emailSignupInput.focus();
+    setEmailSignupStatus('Enter a valid email address so we know where to send your ClutchRP launch updates.', 'error');
+    return;
+  }
+
+  emailSignupPending = true;
+  dom.emailSignupBtn.disabled = true;
+  dom.emailSignupBtn.textContent = 'Joining...';
+
+  try{
+    await waitlistRequest((config.launchEmailTable || 'launch_subscribers') + '?select=email', {
+      method: 'POST',
+      timeoutMs: 12000,
+      body: [{ email }]
+    });
+
+    dom.emailSignupInput.value = '';
+    setEmailSignupStatus('Welcome to the ClutchRP launch list. We are happy to have you in the growing community, and we will keep your inbox updated when the public server goes live and when major updates drop.', 'success');
+  }catch(error){
+    if(/duplicate|already|unique/i.test(String(error && error.message ? error.message : error))){
+      dom.emailSignupInput.value = '';
+      setEmailSignupStatus('That email is already locked into the ClutchRP launch list. You will still get launch news and major server updates.', 'success');
+    }else{
+      console.error('Email signup failed', error);
+      dom.emailSignupInput.classList.add('is-error');
+      setEmailSignupStatus('The email list is not fully live yet. Create the launch_subscribers table in Supabase, then this form will start collecting emails.', 'error');
+    }
+  }finally{
+    emailSignupPending = false;
+    dom.emailSignupBtn.disabled = false;
+    dom.emailSignupBtn.textContent = 'Join Email List';
+  }
 }
 
 window.submitForm = async function submitForm(){
@@ -1281,6 +1372,17 @@ dom.roleSelect.addEventListener('change', () => {
 
 dom.submitBtn.addEventListener('click', () => {
   window.submitForm();
+});
+
+dom.emailSignupBtn.addEventListener('click', () => {
+  submitEmailSignup();
+});
+
+dom.emailSignupInput.addEventListener('keydown', (event) => {
+  if(event.key === 'Enter'){
+    event.preventDefault();
+    submitEmailSignup();
+  }
 });
 
 dom.connectBtn.addEventListener('click', async () => {
