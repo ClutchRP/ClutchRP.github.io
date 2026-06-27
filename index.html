@@ -28,13 +28,19 @@
   .crp-gallery{position:absolute;inset:0;z-index:0;overflow:hidden}
   .crp-gallery::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,22,.6) 0%,rgba(0,8,20,.36) 28%,rgba(0,6,16,.68) 100%);z-index:2}
   .crp-gallery::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(0,150,255,.24),transparent 48%),linear-gradient(135deg,rgba(0,136,255,.18),rgba(0,0,0,.08) 45%,rgba(0,136,255,.22));mix-blend-mode:screen;z-index:3}
-  .crp-gallery-slide{position:absolute;inset:-1%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.02);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
+  .crp-gallery-slide{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1);filter:saturate(.82) brightness(.5) contrast(1.04);animation:crpGalleryFade 36s linear infinite}
   .crp-gallery-slide:nth-child(1){animation-delay:0s}
   .crp-gallery-slide:nth-child(2){animation-delay:6s}
   .crp-gallery-slide:nth-child(3){animation-delay:12s}
   .crp-gallery-slide:nth-child(4){animation-delay:18s}
   .crp-gallery-slide:nth-child(5){animation-delay:24s}
   .crp-gallery-slide:nth-child(6){animation-delay:30s}
+  .crp-gallery-slide:nth-child(1){background-position:center 34%;background-size:96%}
+  .crp-gallery-slide:nth-child(2){background-position:center center;background-size:contain}
+  .crp-gallery-slide:nth-child(3){background-position:center 28%;background-size:94%}
+  .crp-gallery-slide:nth-child(4){background-position:center 30%;background-size:94%}
+  .crp-gallery-slide:nth-child(5){background-position:center 36%;background-size:95%}
+  .crp-gallery-slide:nth-child(6){background-position:center 18%;background-size:96%}
   .crp-rain{position:absolute;inset:0;z-index:1;opacity:.95}
   .crp-rain-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
   .crp-floor-glow{position:absolute;left:0;right:0;bottom:0;height:96px;background:
@@ -54,11 +60,11 @@
     100%{transform:translate3d(34px,-115vh,0) scale(1.45);opacity:0}
   }
   @keyframes crpGalleryFade{
-    0%{opacity:0;transform:scale(1.08)}
+    0%{opacity:0;transform:scale(1.03)}
     4%{opacity:.18}
     16%{opacity:.48}
     26%{opacity:.48}
-    32%{opacity:0;transform:scale(1.02)}
+    32%{opacity:0;transform:scale(1.005)}
     100%{opacity:0;transform:scale(1)}
   }
   .crp-content{position:relative;z-index:1;width:min(100%,1240px);margin:0 auto;padding:0 clamp(14px,2vw,24px)}
@@ -129,6 +135,7 @@
   .crp-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px}
   .crp-opt-note{font-size:11px;color:#333;letter-spacing:1px;text-align:center;margin-bottom:16px;text-transform:uppercase}
   .crp-helper{font-size:12px;color:#62707b;line-height:1.6;margin-top:8px}
+  .crp-select.is-error{border-color:rgba(255,115,115,.72);box-shadow:0 0 0 3px rgba(255,115,115,.12)}
   .crp-btn{width:100%;background:#fff;border:none;color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:4px;text-transform:uppercase;padding:15px;cursor:pointer;margin-top:10px;transition:background .15s,transform .1s}
   .crp-btn:hover{background:#e0e0e0}
   .crp-btn:active{transform:scale(.98)}
@@ -163,7 +170,7 @@
   .crp-entry-role{font-size:11px;color:#0088ff;letter-spacing:1.4px;text-transform:uppercase;margin-top:5px}
   .crp-entry-meta{font-size:10px;color:#4f5860;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
   .crp-list-empty{text-align:center;border:1px dashed rgba(0,136,255,.18);padding:22px;font-size:12px;color:#4f5860;letter-spacing:1px;text-transform:uppercase}
-  .crp-status-error{display:none;color:#ff7373;font-size:11px;text-align:center;margin-top:10px;letter-spacing:1px}
+  .crp-status-error{display:none;color:#ffd0d0;font-size:12px;text-align:center;margin-top:12px;letter-spacing:1px;padding:12px 14px;border:1px solid rgba(255,115,115,.28);background:rgba(85,14,14,.26)}
   .crp-footer{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;color:#222;text-transform:uppercase}
   @media (max-width:900px){
     .crp-content{width:min(100%,960px)}
@@ -252,7 +259,7 @@
         <span>Build your empire. Own the city.</span><br>
         Every crew has a story. <span>What's yours?</span>
       </div>
-      <div class="crp-sub">Connect your Discord, submit your application, and your name shows up on the leaderboard with your Discord profile.</div>
+      <div class="crp-sub">ClutchRP is an upcoming public FiveM server. Connect your Discord, submit your application, and lock in your spot on the official waiting list.</div>
       <div class="crp-line"></div>
     </div>
 
@@ -292,7 +299,7 @@
 
     <div class="crp-form-wrap">
       <div class="crp-form-title">- Secure Your Spot -</div>
-      <div class="crp-form-sub">Connect Discord to start, then hit submit to join the leaderboard</div>
+      <div class="crp-form-sub">Connect Discord to start, choose your role, then join the public server waiting list</div>
 
       <div class="crp-setup-card" id="setupCard">
         <div class="crp-setup-title">Setup Required Before This Version Can Go Live</div>
@@ -322,7 +329,10 @@
       <div class="crp-form-card">
         <div id="theForm">
           <div class="crp-field">
-            <label class="crp-label">Your Role in the City</label>
+            <div class="crp-label-opt">
+              <span>Your Role in the City</span>
+              <span class="crp-opt-tag">Required</span>
+            </div>
             <select class="crp-select" id="roleSelect">
               <option value="" selected>- Choose your path -</option>
               <option value="mafia">Mafia / Crime Family</option>
@@ -364,14 +374,14 @@
             <input class="crp-input" id="prevServer" placeholder="Previous server name..." type="text">
           </div>
 
-          <div class="crp-helper">Connect Discord to unlock submit. Once you submit, your Discord name and avatar go straight onto the leaderboard.</div>
-          <button class="crp-btn" id="submitBtn" onclick="submitForm()" type="button">Submit Application</button>
+          <div class="crp-helper">Pick your role, hit submit, and your Discord name and avatar go straight onto the waiting list.</div>
+          <button class="crp-btn" id="submitBtn" type="button">Submit to Waiting List</button>
           <div class="crp-status-error" id="errMsg">Connect Discord and choose your role before submitting your application.</div>
         </div>
       </div>
 
       <div class="crp-result" id="resultPanel">
-        <div class="crp-result-rank">Your Leaderboard Spot</div>
+        <div class="crp-result-rank">Your Waiting List Spot</div>
         <div class="crp-result-num" id="spotNum">-</div>
         <div class="crp-result-card">
           <div id="resultAvatar"></div>
@@ -380,7 +390,7 @@
             <div class="crp-result-role" id="resultRole">Civilian / Freelancer</div>
           </div>
         </div>
-        <div class="crp-result-msg">Your Discord account is now on the ClutchRP leaderboard.</div>
+        <div class="crp-result-msg">Your Discord account is now on the ClutchRP waiting list.</div>
         <div class="crp-result-code">
           <div class="crp-code-label">Referral Link</div>
           <div class="crp-code-box" id="refCode" onclick="copyCode()">clutchrp.gg/ref/XXXXXX</div>
@@ -392,13 +402,13 @@
 
     <div class="crp-list-wrap">
       <div class="crp-list-head">
-        <div class="crp-list-title">ClutchRP Leaderboard</div>
+        <div class="crp-list-title">ClutchRP Waiting List</div>
       </div>
-      <div class="crp-list-empty" id="waitlistEmpty">No applications on the leaderboard yet.</div>
+      <div class="crp-list-empty" id="waitlistEmpty">No applications on the waiting list yet.</div>
       <div class="crp-list" id="waitlistList"></div>
     </div>
 
-    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Discord Waitlist</div>
+    <div class="crp-footer">ClutchRP &nbsp;&mdash;&nbsp; Public Server Waiting List</div>
   </div>
 </div>
 
@@ -470,6 +480,7 @@ let supabase = null;
 let authUser = null;
 let entries = [];
 let myEntry = null;
+let submitPending = false;
 let ytPlayer = null;
 let musicReady = false;
 let musicPlaying = false;
@@ -1034,6 +1045,23 @@ function showForm(){
   dom.errMsg.style.display = 'none';
 }
 
+function clearSubmitError(){
+  dom.errMsg.style.display = 'none';
+  dom.roleSelect.classList.remove('is-error');
+}
+
+function showSubmitError(message, highlightRole){
+  dom.errMsg.textContent = message;
+  dom.errMsg.style.display = 'block';
+  if(highlightRole){
+    dom.roleSelect.classList.add('is-error');
+    dom.roleSelect.focus();
+    dom.roleSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }else{
+    dom.roleSelect.classList.remove('is-error');
+  }
+}
+
 function syncAuthUi(){
   if(!configReady){
     setSetupMode(true);
@@ -1049,7 +1077,7 @@ function syncAuthUi(){
     dom.authConnected.style.display = 'none';
     dom.connectBtn.style.display = 'inline-block';
     dom.submitBtn.disabled = true;
-    setAuthStatus('Connect your <strong>Discord account</strong> to start. Your name will not show on the leaderboard until Discord is connected.');
+    setAuthStatus('Connect your <strong>Discord account</strong> to start. Your name will not show on the waiting list until Discord is connected.');
     return;
   }
 
@@ -1064,7 +1092,7 @@ function syncAuthUi(){
   dom.authAvatar.appendChild(buildAvatar(profile.username, profile.avatarUrl));
   dom.authName.textContent = profile.username;
   dom.authNote.textContent = 'Connected and ready to submit';
-  setAuthStatus('Discord connected. Hit <strong>Submit Application</strong> and <strong>' + profile.username + '</strong> will be added to the leaderboard.');
+  setAuthStatus('Discord connected. Choose your role, hit <strong>Submit</strong>, and <strong>' + profile.username + '</strong> will be added to the waiting list.');
 }
 
 async function loadWaitlist(){
@@ -1099,19 +1127,21 @@ async function restoreSession(){
 }
 
 window.submitForm = async function submitForm(){
+  if(submitPending){return;}
   if(!configReady || !supabase){
-    dom.errMsg.textContent = 'Finish the Supabase and Discord setup first.';
-    dom.errMsg.style.display = 'block';
+    showSubmitError('Finish the Supabase and Discord setup first.', false);
     return;
   }
 
   if(!authUser || !dom.roleSelect.value){
-    dom.errMsg.textContent = 'Connect Discord and choose your role before submitting your application.';
-    dom.errMsg.style.display = 'block';
+    showSubmitError('Choose your role before submitting your waiting list application.', true);
     return;
   }
 
-  dom.errMsg.style.display = 'none';
+  clearSubmitError();
+  submitPending = true;
+  dom.submitBtn.disabled = true;
+  dom.submitBtn.textContent = 'Submitting...';
 
   const profile = extractDiscordProfile(authUser);
   const payload = {
@@ -1134,17 +1164,23 @@ window.submitForm = async function submitForm(){
     .single();
 
   if(error){
-    dom.errMsg.textContent = 'Submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.';
-    dom.errMsg.style.display = 'block';
+    showSubmitError('Submit failed. Make sure the Supabase table, RLS policies, and Discord provider are configured.', false);
+    submitPending = false;
+    dom.submitBtn.disabled = false;
+    dom.submitBtn.textContent = 'Submit to Waiting List';
     return;
   }
 
   myEntry = data || payload;
   resetFormFields();
+  clearSubmitError();
   await loadWaitlist();
   if(myEntry){
     showResult(myEntry);
   }
+  submitPending = false;
+  dom.submitBtn.disabled = false;
+  dom.submitBtn.textContent = 'Submit to Waiting List';
 }
 
 window.copyCode = function copyCode(){
@@ -1166,6 +1202,16 @@ dom.musicToggleBtn.addEventListener('click', () => {
 
 dom.musicVolume.addEventListener('input', () => {
   applyMusicVolumeFromInput();
+});
+
+dom.roleSelect.addEventListener('change', () => {
+  if(dom.roleSelect.value){
+    clearSubmitError();
+  }
+});
+
+dom.submitBtn.addEventListener('click', () => {
+  window.submitForm();
 });
 
 dom.connectBtn.addEventListener('click', async () => {
